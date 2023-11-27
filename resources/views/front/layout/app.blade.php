@@ -64,6 +64,7 @@
                                     <li><a href="author-detail.php">Author Detail</a>
                                 </ul>
                             </li>
+                            @auth
                             <li><a href="listing-detail.php">User Dashboard</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li>
@@ -78,6 +79,7 @@
                                     <li><a href="dashboard-change-password.php"><i class="lni lni-lock-alt me-2"></i>Change Password</a></li>
                                 </ul>
                             </li>
+                            @endauth
                             <li><a href="javascript:void(0);">Pages</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li><a href="blog.php">Blog Style</a></li>
@@ -109,13 +111,15 @@
                                     <a href="{{ route ('user.loginPage')}}" class="ft-bold"> 
                                         <i class="fas fa-sign-in-alt me-1 theme-cl"></i>Sign In
                                     </a>
+                                    <li class="add-listing">
+                                        <a href="{{ route ('user.registerPage')}}">
+                                            <i class="fas fa-plus me-2"></i>Register
+                                        </a>
+                                    </li>
                                 @endauth
-                            </li>
-                           
+                            </li>   
                         </ul>
-                        
-                    </div>
-                    
+                    </div>                      
                 </nav>
             </div>
         </div>

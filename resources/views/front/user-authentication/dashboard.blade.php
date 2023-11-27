@@ -3,7 +3,7 @@
 			
 			<!-- =============================== Dashboard Header ========================== -->
 			<section class="bg-cover position-relative" style="background:url({{asset('front/img/cover.jpg')}}) no-repeat #C90000;">
-				<div class="abs-list-sec"><a href="dashboard-add-listing.html" class="add-list-btn"><i class="fas fa-plus me-2"></i>Add Listing</a></div>
+				<div class="abs-list-sec"><a href="{{route ('business_listing')}}" class="add-list-btn"><i class="fas fa-plus me-2"></i>Add Listing</a></div>
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -13,9 +13,9 @@
 									<img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
 								</div>
 								<div class="dashboard-head-author-caption">
-									<div class="dashploio"><h4>Charles D. Robinson</h4></div>
-									<div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span></div>
-									<div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div>
+									<div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
+									{{-- <div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span></div>
+									<div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div> --}}
 								</div>
 							</div>
 						
@@ -38,7 +38,7 @@
 					<div class="dashboard-tlbar d-block mb-5">
 						<div class="row">
 							<div class="colxl-12 col-lg-12 col-md-12">
-								<h1 class="ft-medium">Hello, Darnell Johns</h1>
+								<h1 class="ft-medium">{{ Auth::user()->name }}</h1>
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
@@ -105,7 +105,7 @@
 							</div>
 							
 							<!-- Donut Chart -->
-							<div class="col-md-4 col-sm-12">
+							{{-- <div class="col-md-4 col-sm-12">
 								<div class="dash-card">
 									<div class="dash-card-header">
 										<h4>Followers</h4>
@@ -172,12 +172,12 @@
 										</div>
 									</div>
 								</div>	
-							</div>
+							</div> --}}
 							
 						</div>
 						<!-- /.row -->
 				
-						<div class="row">
+						{{-- <div class="row">
 							<div class="col-lg-6 col-md-12">
 								<div class="goodup-dashboard-grouping-list with-icons">
 									<h4>Recent Activities</h4>
@@ -300,7 +300,7 @@
 									</ul>
 								</div>
 							</div>	
-						</div>	
+						</div>	 --}}
 							
 					</div>
 					

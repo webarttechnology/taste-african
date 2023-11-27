@@ -49,7 +49,8 @@ class BusinessListing extends Model
         return $this->hasMany(BusinessListingMenuitems::class);
     }
 
-
-
-
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

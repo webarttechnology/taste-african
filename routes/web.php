@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CategotyController;
 use App\Http\Controllers\user\BusinessListingController;
 use App\Http\Controllers\admin\AuthenticationController;
-
+use App\Http\Controllers\admin\AdminBusinessListingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +35,7 @@ Route::get('/business-listing', [BusinessListingController::class, 'businessList
 Route::get('/business-listing/add', [BusinessListingController::class, 'add'])->name('business_listing_add');
 Route::post('/business-listing/store', [BusinessListingController::class, 'store'])->name('business_listing_store');
 Route::get('/business-listing/show', [BusinessListingController::class, 'show'])->name('business_listing_show');
-
+Route::get('/business-listing/details/{id}', [BusinessListingController::class, 'viewDetails'])->name('business_viewDetails');
 
 // ADMIN BELOW
 
@@ -55,6 +55,6 @@ Route::prefix('admin')->group(function ()
     Route::get('/category-listing/delete/{id}', [CategotyController::class, 'delete'])->name('category_listing_delete');
     Route::post('/user/status-change', [CategotyController::class, 'statusChange'])->name('statusChange');   
 
-    Route::get('/business-listing/show', [BusinessListingController::class, 'edit'])->name('business_listing_edit');
+    Route::get('/business-listing/show', [AdminBusinessListingController::class, 'businessListing'])->name('admin.business_listing_show');
 
 });

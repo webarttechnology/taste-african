@@ -82,7 +82,7 @@
 						</li>
 
 						<li class="active">
-							<a class="sidenav-item-link" href="{{ route ('business_listing')}}">
+							<a class="sidenav-item-link" href="{{ route ('admin.business_listing_show')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>
 								<span class="nav-text">Business Listing</span>
 							</a>

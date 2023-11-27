@@ -59,7 +59,7 @@ class AuthenticationController extends Controller
     public function logout()
     {  
         Auth::logout();
-        return redirect()->route('business.loginPage')->with('message', 'Logout Successfully!!!');
+        return redirect()->route('admin.loginPage')->with('message', 'Logout Successfully!!!');
     }
 
     public function forgot_Pass()

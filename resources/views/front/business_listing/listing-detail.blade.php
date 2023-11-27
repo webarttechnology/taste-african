@@ -2,17 +2,23 @@
 @section('content')
 
     <!-- ======================= Searchbar Banner ======================== -->
-    @foreach ($data as $listing)
+    {{-- @foreach ($data as $listing) --}}
         <div class="featured-slick">
             <div class="featured-gallery-slide">
                 <div class="dlf-flew">
+                    @if ($listing->images && is_iterable($listing->images))
                     @foreach ($listing->images as $listing_image)
-                        <a href="{{ asset($listing_image->images) }}" class="mfp-gallery">
-                            <img src="{{ asset($listing_image->images) }}" class="img-fluid mx-auto" alt=""/>
-                        </a>
+                            <a href="{{asset($listing_image->images) }}" class="mfp-gallery">
+                                <img src="{{asset( $listing_image->images) }}" class="img-fluid mx-auto" alt=""/>
+                            </a>
                     @endforeach
+                    @else
+                        <p>No images available for this listing.</p>
+                    @endif
                 </div>
             </div>
+
+            
 
             <div class="ftl-diope"><a href="javascript:void(0);" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a></div>
             <div class="Goodup-ops-bhri">
@@ -138,7 +144,7 @@
 
                             </div>
                         </div>
-    @endforeach
+    
 
     <!-- Recommended Reviews -->
     <div class="bg-white rounded mb-4">
@@ -275,13 +281,8 @@
                                     referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <div class="list-map-capt">
-                                <div class="lio-pact"><span class="ft-medium text-info">2919 N
-                                        Flores St</span></div>
-                                <div class="lio-pact"><span class="hkio-oilp ft-bold">San Antonio,
-                                        TX 78212</span></div>
-                                <div class="lio-pact">
-                                    <p class="ft-medium">Alta Vista</p>
-                                </div>
+                                <div class="lio-pact"><span class="ft-medium text-info">{{$listing->address}}</span></div>
+                                <div class="lio-pact"><span class="hkio-oilp ft-bold">{{$listing->city . $listing->state}}</span></div>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12">
@@ -741,6 +742,7 @@
             <!-- row -->
 
         </div>
+        {{-- @endforeach --}}
     </section>
     <!-- ======================= Related Listings ======================== -->
 

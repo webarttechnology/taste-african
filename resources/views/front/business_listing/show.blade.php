@@ -5,28 +5,22 @@
 
     <!-- =============================== Dashboard Header ========================== -->
     <section class="bg-cover position-relative" style="background:url({{asset('front/img/cover.jpg')}}) no-repeat #C90000;">
-        <div class="abs-list-sec">
-            <a href="{{ route('business_listing_add') }}" class="add-list-btn"><i class="fas fa-plus me-2"></i>Add Listing</a>
-        </div>
+        <div class="abs-list-sec"><a href="{{route ('business_listing_add')}}" class="add-list-btn"><i class="fas fa-plus me-2"></i>Add Listing</a></div>
         <div class="container">
-            <div class="row" >
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" >
-                    <div class="dashboard-head-author-clicl" >
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        
+                    <div class="dashboard-head-author-clicl">
                         <div class="dashboard-head-author-thumb">
                             <img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
                         </div>
                         <div class="dashboard-head-author-caption">
-                            <div class="dashploio">
-                                <h4>Charles D. Robinson</h4>
-                            </div>
-                            <div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San
-                                    Francisco, USA</span></div>
-                            <div class="listing-rating high"><i class="fas fa-star active"></i><i
-                                    class="fas fa-star active"></i><i class="fas fa-star active"></i><i
-                                    class="fas fa-star active"></i><i class="fas fa-star active"></i></div>
+                            <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
+                            {{-- <div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span></div>
+                            <div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div> --}}
                         </div>
                     </div>
-
+                
                 </div>
             </div>
         </div>
@@ -99,7 +93,7 @@
                                                 <div class="dsd-single-lst-footer">
                                                     <a href="{{ $listing->id }}" class="btn btn-edit mr-1"><i
                                                             class="fas fa-edit me-1"></i>Edit</a>
-                                                    <a href="{{ url ('business-listing/show/'.$listing->id) }}" class="btn btn-view mr-1"><i
+                                                    <a href="{{ url ('business-listing/details/'.$listing->id) }}" class="btn btn-view mr-1"><i
                                                             class="fas fa-eye me-1"></i>View</a>
                                                     <a href="{{ $listing->id }}" class="btn btn-delete"><i
                                                             class="fas fa-trash me-1"></i>Delete</a>
