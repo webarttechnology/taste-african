@@ -25,7 +25,6 @@
                                             <th scope="col">State</th>
                                             <th scope="col">Mobile</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

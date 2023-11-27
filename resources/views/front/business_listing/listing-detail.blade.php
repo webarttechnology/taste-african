@@ -20,7 +20,8 @@
 
             
 
-            <div class="ftl-diope"><a href="javascript:void(0);" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a></div>
+        <div class="ftl-diope">
+            <a href="javascript:void(0);" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a></div>
             <div class="Goodup-ops-bhri">
                 <div class="Goodup-lkp-flex d-flex align-items-start justify-content-start">
                     <div class="Goodup-lkp-thumb">
@@ -288,41 +289,42 @@
                         <div class="col-xl-6 col-lg-6 col-md-12">
                             <table class="table table-borderless">
                                 <tbody>
+                                    @foreach ($listing->infos as $infos)
                                     <tr>
                                         <th scope="row">Mon</th>
-                                        <td>5:00 PM - 8:30 PM</td>
-                                        <td class="text-success">Open now</td>
+                                        <td>{{$infos->monday_opening_time}} - {{$infos->monday_closing_time}}</td>
                                     </tr>
                                     <tr>
                                         <td>Tue</td>
-                                        <td>5:00 PM - 8:30 PM</td>
+                                        <td>{{$infos->tuesday_opening_time}} - {{$infos->tuesday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Wed</td>
-                                        <td>5:00 PM - 8:30 PM</td>
+                                        <td>{{$infos->wednesday_opening_time}} - {{$infos->wednesday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Thu</td>
-                                        <td>5:00 PM - 8:30 PM</td>
+                                        <td>{{$infos->thursday_opening_time}} - {{$infos->thursday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Fri</td>
-                                        <td>5:00 PM - 6:30 PM</td>
+                                        <td>{{$infos->friday_opening_time}} - {{$infos->friday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Sat</td>
-                                        <td>Closed</td>
+                                        <td>{{$infos->saturday_opening_time}} - {{$infos->saturday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Sun</td>
-                                        <td>Closed</td>
+                                        <td>{{$infos->sunday_opening_time}} - {{$infos->sunday_closing_time}}</td>
                                         <td></td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -434,7 +436,7 @@
                             <div class="list-iobk"><i class="fas fa-globe"></i></div>
                             <div class="list-uiyt-capt">
                                 <h5>Live Site</h5>
-                                <p>https://www.Goodup.com/</p>
+                                <p>{{$listing->website}}</p>
                             </div>
                         </div>
                     </li>
@@ -444,7 +446,7 @@
                             <div class="list-iobk"><i class="fas fa-envelope"></i></div>
                             <div class="list-uiyt-capt">
                                 <h5>Drop a Mail</h5>
-                                <p>info@demo.com</p>
+                                <p>{{$listing->email}}</p>
                             </div>
                         </div>
                     </li>
@@ -454,7 +456,7 @@
                             <div class="list-iobk"><i class="fas fa-phone"></i></div>
                             <div class="list-uiyt-capt">
                                 <h5>Call Us</h5>
-                                <p>(210) 659 584 756</p>
+                                <p>{{$listing->mobile}}</p>
                             </div>
                         </div>
                     </li>
@@ -463,7 +465,7 @@
                             <div class="list-iobk"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="list-uiyt-capt">
                                 <h5>Get Directions</h5>
-                                <p>2919 N Flores St San Antonio, TX 78212</p>
+                                <p>{{$listing->address}}</p>
                             </div>
                         </div>
                     </li>

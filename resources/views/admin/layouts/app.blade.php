@@ -51,7 +51,7 @@
 						</li>
 
 						<!-- Users -->
-						<li class="has-sub">
+						{{-- <li class="has-sub">
 							<a class="sidenav-item-link" href="javascript:void(0)">
 								<i class="fa-solid fa-arrow-down-short-wide"></i>	
 								<span class="nav-text">Users</span>
@@ -72,7 +72,7 @@
 								</ul>
 							</div>
 							<hr>
-						</li>
+						</li> --}}
 						<li class="active">
 							<a class="sidenav-item-link" href="{{ route ('category_listing')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>

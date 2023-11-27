@@ -18,7 +18,7 @@ class BusinessListingController extends Controller
     public function businessListing()
     {
        $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems')->get();
-       // return $listings; die;
+        //return $listings; die;
         return view ('front.business_listing.show' , compact('listings'));
     }
 
@@ -168,17 +168,9 @@ class BusinessListingController extends Controller
         return redirect()->route('business_listing')->with('message', 'Data Saved Successfully!!!');
     }
 
-    // public function viewDetails()
-    // {
-    //     $data = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')->get();
-    //     return view ('front.business_listing.listing-detail', compact('data'));
-    // }
-
     public function viewDetails($id)
     {
         $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')->where('id', $id)->first();
-        // return $data;
-        // exit;
         return view ('front.business_listing.listing-detail', compact('listing'));
     }
 }

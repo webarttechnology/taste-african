@@ -6,10 +6,10 @@
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Users Detail</h1>
+                    <h1>Category Detail</h1>
                 </div>   
                 <div>
-                    <a href="{{ route ('category_listing_add')}}" class="btn btn-primary"> Add Porduct</a>
+                    <a href="{{ route ('category_listing_add')}}" class="btn btn-primary"> Add </a>
                 </div>            
             </div>
             <div class="row">
@@ -41,29 +41,16 @@
                                                             data-bs-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false" data-display="static">
                                                             <span class="sr-only">Info</span>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-															<a href="{{ url ('admin/category-listing/edit/'.$categories->id)}}">Edit</a>
-															<a href="{{ url ('admin/category-listing/delete/'.$categories->id)}}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>		
-                                                        </div>
+                                                        </button>                                                       
+                                                        <div class="dropdown-menu dropdown-custom-button">
+                                                            <a class="dropdown-item" href="{{ url ('admin/category-listing/edit/'.$categories->id)}}">Edit</a>
+                                                            <a  href="{{ url ('admin/category-listing/delete/'.$categories->id)}}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                                        </div>		
+                                                       
                                                     </div>
                                                 </td>
 
-                                                {{-- <td>
-                                                    <div class="btn-group mb-1">
-                                                        <button type="button" class="btn btn-outline-success">Info</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false" data-display="static">
-                                                            <span class="sr-only">Info</span>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-															<a class="dropdown-item update-status" href="{{ url ('admin/category-listing/edit/'.$categories->id)}}">Edit</a>
-															<a class="dropdown-item update-status" href="{{ url ('admin/category-listing/delete/'.$categories->id)}}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>	
-                                                        </div>
-                                                    </div>
-                                                </td> --}}
+                                                
 												
                                             </tr>
                                         @endforeach
