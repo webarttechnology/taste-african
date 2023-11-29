@@ -261,174 +261,23 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                 <div class="Goodup-all-features-list">
-                                                    <ul>
+                                                    <ul id="amenities-list">
+                                                        @foreach ($amenities as $amenity)
                                                         <li>
-                                                            <input id="am1" class="checkbox-custom"
+                                                            <input class="checkbox-custom" id="amenities{{$amenity->id}}"
                                                                 name="amenities[]" type="checkbox"
-                                                                value="Health Score 8.7 / 10">
-                                                            <label for="am1" class="checkbox-custom-label">Health
-                                                                Score 8.7 / 10</label>
+                                                                value="{{$amenity->name}}">
+                                                            <label for="amenities{{$amenity->id}}" class="checkbox-custom-label">{{$amenity->name}}</label>
                                                         </li>
-                                                        <li>
-                                                            <input id="am2" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Reservations">
-                                                            <label for="am2"
-                                                                class="checkbox-custom-label">Reservations</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am3" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Vegetarian Options">
-                                                            <label for="am3" class="checkbox-custom-label">Vegetarian
-                                                                Options</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am4" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Moderate Noise">
-                                                            <label for="am4" class="checkbox-custom-label">Moderate
-                                                                Noise</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am5" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Good For Kids">
-                                                            <label for="am5" class="checkbox-custom-label">Good For
-                                                                Kids</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am6" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Private Lot Parking">
-                                                            <label for="am6" class="checkbox-custom-label">Private
-                                                                Lot Parking</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am7" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Beer & Wine">
-                                                            <label for="am7" class="checkbox-custom-label">Beer &
-                                                                Wine</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am8" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="TV Services">
-                                                            <label for="am8" class="checkbox-custom-label">TV
-                                                                Services</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am9" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Pets Allow">
-                                                            <label for="am9" class="checkbox-custom-label">Pets
-                                                                Allow</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am10" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Offers Delivery">
-                                                            <label for="am10" class="checkbox-custom-label">Offers
-                                                                Delivery</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am11" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Staff wears masks">
-                                                            <label for="am11" class="checkbox-custom-label">Staff
-                                                                wears masks</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am12" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Accepts Credit Cards">
-                                                            <label for="am12" class="checkbox-custom-label">Accepts
-                                                                Credit Cards</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am13" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Offers Catering">
-                                                            <label for="am13" class="checkbox-custom-label">Offers
-                                                                Catering</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am14" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Good for Breakfast">
-                                                            <label for="am14" class="checkbox-custom-label">Good for
-                                                                Breakfast</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am15" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Waiter Service">
-                                                            <label for="am15" class="checkbox-custom-label">Waiter
-                                                                Service</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am16" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Drive-Thru">
-                                                            <label for="am16"
-                                                                class="checkbox-custom-label">Drive-Thru</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am17" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Outdoor Seating">
-                                                            <label for="am17" class="checkbox-custom-label">Outdoor
-                                                                Seating</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am18" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Offers Takeout">
-                                                            <label for="am18" class="checkbox-custom-label">Offers
-                                                                Takeout</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am19" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Vegan Options">
-                                                            <label for="am19" class="checkbox-custom-label">Vegan
-                                                                Options</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am20" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Casual">
-                                                            <label for="am20"
-                                                                class="checkbox-custom-label">Casual</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am21" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Good for Groups">
-                                                            <label for="am21" class="checkbox-custom-label">Good for
-                                                                Groups</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am22" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Brunch, Lunch, Dinner">
-                                                            <label for="am22" class="checkbox-custom-label">Brunch,
-                                                                Lunch, Dinner</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am23" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Free Wi-Fi">
-                                                            <label for="am23" class="checkbox-custom-label">Free
-                                                                Wi-Fi</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am24" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox"
-                                                                value="Wheelchair Accessible">
-                                                            <label for="am24" class="checkbox-custom-label">Wheelchair
-                                                                Accessible</label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="am25" class="checkbox-custom"
-                                                                name="amenities[]" type="checkbox" value="Happy Hour">
-                                                            <label for="am25" class="checkbox-custom-label">Happy
-                                                                Hour</label>
-                                                        </li>
+                                                        @endforeach                                                        
                                                     </ul>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <button type="button" class="btn theme-cl rounded bg-warning ft-medium  mt-4" id="addNewButton"> You can add New Amenties
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -454,13 +303,13 @@
                                                 <div class="col-lg-6 col-md-6 uploadForm"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <button type="button" class="btn theme-cl rounded theme-bg-light ft-medium"
-                                                id="add-image-div">Add New</button>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <button type="button" class="btn theme-cl rounded bg-warning ft-medium mt-4"
+                                                    id="add-image-div">Add New</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
 
 
@@ -535,7 +384,7 @@
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <button type="button"
-                                                        class="btn theme-cl rounded theme-bg-light ft-medium"
+                                                        class="btn theme-cl rounded bg-warning ft-medium"
                                                         id="add-div">Add New</button>
 
                                                 </div>
@@ -1082,8 +931,7 @@
                                             </div>
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <button class="btn theme-bg rounded text-light" type="submit">Submit
-                                                        & Preview</button>
+                                                    <button class="btn theme-bg rounded text-light" type="submit"> Submit </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1222,4 +1070,21 @@
                 }
             </script>
 
-        @endsection
+    <script>
+        $(document).ready(function () {
+            $('#addNewButton').on('click', function () {
+                var newAmenity = prompt('Enter the name of the new amenity:');
+
+                if (newAmenity) {
+                    var newListItem = '<li>' +
+                        '<input class="checkbox-custom" name="amenities[]" type="checkbox" value="' + newAmenity + '">' +
+                        '<label class="checkbox-custom-label">' + newAmenity + '</label>' +
+                        '</li>';
+                    
+                    $('#amenities-list').append(newListItem);
+                }
+            });
+        });
+    </script>
+
+@endsection

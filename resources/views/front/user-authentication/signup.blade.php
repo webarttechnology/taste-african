@@ -55,7 +55,7 @@
 
 										<div class="form-group text-center mt-4 mb-0">
 											<p class="mb-0">Have You Already An account?
-												<a href="{{ route ('user.loginPage')}}" class="ft-medium text-success">Sign In</a>
+												<a href="{{ route ('login')}}" class="ft-medium text-success">Sign In</a>
 											</p>
 										</div>
 									</form>

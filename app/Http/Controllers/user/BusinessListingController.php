@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Models\Category;
+use App\Models\Amenity;
 use App\Models\BusinessListing;
 use App\Models\BusinessListingAmenities;
 use App\Models\BusinessListingInfo;
@@ -17,18 +18,22 @@ class BusinessListingController extends Controller
 {
     public function businessListing()
     {
-       $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems')->where('user_id' , Auth::guard('web')->id())->get();
-        return view ('front.business_listing.show' , compact('listings'));
+       
+        $listings = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
+            ->where('user_id', Auth::guard('web')->id())
+            ->get();
+        return view('front.business_listing.show', compact('listings'));
     }
 
     public function add()
     {
+        $amenities = Amenity::get();
         $categories = Category::get();
-        return view ('front.business_listing.add',  compact('categories'));
+        return view('front.business_listing.add', compact('categories', 'amenities'));
     }
 
     public function store(Request $request)
-    { 
+    {
         $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
@@ -55,7 +60,7 @@ class BusinessListingController extends Controller
         ]);
 
         // Business Listing Add
-        $business_listing =  BusinessListing::create([
+        $business_listing = BusinessListing::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'category' => $request->category,
@@ -95,18 +100,14 @@ class BusinessListingController extends Controller
             'linkedin' => $request->linkedin,
         ]);
 
-
         // Business Listing Keywords Add
         $keywords = json_decode($request->keywords, true);
 
-        if( !empty($keywords) )
-        {
-            foreach ($keywords as $keyword) 
-            {
-                $keywordValue =  $keyword['value'] ;
+        if (!empty($keywords)) {
+            foreach ($keywords as $keyword) {
+                $keywordValue = $keyword['value'];
 
-                if (!is_null($keywordValue)) 
-                {                
+                if (!is_null($keywordValue)) {
                     BusinessListingKeywords::create([
                         'business_listing_id' => $business_listing->id,
                         'keywords' => $keywordValue,
@@ -118,66 +119,68 @@ class BusinessListingController extends Controller
         // Business Listing Amenity Add
         $amenity = $request->amenities;
 
-            foreach ( $amenity as $amenity) {
-                BusinessListingAmenities::create([
-                    'business_listing_id' => $business_listing->id,
-                    'amenities' => $amenity,
-                ]);
+        foreach ($amenity as $amenity) {
+            BusinessListingAmenities::create([
+                'business_listing_id' => $business_listing->id,
+                'amenities' => $amenity,
+            ]);
+        }
+
+        // Business Listing Menu Add
+        $menu_items = $request->input('menu_item_name');
+        $menu_category = $request->input('menu_item_category');
+        $menu_price = $request->input('menu_item_price');
+        $menu_itemsDetails = $request->input('menu_item_about');
+        $menuItemImageData = $request->file('menu_item_image');
+
+        for ($i = 0; $i < count($menu_items); $i++) {
+            $menu = BusinessListingMenuitems::create([
+                'business_listing_id' => $business_listing->id,
+                'item_name' => is_array($menu_items) ? $menu_items[$i] : $menu_items,
+                'category' => is_array($menu_category) ? $menu_category[$i] : $menu_category,
+                'price' => is_array($menu_price) ? $menu_price[$i] : $menu_price,
+                'about_item' => is_array($menu_itemsDetails) ? $menu_itemsDetails[$i] : $menu_itemsDetails,
+            ]);
+
+            // Upload and store the image
+            if ($request->hasFile('menu_item_image') && isset($menuItemImageData[$i]) && $menuItemImageData[$i]->isValid()) {
+                $image = 'images/MenuItems/' . time() . $i . '.' . $menuItemImageData[$i]->extension();
+                $menuItemImageData[$i]->move('images/MenuItems', $image);
+                $menu->image = $image;
+                $menu->save();
             }
+        }
 
-        
-         // Business Listing Menu Add
-            $menu_items = $request->input('menu_item_name');
-            $menu_category = $request->input('menu_item_category');
-            $menu_price = $request->input('menu_item_price');
-            $menu_itemsDetails = $request->input('menu_item_about');
-            $menuItemImageData = $request->file('menu_item_image');
-
-            for ($i = 0; $i < count($menu_items); $i++) {
-                $menu = BusinessListingMenuitems::create([
-                    'business_listing_id' => $business_listing->id,
-                    'item_name' => is_array($menu_items) ? $menu_items[$i] : $menu_items,
-                    'category' => is_array($menu_category) ? $menu_category[$i] : $menu_category,
-                    'price' => is_array($menu_price) ? $menu_price[$i] : $menu_price,
-                    'about_item' => is_array($menu_itemsDetails) ? $menu_itemsDetails[$i] : $menu_itemsDetails,
-                ]);
-
-                // Upload and store the image
-                if ( $request->hasFile('menu_item_image') && isset($menuItemImageData[$i]) && $menuItemImageData[$i]->isValid()) 
-                {
-                    $image = 'images/MenuItems/' . time() . $i . '.' . $menuItemImageData[$i]->extension();
-                    $menuItemImageData[$i]->move('images/MenuItems', $image);
-                    $menu->image = $image;
-                    $menu->save();
-                }
-            }
-
-        
-            // Business Listing Images Add                    
-            $business_images = $request->image;
-            foreach ( $business_images as $images) 
-            {           
-                $imageName = 'images/Business_Images/'.time() . '_' . $images->getClientOriginalName();
-                $images->move('images/Business_Images',$imageName);  
-                BusinessListingImages::create([
-                    'business_listing_id' =>  $business_listing->id,
-                    'images' => $imageName,
-                ]);
-            }  
-        return redirect()->route('business_listing')->with('message', 'Data Saved Successfully!!!');
+        // Business Listing Images Add
+        $business_images = $request->image;
+        foreach ($business_images as $images) {
+            $imageName = 'images/Business_Images/' . time() . '_' . $images->getClientOriginalName();
+            $images->move('images/Business_Images', $imageName);
+            BusinessListingImages::create([
+                'business_listing_id' => $business_listing->id,
+                'images' => $imageName,
+            ]);
+        }
+        return redirect()
+            ->route('business_listing')
+            ->with('message', 'Data Saved Successfully!!!');
     }
 
     public function viewDetails($id)
     {
-        $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')->where('id', $id)->first();
-        return view ('front.business_listing.listing-detail', compact('listing'));
+        $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
+            ->where('id', $id)
+            ->first();
+        //return $listing ; exit;
+        return view('front.business_listing.listing-detail', compact('listing'));
     }
 
     public function edit($id)
     {
-        $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')->where('id', $id)->first();
-        // return $listing ; exit;
-        return view ('front.business_listing.update',  compact('listing'));
+        $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
+            ->where('id', $id)
+            ->first();
+        return view('front.business_listing.update', compact('listing'));
     }
 
     public function deleteImage(Request $request)
@@ -192,7 +195,7 @@ class BusinessListingController extends Controller
         // if (file_exists($oldImagePath)) {
         //     unlink($oldImagePath);
         // }
-        
+
         if ($image) {
             $image->delete();
 
@@ -202,12 +205,13 @@ class BusinessListingController extends Controller
         return response()->json(['success' => false]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $business_listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')->where('id', $id)->first();
+        $business_listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
+            ->where('id', $id)
+            ->first();
 
-
-      // Business Listing Update
+        // Business Listing Update
         $business_listing->update([
             'user_id' => Auth::id(),
             'title' => $request->title,
@@ -248,28 +252,23 @@ class BusinessListingController extends Controller
         ]);
 
         // Update Business amenities
-            $amenities = $request->amenities;
-            $business_listing->amenties()->delete(); 
+        $amenities = $request->amenities;
+        $business_listing->amenties()->delete();
 
-            foreach ($amenities as $amenity) {
-                BusinessListingAmenities::updateOrCreate(
-                    ['business_listing_id' => $business_listing->id, 'amenities' => $amenity],
-                    ['amenities' => $amenity]
-                );
-            }
+        foreach ($amenities as $amenity) {
+            BusinessListingAmenities::updateOrCreate(['business_listing_id' => $business_listing->id, 'amenities' => $amenity], ['amenities' => $amenity]);
+        }
         // Update Business amenities
-        
-        // Update Business Images 
+
+        // Update Business Images
         $business_images = $request->image;
 
-        if (is_array($business_images)) 
-        {
-            foreach ($business_images as $image) 
-            {
+        if (is_array($business_images)) {
+            foreach ($business_images as $image) {
                 if ($image && $image->isValid()) {
                     $imageName = 'images/Business_Images/' . time() . '_' . $image->getClientOriginalName();
                     $image->move('images/Business_Images', $imageName);
-        
+
                     BusinessListingImages::updateOrCreate([
                         'business_listing_id' => $business_listing->id,
                         'images' => $imageName,
@@ -280,45 +279,46 @@ class BusinessListingController extends Controller
             if ($business_images && $business_images->isValid()) {
                 $imageName = 'images/Business_Images/' . time() . '_' . $business_images->getClientOriginalName();
                 $business_images->move('images/Business_Images', $imageName);
-        
+
                 BusinessListingImages::updateOrCreate([
                     'business_listing_id' => $business_listing->id,
                     'images' => $imageName,
                 ]);
             }
         }
-       // Update Business Images 
+        // Update Business Images
 
-
-         // Business Listing Menu Add
+        // Business Listing Menu Add
         $menu_items = $request->input('menu_item_name');
         $menu_category = $request->input('menu_item_category');
         $menu_price = $request->input('menu_item_price');
         $menu_itemsDetails = $request->input('menu_item_about');
         $menuItemImageData = $request->file('menu_item_image');
 
-        $business_listing->menuitems()->delete(); 
+        $business_listing->menuitems()->delete();
         for ($i = 0; $i < count($menu_items); $i++) {
-            $menu = BusinessListingMenuitems::create(
-                [
-                    'business_listing_id' => $id,
-                    'item_name' => is_array($menu_items) ? $menu_items[$i] : $menu_items,
-                    'category' => is_array($menu_category) ? $menu_category[$i] : $menu_category,
-                    'price' => is_array($menu_price) ? $menu_price[$i] : $menu_price,
-                    'about_item' => is_array($menu_itemsDetails) ? $menu_itemsDetails[$i] : $menu_itemsDetails,
-                ]
-            );
+            $menu = BusinessListingMenuitems::create([
+                'business_listing_id' => $id,
+                'item_name' => is_array($menu_items) ? $menu_items[$i] : $menu_items,
+                'category' => is_array($menu_category) ? $menu_category[$i] : $menu_category,
+                'price' => is_array($menu_price) ? $menu_price[$i] : $menu_price,
+                'about_item' => is_array($menu_itemsDetails) ? $menu_itemsDetails[$i] : $menu_itemsDetails,
+            ]);
 
             // Upload and store the image
             if ($request->hasFile('menu_item_image') && isset($menuItemImageData[$i]) && $menuItemImageData[$i]->isValid()) {
                 $image = 'images/MenuItems/' . time() . $i . '.' . $menuItemImageData[$i]->extension();
                 $menuItemImageData[$i]->move('images/MenuItems', $image);
                 $menu->image = $image;
-                $menu->save();
+            } elseif (isset($request->menu_item_image_old[$i])) {
+                $menu->image = $request->menu_item_image_old[$i];
             }
+
+            $menu->save();
         }
 
-        return redirect()->route('business_listing')->with('message', 'Data Saved Successfully!!!');
+        return redirect()
+            ->route('business_listing')
+            ->with('message', 'Data Saved Successfully!!!');
     }
-
 }

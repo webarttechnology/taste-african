@@ -287,44 +287,42 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12">
-                            <table class="table table-borderless">
+                            <table class="table table-borderless">                              
                                 <tbody>
-                                    @foreach ($listing->infos as $infos)
                                     <tr>
                                         <th scope="row">Mon</th>
-                                        <td>{{$infos->monday_opening_time}} - {{$infos->monday_closing_time}}</td>
+                                        <td>{{$listing->infos->monday_opening_time}} - {{$listing->infos->monday_opening_time}}</td>
                                     </tr>
                                     <tr>
                                         <td>Tue</td>
-                                        <td>{{$infos->tuesday_opening_time}} - {{$infos->tuesday_closing_time}}</td>
+                                        <td>{{$listing->infos->tuesday_opening_time}} - {{$listing->infos->tuesday_closing_time}}</td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <tr>$listing->infos
                                         <td>Wed</td>
-                                        <td>{{$infos->wednesday_opening_time}} - {{$infos->wednesday_closing_time}}</td>
+                                        <td>{{$listing->infos->wednesday_opening_time}} - {{$listing->infos->wednesday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Thu</td>
-                                        <td>{{$infos->thursday_opening_time}} - {{$infos->thursday_closing_time}}</td>
+                                        <td>{{$listing->infos->thursday_opening_time}} - {{$listing->infos->thursday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Fri</td>
-                                        <td>{{$infos->friday_opening_time}} - {{$infos->friday_closing_time}}</td>
+                                        <td>{{$listing->infos->friday_opening_time}} - {{$listing->infos->friday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Sat</td>
-                                        <td>{{$infos->saturday_opening_time}} - {{$infos->saturday_closing_time}}</td>
+                                        <td>{{$listing->infos->saturday_opening_time}} - {{$listing->infos->saturday_closing_time}}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Sun</td>
-                                        <td>{{$infos->sunday_opening_time}} - {{$infos->sunday_closing_time}}</td>
+                                        <td>{{$listing->infos->sunday_opening_time}} - {{$listing->infos->sunday_closing_time}}</td>
                                         <td></td>
-                                    </tr>
-                                    @endforeach
+                                    </tr>                             
                                 </tbody>
                             </table>
                         </div>
@@ -785,68 +783,6 @@
         </div>
     </section>
     <!-- ======================= Newsletter Start ============================ -->
-    <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false"
-        aria-controls="MobNav">
-        <i class="fas fa-bars me-2"></i>Dashboard Navigation</a>
-    <div class="collapse" id="MobNav">
-        <div class="goodup-dashboard-nav sticky-top">
-            <div class="goodup-dashboard-inner">
-                <ul data-submenu-title="Main Navigation">
-                    <li><a href="dashboard.html"><i class="lni lni-dashboard me-2"></i>Dashboard</a></li>
-                    <li><a href="dashboard-my-listings.html"><i class="lni lni-files me-2"></i>My Listings</a></li>
-                    <li class="active"><a href="dashboard-add-listings.html"><i class="lni lni-add-files me-2"></i>Add
-                            Listing</a></li>
-                    <li><a href="dashboard-saved-listings.html"><i class="lni lni-bookmark me-2"></i>Saved Listing</a>
-                    </li>
-                    <li><a href="dashboard-my-bookings.html"><i class="lni lni-briefcase me-2"></i>My Bookings<span
-                                class="count-tag bg-warning">4</span></a></li>
-                    <li><a href="dashboard-wallet.html"><i class="lni lni-mastercard me-2"></i>Wallet</a></li>
-                    <li><a href="dashboard-messages.html"><i class="lni lni-envelope me-2"></i>Messages<span
-                                class="count-tag">4</span></a></li>
-                </ul>
-                <ul data-submenu-title="My Accounts">
-                    <li><a href="dashboard-my-profile.html"><i class="lni lni-user me-2"></i>My Profile </a></li>
-                    <li><a href="dashboard-change-password.html"><i class="lni lni-lock-alt me-2"></i>Change
-                            Password</a></li>
-                    <li><a href="javascript:void(0);"><i class="lni lni-trash-can me-2"></i>Delete Account</a></li>
-                    <li><a href="login.html"><i class="lni lni-power-switch me-2"></i>Log Out</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="goodup-dashboard-content">
-        <div class="dashboard-tlbar d-block mb-5">
-            <div class="row">
-                <div class="colxl-12 col-lg-12 col-md-12">
-                    <h1 class="ft-medium">Add Listing</h1>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-widg-bar d-block">
-            <div class="row">
-                <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
+   
+   
     @stop

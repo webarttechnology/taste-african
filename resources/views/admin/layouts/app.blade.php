@@ -51,28 +51,28 @@
 						</li>
 
 						<!-- Users -->
-						{{-- <li class="has-sub">
+						<li class="has-sub">
 							<a class="sidenav-item-link" href="javascript:void(0)">
 								<i class="fa-solid fa-arrow-down-short-wide"></i>	
-								<span class="nav-text">Users</span>
+								<span class="nav-text">Amenity</span>
 							</a>
 							<div class="collapse">
 								<ul class="sub-menu" id="users" data-parent="#sidebar-menu">
 									
 									<li class="">
-										<a class="sidenav-item-link" href="">
-											<span class="nav-text">User List</span>
+										<a class="sidenav-item-link" href="{{ route ('amenities_add')}}">
+											<span class="nav-text">Add</span>
 										</a>
 									</li>
 									<li class="">
-										<a class="sidenav-item-link" href="user-profile.html">
-											<span class="nav-text">Users Profile</span>
+										<a class="sidenav-item-link" href="{{ route ('amenities')}}">
+											<span class="nav-text">Show</span>
 										</a>
 									</li>
 								</ul>
 							</div>
 							<hr>
-						</li> --}}
+						</li>
 						<li class="active">
 							<a class="sidenav-item-link" href="{{ route ('category_listing')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>

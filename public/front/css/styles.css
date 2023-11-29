@@ -5338,12 +5338,16 @@ ul.doc.ratting-view li i.filled {
 	General Features Designs
 -------------------------------------------------------------*/
 /*-------------- Form Elements ----------------*/
+.form-group label{
+    color:#000;
+    font-weight: bold;
+}
 .form-control, select.form-control {
     height:54px !important;
     padding:10px 15px;
 	font-size:15px;
     border-radius: 1px;
-    border-color:#eee;
+    border-color:#2c2424;
 	color:#2b2e30;
 }
 .form-control.sm{
@@ -8237,4 +8241,8 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 #tops-button:hover {
     background-color:#d2d7e4;
     color:#333c56;
+}
+
+.image-div{
+    padding-top: 8px;
 }

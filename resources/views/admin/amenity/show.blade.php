@@ -6,11 +6,9 @@
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Category Detail</h1>
+                    <h1>Amenity Listings</h1>
                 </div>   
-                <div>
-                    <a href="{{ route ('category_listing_add')}}" class="btn btn-primary"> Add </a>
-                </div>            
+                     
             </div>
             <div class="row">
                 <div class="col-12">
@@ -21,18 +19,16 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Image</th>
-											<th scope="col">Action</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($category as $categories)
+                                        @foreach ($data as $amenities)
                                             <tr>
-                                                <td>{{ $categories->name }}</td>
-                                                <td>
-                                                    <img src="{{ asset($categories->image) }}" alt="Your Image" width="100px">
-                                                </td>
+                                                
+                                                <td>{{ $amenities->name }}</td>                                               
+                                               
                                                 <td>
                                                     <div class="btn-group mb-1">
                                                         <button type="button" class="btn btn-outline-success">Info</button>
@@ -41,14 +37,14 @@
                                                             data-bs-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false" data-display="static">
                                                             <span class="sr-only">Info</span>
-                                                        </button>                                                       
-                                                        <div class="dropdown-menu dropdown-custom-button">
-                                                            <a class="dropdown-item" href="{{ url ('admin/category-listing/edit/'.$categories->id)}}">Edit</a>
-                                                            <a  href="{{ url ('admin/category-listing/delete/'.$categories->id)}}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
-                                                        </div>		
-                                                       
+                                                        </button>
+                                                        <div class="dropdown-menu">
+															<a class="dropdown-item update-status" href="{{ url ('admin/amenities/edit/'.$amenities->id)}}">Edit</a>
+															<a class="dropdown-item update-status" href="{{ url ('admin/amenities/delete/'.$amenities->id)}}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>	
+                                                        </div>
                                                     </div>
                                                 </td>
+												
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -63,6 +59,8 @@
 
 
 @stop
+
+
 
 
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\CategotyController;
 use App\Http\Controllers\user\BusinessListingController;
 use App\Http\Controllers\user\UserProfileController;
 use App\Http\Controllers\admin\AuthenticationController;
+use App\Http\Controllers\admin\AdminAmenityController;
 use App\Http\Controllers\admin\AdminBusinessListingController;
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +78,14 @@ Route::prefix('admin')->group(function ()
     Route::get('/category-listing/edit/{id}', [CategotyController::class, 'edit'])->name('category_listing_edit');
     Route::put('/category-listing/update/{id}', [CategotyController::class, 'update'])->name('category_listing_update');
     Route::get('/category-listing/delete/{id}', [CategotyController::class, 'delete'])->name('category_listing_delete');
-    Route::post('/user/status-change', [CategotyController::class, 'statusChange'])->name('statusChange');   
+    // Route::post('/user/status-change', [CategotyController::class, 'statusChange'])->name('statusChange');   
+
+
+    Route::get('/amenities', [AdminAmenityController::class, 'index'])->name('amenities');
+    Route::get('/amenities/add', [AdminAmenityController::class, 'add'])->name('amenities_add');
+    Route::get('/amenities/edit/{id}', [AdminAmenityController::class, 'edit'])->name('amenities_edit');
+    Route::post('/amenities/storeOrUpdate/{id?}', [AdminAmenityController::class, 'storeOrUpdate'])->name('amenities.storeOrUpdate');
+    Route::get('/amenities/delete/{id}', [AdminAmenityController::class, 'delete'])->name('amenities_delete');
 
     Route::get('/business-listing/show', [AdminBusinessListingController::class, 'businessListing'])->name('admin.business_listing_show');
 
