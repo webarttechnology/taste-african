@@ -126,14 +126,10 @@
 								@else
 									<!-- Put alternative content or nothing here if the user is not authenticated -->
 								@endif
-								<ul class="dropdown-menu dropdown-menu-right ec-dropdown-menu">
-									<li class="dropdown-footer">										
-										<form action="{{ route('admin.logout') }}" method="post">
-											@csrf
-											<button type="submit" class="btn btn-link">Log Out</button>
-										</form>
-									</li>
-								</ul>
+								<form action="{{ route('admin.logout') }}" method="post">
+									@csrf
+									<button type="submit" class="btn btn-link">Log Out</button>
+								</form>	
 							</li>
 						
 							<li class="right-sidebar-in right-sidebar-2-menu">

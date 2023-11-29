@@ -91,7 +91,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="dsd-single-lst-footer">
-                                                    <a href="{{ $listing->id }}" class="btn btn-edit mr-1"><i
+                                                    <a href="{{ url ('business-listing/edit/'.$listing->id) }}" class="btn btn-edit mr-1"><i
                                                             class="fas fa-edit me-1"></i>Edit</a>
                                                     <a href="{{ url ('business-listing/details/'.$listing->id) }}" class="btn btn-view mr-1"><i
                                                             class="fas fa-eye me-1"></i>View</a>

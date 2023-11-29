@@ -64,7 +64,7 @@ class AuthenticationController extends Controller
 
     public function forgot_Pass()
     {    
-        return view('admin.forgot_password');
+        return view('front.user-authentication.forgot_password');
     }
 
     public function sendResetLink(Request $request)

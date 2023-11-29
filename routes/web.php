@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CategotyController;
 use App\Http\Controllers\user\BusinessListingController;
+use App\Http\Controllers\user\UserProfileController;
 use App\Http\Controllers\admin\AuthenticationController;
 use App\Http\Controllers\admin\AdminBusinessListingController;
 /*
@@ -20,22 +21,45 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 
 Route::get('/', [HomeController::class, 'front'])->name('front');
 
-
-
-// User Login Page:
+ // User Login Page:
 Route::get('user/register', [AuthenticationController::class, 'userRegisterPage'])->name('user.registerPage');
 Route::post('user/store', [AuthenticationController::class, 'userRegister'])->name('user.register');
-Route::get('user/login-page', [AuthenticationController::class, 'userLoginPage'])->name('user.loginPage');
+Route::get('login', [AuthenticationController::class, 'userLoginPage'])->name('login');
 Route::post('user/login', [AuthenticationController::class, 'userLogin'])->name('user.login');
-Route::post('user/logout', [AuthenticationController::class, 'userLogout'])->name('user.logout');
-Route::get('user/dashboard', [AuthenticationController::class, 'userDashboard'])->name('user.dashboard');
 
-// User Business Listing Page:
-Route::get('/business-listing', [BusinessListingController::class, 'businessListing'])->name('business_listing');
-Route::get('/business-listing/add', [BusinessListingController::class, 'add'])->name('business_listing_add');
-Route::post('/business-listing/store', [BusinessListingController::class, 'store'])->name('business_listing_store');
-Route::get('/business-listing/show', [BusinessListingController::class, 'show'])->name('business_listing_show');
-Route::get('/business-listing/details/{id}', [BusinessListingController::class, 'viewDetails'])->name('business_viewDetails');
+
+
+Route::get('/authorDetails', [HomeController::class, 'authorDetails'])->name('authorDetails');
+
+Route::middleware('auth')->group(function () 
+{
+    // User Login Page:
+    Route::post('user/logout', [AuthenticationController::class, 'userLogout'])->name('user.logout');
+    Route::get('user/dashboard', [AuthenticationController::class, 'userDashboard'])->name('user.dashboard');
+
+
+    // User Login Page:
+    Route::get('user/forget-password', [AuthenticationController::class, 'forgot_Pass'])->name('user.forgot_Pass');
+    Route::post('user/forget-password', [AuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');
+
+    // User Business Listing Page:
+    Route::get('/business-listing', [BusinessListingController::class, 'businessListing'])->name('business_listing');
+    Route::get('/business-listing/add', [BusinessListingController::class, 'add'])->name('business_listing_add');
+    Route::post('/business-listing/store', [BusinessListingController::class, 'store'])->name('business_listing_store');
+    Route::get('/business-listing/show', [BusinessListingController::class, 'show'])->name('business_listing_show');
+    Route::get('/business-listing/details/{id}', [BusinessListingController::class, 'viewDetails'])->name('business_viewDetails');
+    Route::get('/business-listing/edit/{id}', [BusinessListingController::class, 'edit'])->name('business_edit');
+    Route::put('/business-listing/update/{id}', [BusinessListingController::class, 'update'])->name('business_update');
+    Route::post('/delete-image',  [BusinessListingController::class, 'deleteImage'])->name('delete.image');
+
+
+    // User Profile Page:
+    Route::get('/user/profile', [UserProfileController::class, 'profile'])->name('user.profile');
+    Route::get('/user/password', [UserProfileController::class, 'changepassword'])->name('user.changepassword');
+    Route::post('/user/password', [UserProfileController::class, 'changepasswordStore'])->name('user.changepasswordStore');
+    Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');
+
+});
 
 // ADMIN BELOW
 

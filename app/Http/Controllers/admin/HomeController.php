@@ -23,5 +23,10 @@ class HomeController extends Controller
         return view('admin.sign-up');
     }
 
+    public function authorDetails()
+    {
+        return view('front.authorDetails');
+    }
+
     
 }

@@ -36,7 +36,7 @@ class BusinessListing extends Model
 
     public function infos()
     {
-        return $this->hasMany(BusinessListingInfo::class);
+        return $this->hasOne(BusinessListingInfo::class);
     }
 
     public function keywords()

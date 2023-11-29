@@ -42,17 +42,16 @@
                         <div class="nav-toggle"></div>
                         <div class="mobile_nav">
                             <ul>
+                                @auth
                                 <li>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#login"
-                                        class="theme-cl fs-lg">
-                                        <i class="lni lni-user"></i>
-                                    </a>
+                                    <a href="{{ route ('login')}}"  class="theme-cl fs-lg"> <i class="lni lni-user"></i> </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="crs_yuo12 w-auto text-white theme-bg">
-                                        <span class="embos_45"><i class="fas fa-plus me-2"></i>Add Listing</span>
-                                    </a>
+                                @else
+                                <li class="add-listing">
+                                    <a href="{{ route ('user.registerPage')}}"> <i class="fas fa-plus me-2"></i>Register </a>
                                 </li>
+                            @endauth
+
                             </ul>
                         </div>
                     </div>
@@ -61,26 +60,23 @@
                             <li class="active"><a href="index.php">Home</a></li>
                             <li><a href="listings.php">Listings</a>
                                 <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="author-detail.php">Author Detail</a>
+                                    <li><a href="{{ route ('authorDetails')}}">Author Detail</a>
                                 </ul>
                             </li>
                             @auth
                             <li><a href="listing-detail.php">User Dashboard</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li>
-                                        <a href="dashboard.php"><i class="lni lni-dashboard me-2 "></i>Dashboard</a>
+                                        <a href="{{route ('user.dashboard')}}"><i class="lni lni-dashboard me-2 "></i>Dashboard</a>
                                     </li>
                                     <li>
                                         <a href="{{ route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings</a>
                                     </li>
-                                    <li><a href="{{ route('business_listing') }}"><i class="lni lni-add-files me-2"></i>Add Listing</a></li>
-                                    <li><a href="dashboard-saved-listings.php"><i class="lni lni-bookmark me-2"></i>Saved Listing</a></li>
-                                    <li><a href="dashboard-my-profile.php"><i class="lni lni-user me-2"></i>My Profile </a></li>
-                                    <li><a href="dashboard-change-password.php"><i class="lni lni-lock-alt me-2"></i>Change Password</a></li>
-                                </ul>
+                                    <li><a href="{{ route('business_listing_add') }}"><i class="lni lni-add-files me-2"></i>Add Listing</a></li>
+                                   </ul>
                             </li>
                             @endauth
-                            <li><a href="javascript:void(0);">Pages</a>
+                            {{-- <li><a href="javascript:void(0);">Pages</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li><a href="blog.php">Blog Style</a></li>
                                     <li><a href="about-us.php">About Us</a></li>
@@ -93,7 +89,7 @@
                                     <li><a href="faq.php">FAQs</a></li>
                                     <li><a href="404.php">404 Page</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
 
                         <ul class="nav-menu nav-menu-social align-to-right">
@@ -108,7 +104,7 @@
                                     </form>
                                 @else
                                     <!-- User is not authenticated, show login -->
-                                    <a href="{{ route ('user.loginPage')}}" class="ft-bold"> 
+                                    <a href="{{ route ('login')}}" class="ft-bold"> 
                                         <i class="fas fa-sign-in-alt me-1 theme-cl"></i>Sign In
                                     </a>
                                     <li class="add-listing">
@@ -369,14 +365,6 @@
     <!-- Multi-select -->
     @yield('custom_js')
     <!-- Multi-select -->
-
-
-    {{-- Dropzone --}}
-   
-
-
-	
-
 </body>
 
 </html>

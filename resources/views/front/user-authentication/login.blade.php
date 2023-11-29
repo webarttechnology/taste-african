@@ -29,11 +29,11 @@
 										<div class="form-group">
 											<div class="d-flex align-items-center justify-content-between">
 												<div class="flex-1">
-													<input id="dd" class="checkbox-custom" name="dd" type="checkbox" checked>
-													<label for="dd" class="checkbox-custom-label">Remember Me</label>
+													{{-- <input id="dd" class="checkbox-custom" name="dd" type="checkbox" checked>
+													<label for="dd" class="checkbox-custom-label">Remember Me</label> --}}
 												</div>	
 												<div class="eltio_k2">
-													<a href="#" class="theme-cl">Lost Your Password?</a>
+													<a href="{{ route ('user.forgot_Pass')}}" class="checkbox-custom-label">Lost Your Password?</a>
 												</div>	
 											</div>
 										</div>
