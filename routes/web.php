@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function ()
     Route::get('/business-listing/details/{id}', [BusinessListingController::class, 'viewDetails'])->name('business_viewDetails');
     Route::get('/business-listing/edit/{id}', [BusinessListingController::class, 'edit'])->name('business_edit');
     Route::put('/business-listing/update/{id}', [BusinessListingController::class, 'update'])->name('business_update');
+    Route::get('/business-listing/delete/{id}', [BusinessListingController::class, 'delete'])->name('business_delete');
     Route::post('/delete-image',  [BusinessListingController::class, 'deleteImage'])->name('delete.image');
 
 

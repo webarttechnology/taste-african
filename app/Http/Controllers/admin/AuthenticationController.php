@@ -134,7 +134,7 @@ class AuthenticationController extends Controller
             'status' => "active",
         ]);
 
-        return redirect()->route('user.loginPage')->with('message','Register Successfully!!!');
+        return redirect()->route('login')->with('message','Register Successfully!!!');
     }
 
     public function userDashboard()

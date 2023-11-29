@@ -177,10 +177,18 @@ class BusinessListingController extends Controller
 
     public function edit($id)
     {
+        $categories = Category::get();
+        $amenities = Amenity::get();
         $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
             ->where('id', $id)
             ->first();
-        return view('front.business_listing.update', compact('listing'));
+        
+        $keywords =  '';
+        foreach ($listing->keywords as $keyword)
+        {
+            $keywords .= ", " . $keyword->keywords;
+        }
+        return view('front.business_listing.update', compact('listing', 'keywords', 'categories', 'amenities'));
     }
 
     public function deleteImage(Request $request)
@@ -321,4 +329,19 @@ class BusinessListingController extends Controller
             ->route('business_listing')
             ->with('message', 'Data Saved Successfully!!!');
     }
+
+    public function delete($id)
+    {
+        $businessListing = BusinessListing::findOrFail($id);
+
+        BusinessListingMenuitems::where('business_listing_id', $id)->delete();
+        BusinessListingImages::where('business_listing_id', $id)->delete();
+        BusinessListingAmenities::where('business_listing_id', $id)->delete();
+        BusinessListingKeywords::where('business_listing_id', $id)->delete();
+        BusinessListingInfo::where('business_listing_id', $id)->delete();
+        $businessListing->delete();
+
+        return redirect()->route('business_listing')->with('message', 'Data Deleted Successfully!!!');
+    }
+
 }

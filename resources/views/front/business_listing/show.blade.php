@@ -58,6 +58,7 @@
 
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="dashboard-listing-wraps">
+                                    @if( count($listings) > 0)
                                     @foreach ($listings as $listing)
                                         <!-- Single Listing Item -->
                                         <div class="dsd-single-listing-wraps">
@@ -95,12 +96,17 @@
                                                             class="fas fa-edit me-1"></i>Edit</a>
                                                     <a href="{{ url ('business-listing/details/'.$listing->id) }}" class="btn btn-view mr-1"><i
                                                             class="fas fa-eye me-1"></i>View</a>
-                                                    <a href="{{ $listing->id }}" class="btn btn-delete"><i
+                                                    <a href="{{ url ('business-listing/delete/'.$listing->id) }}" class="btn btn-delete"><i
                                                             class="fas fa-trash me-1"></i>Delete</a>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
+                                    @else
+                                    <center>
+                                        <p>You Have Not Listed a single Item. </p>
+                                        <a class="btn bg-warning" href="{{route ('business_listing_add')}}"> Add New </a><center>
+                                    @endif
                                 </div>
                             </div>
                         </div>

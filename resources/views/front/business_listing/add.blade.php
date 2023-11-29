@@ -273,13 +273,13 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <button type="button" class="btn theme-cl rounded bg-warning ft-medium  mt-4" id="addNewButton"> You can add New Amenties
-                                                </button>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn theme-cl rounded bg-warning ft-medium  mt-4" id="addNewButton"> You can add New Amenties
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
 
@@ -303,7 +303,7 @@
                                                 <div class="col-lg-6 col-md-6 uploadForm"></div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <button type="button" class="btn theme-cl rounded bg-warning ft-medium mt-4"
                                                     id="add-image-div">Add New</button>
@@ -1076,7 +1076,7 @@
                 var newAmenity = prompt('Enter the name of the new amenity:');
 
                 if (newAmenity) {
-                    var newListItem = '<li>' +
+                    var newListItem = '<li class="am1" >' +
                         '<input class="checkbox-custom" name="amenities[]" type="checkbox" value="' + newAmenity + '">' +
                         '<label class="checkbox-custom-label">' + newAmenity + '</label>' +
                         '</li>';
