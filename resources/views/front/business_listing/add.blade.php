@@ -1072,16 +1072,18 @@
 
     <script>
         $(document).ready(function () {
+            var amenitiesId = 1;
             $('#addNewButton').on('click', function () {
                 var newAmenity = prompt('Enter the name of the new amenity:');
 
                 if (newAmenity) {
                     var newListItem = '<li class="am1" >' +
-                        '<input class="checkbox-custom" name="amenities[]" type="checkbox" value="' + newAmenity + '">' +
-                        '<label class="checkbox-custom-label">' + newAmenity + '</label>' +
+                        '<input id="amenities_'+ amenitiesId +'" class="checkbox-custom" name="amenities[]" type="checkbox" value="' + newAmenity + '">' +
+                        '<label for="amenities_'+ amenitiesId +'" class="checkbox-custom-label">' + newAmenity + '</label>' +
                         '</li>';
                     
                     $('#amenities-list').append(newListItem);
+                    amenitiesId++;
                 }
             });
         });

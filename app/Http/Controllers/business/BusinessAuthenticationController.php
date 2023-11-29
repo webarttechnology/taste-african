@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\business;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -12,27 +12,27 @@ use Illuminate\Support\Facades\Password;
 
 
 
-class AuthenticationController extends Controller
+class BusinessAuthenticationController extends Controller
 {
     
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|unique:users',
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|unique:users',
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), 
-            'role' => $request->role,
-            'status' => "active",
-        ]);
+    //     User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password), 
+    //         'role' => $request->role,
+    //         'status' => "active",
+    //     ]);
 
-        return redirect()->route('business.loginPage')->with('message','Register Successfully!!!');
-    }
+    //     return redirect()->route('business.loginPage')->with('message','Register Successfully!!!');
+    // }
 
     public function loginPage()
     {  
@@ -49,9 +49,9 @@ class AuthenticationController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('dashboard')->with('message', 'Login Successfully!!!');
+            return redirect()->route('business.dashboard')->with('message', 'Login Successfully!!!');
         } else {
-            return redirect()->route('business.loginPage')->with('error', 'Invalid email or password');
+            return redirect()->route('login')->with('error', 'Invalid email or password');
         }
     }
 
@@ -137,7 +137,7 @@ class AuthenticationController extends Controller
         return redirect()->route('login')->with('message','Register Successfully!!!');
     }
 
-    public function userDashboard()
+    public function businessDashboard()
     {
         return view ('front.user-authentication.dashboard');
     }

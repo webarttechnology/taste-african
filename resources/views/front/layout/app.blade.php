@@ -33,10 +33,10 @@
             <div class="container">
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand static-logo" href="#">
+                        <a class="nav-brand static-logo" href="{{ route ('front')}}">
                             <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt="" />
                         </a>
-                        <a class="nav-brand fixed-logo" href="index.php">
+                        <a class="nav-brand fixed-logo" href="{{ route ('front')}}">
                             <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt="" />
                         </a>
                         <div class="nav-toggle"></div>
@@ -48,7 +48,7 @@
                                 </li>
                                 @else
                                 <li class="add-listing">
-                                    <a href="{{ route ('user.registerPage')}}"> <i class="fas fa-plus me-2"></i>Register </a>
+                                    <a href=""> <i class="fas fa-plus me-2"></i>Register </a>
                                 </li>
                             @endauth
 
@@ -67,7 +67,7 @@
                             <li><a href="listing-detail.php">User Dashboard</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li>
-                                        <a href="{{route ('user.dashboard')}}"><i class="lni lni-dashboard me-2 "></i>Dashboard</a>
+                                        <a href="{{route ('business.dashboard')}}"><i class="lni lni-dashboard me-2 "></i>Dashboard</a>
                                     </li>
                                     <li>
                                         <a href="{{ route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings</a>
@@ -93,7 +93,7 @@
                         </ul>
 
                         <ul class="nav-menu nav-menu-social align-to-right">
-                            <li>
+                            {{-- <li>
                                 @auth
                                     <!-- User is authenticated, show logout -->
                                     <a href="{{ route('user.logout') }}" class="ft-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -105,16 +105,35 @@
                                 @else
                                     <!-- User is not authenticated, show login -->
                                     <a href="{{ route ('login')}}" class="ft-bold"> 
-                                        <i class="fas fa-sign-in-alt me-1 theme-cl"></i>Sign In
+                                        <i class="fas fa-sign-in-alt me-1 theme-cl"></i>Business Sign In
                                     </a>
                                     <li class="add-listing">
                                         <a href="{{ route ('user.registerPage')}}">
-                                            <i class="fas fa-plus me-2"></i>Register
+                                            Business Register
+                                            
                                         </a>
                                     </li>
                                 @endauth
-                            </li>   
-                        </ul>
+                            </li>   --}}
+                            @auth
+                            <li>
+                                <a>{{Auth::user()->name}}</a>
+                                <ul class="nav-dropdown nav-submenu">
+                                    <li>                                     
+                                        <!-- User is authenticated, show logout -->
+                                        <a href="{{ route('user.logout') }}" class="ft-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @else
+                                    <a href="{{ route ('login')}}">Business Sign In</a>
+                                    <li><a href="{{ route ('login')}}">User Sign In</a>
+                                    @endauth
+                                </ul>
+                            </li>
+                        </ul>      
                     </div>                      
                 </nav>
             </div>

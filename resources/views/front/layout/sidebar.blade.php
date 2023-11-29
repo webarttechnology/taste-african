@@ -7,7 +7,7 @@
         <div class="goodup-dashboard-nav sticky-top">
             <div class="goodup-dashboard-inner">
                 <ul data-submenu-title="Main Navigation">
-                    <li class="{{ Route::is('user.dashboard') ? 'active' : ''}}"><a href="{{route ('user.dashboard')}}"><i class="lni lni-dashboard me-2"></i>Dashboard</a></li>
+                    <li class="{{ Route::is('business.dashboard') ? 'active' : ''}}"><a href="{{route ('business.dashboard')}}"><i class="lni lni-dashboard me-2"></i>Dashboard</a></li>
                     <li class="{{ Route::is('business_listing') ? 'active' : ''}}">
                         <a href="{{route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings </a>
                     </li>

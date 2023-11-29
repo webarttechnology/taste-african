@@ -270,10 +270,13 @@
                                             <div class="Goodup-all-features-list">
                                                 <ul>
                                                     @foreach ($amenities as $amenity)
+                                                    @php
+                                                        $amenitiesArray = array_column(json_decode(json_encode($listing->amenties), true), 'amenities');
+                                                    @endphp
                                                         <li>
                                                             <input class="checkbox-custom" id="amenities{{$amenity->id}}"
                                                                 name="amenities[]" type="checkbox"
-                                                                value="{{$amenity->name}}" {{$amenity->name == $listing->amenties ? 'checked' : ''}}>
+                                                                value="{{$amenity->name}}" {{ in_array($amenity->name, $amenitiesArray) ? 'checked' : '' }}>
                                                             <label for="amenities{{$amenity->id}}" class="checkbox-custom-label">{{$amenity->name}}</label>
                                                         </li>
                                                     @endforeach  

@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\HomeController;
-use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\user\UserDashboardController;
 use App\Http\Controllers\admin\CategotyController;
 use App\Http\Controllers\user\BusinessListingController;
 use App\Http\Controllers\user\UserProfileController;
-use App\Http\Controllers\admin\AuthenticationController;
+use App\Http\Controllers\user\UserAuthController;
+use App\Http\Controllers\business\BusinessAuthenticationController;
 use App\Http\Controllers\admin\AdminAmenityController;
 use App\Http\Controllers\admin\AdminBusinessListingController;
 /*
@@ -22,12 +23,17 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 
 Route::get('/', [HomeController::class, 'front'])->name('front');
 
- // User Login Page:
-Route::get('user/register', [AuthenticationController::class, 'userRegisterPage'])->name('user.registerPage');
-Route::post('user/store', [AuthenticationController::class, 'userRegister'])->name('user.register');
-Route::get('login', [AuthenticationController::class, 'userLoginPage'])->name('login');
-Route::post('user/login', [AuthenticationController::class, 'userLogin'])->name('user.login');
+ // Business Owner Login Page:
+Route::get('business/register', [BusinessAuthenticationController::class, 'userRegisterPage'])->name('business.registerPage');
+Route::post('business/store', [BusinessAuthenticationController::class, 'userRegister'])->name('business.register');
+Route::get('login', [BusinessAuthenticationController::class, 'userLoginPage'])->name('login');
+Route::post('business/login', [BusinessAuthenticationController::class, 'userLogin'])->name('user.login');
 
+
+ // User Login Page:
+ Route::get('user/register', [UserAuthController::class, 'registerPage'])->name('user.registerPage');
+ Route::post('store', [UserAuthController ::class, 'register'])->name('user.register');
+ Route::get('user/login', [UserAuthController::class, 'login'])->name('user.loginPage');
 
 
 Route::get('/authorDetails', [HomeController::class, 'authorDetails'])->name('authorDetails');
@@ -35,13 +41,13 @@ Route::get('/authorDetails', [HomeController::class, 'authorDetails'])->name('au
 Route::middleware('auth')->group(function () 
 {
     // User Login Page:
-    Route::post('user/logout', [AuthenticationController::class, 'userLogout'])->name('user.logout');
-    Route::get('user/dashboard', [AuthenticationController::class, 'userDashboard'])->name('user.dashboard');
+    Route::post('user/logout', [BusinessAuthenticationController::class, 'userLogout'])->name('user.logout');
+
 
 
     // User Login Page:
-    Route::get('user/forget-password', [AuthenticationController::class, 'forgot_Pass'])->name('user.forgot_Pass');
-    Route::post('user/forget-password', [AuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');
+    Route::get('user/forget-password', [BusinessAuthenticationController::class, 'forgot_Pass'])->name('user.forgot_Pass');
+    Route::post('user/forget-password', [BusinessAuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');
 
     // User Business Listing Page:
     Route::get('/business-listing', [BusinessListingController::class, 'businessListing'])->name('business_listing');
@@ -61,13 +67,26 @@ Route::middleware('auth')->group(function ()
     Route::post('/user/password', [UserProfileController::class, 'changepasswordStore'])->name('user.changepasswordStore');
     Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');
 
+    // Route::middleware('checkRole')->group(function () {
+    //   Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
+    //   Route::get('business/dashboard', [BusinessAuthenticationController::class, 'userDashboard'])->name('business.dashboard');
+    // });
+
+    Route::middleware(['checkRole:user'])->group(function () {
+        Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
+    });
+
+    Route::middleware(['checkRole:business_owner'])->group(function () {
+        Route::get('business/dashboard', [BusinessAuthenticationController::class, 'businessDashboard'])->name('business.dashboard');
+    });
+    
 });
 
 // ADMIN BELOW
 
-Route::get('admin/login', [AuthenticationController::class, 'loginPage'])->name('admin.loginPage');
-Route::post('admin/store', [AuthenticationController::class, 'login'])->name('admin.login');
-Route::post('admin/admin-logout', [AuthenticationController::class, 'logout'])->name('admin.logout');
+Route::get('admin/login', [BusinessAuthenticationController::class, 'loginPage'])->name('admin.loginPage');
+Route::post('admin/store', [BusinessAuthenticationController::class, 'login'])->name('admin.login');
+Route::post('admin/admin-logout', [BusinessAuthenticationController::class, 'logout'])->name('admin.logout');
 
 Route::prefix('admin')->group(function () 
 {

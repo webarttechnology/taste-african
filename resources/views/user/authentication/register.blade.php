@@ -10,10 +10,10 @@
 							<div class="signup-screen-wrap">
 								<div class="signup-screen-single light">
 									<div class="text-center mb-4">
-										<h4 class="m-0 ft-medium">Create Business Account</h4>
+										<h4 class="m-0 ft-medium">Create User Account</h4>
 									</div>
 									
-									<form class="submit-form" action="{{ route ('business.register')}}" method="POST">
+									<form class="submit-form" action="{{ route ('user.register')}}" method="POST">
 										@csrf
 										<div class="row">
 											<div class="col-6">
