@@ -45,7 +45,7 @@
 											<div class="col-4">
 												<div class="form-group">
 													<label class="mb-1">Confirem Password</label>
-													<input type="number" class="form-control rounded" name="password_confirmation">
+													<input type="password" class="form-control rounded" name="password_confirmation">
 												</div>
 											</div>
 											</div>		

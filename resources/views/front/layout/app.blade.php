@@ -17,13 +17,14 @@
     <link href="{{ asset('front/css/styles.css') }}" rel="stylesheet">
 
 
-   {{-- Dropzone --}}
+    {{-- Dropzone --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 
     {{-- Toaster:: --}}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -33,24 +34,25 @@
             <div class="container">
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand static-logo" href="{{ route ('front')}}">
+                        <a class="nav-brand static-logo" href="{{ route('front') }}">
                             <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt="" />
                         </a>
-                        <a class="nav-brand fixed-logo" href="{{ route ('front')}}">
+                        <a class="nav-brand fixed-logo" href="{{ route('front') }}">
                             <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt="" />
                         </a>
                         <div class="nav-toggle"></div>
                         <div class="mobile_nav">
                             <ul>
                                 @auth
-                                <li>
-                                    <a href="{{ route ('login')}}"  class="theme-cl fs-lg"> <i class="lni lni-user"></i> </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ route('login') }}" class="theme-cl fs-lg"> <i class="lni lni-user"></i>
+                                            Login</a>
+                                    </li>
                                 @else
-                                <li class="add-listing">
-                                    <a href=""> <i class="fas fa-plus me-2"></i>Register </a>
-                                </li>
-                            @endauth
+                                    <li class="add-listing">
+                                        <a href=""> <i class="fas fa-plus me-2"></i>Register </a>
+                                    </li>
+                                @endauth
 
                             </ul>
                         </div>
@@ -60,21 +62,24 @@
                             <li class="active"><a href="index.php">Home</a></li>
                             <li><a href="listings.php">Listings</a>
                                 <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="{{ route ('authorDetails')}}">Author Detail</a>
+                                    <li><a href="{{ route('authorDetails') }}">Author Detail</a>
                                 </ul>
                             </li>
                             @auth
-                            <li><a href="listing-detail.php">User Dashboard</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li>
-                                        <a href="{{route ('business.dashboard')}}"><i class="lni lni-dashboard me-2 "></i>Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings</a>
-                                    </li>
-                                    <li><a href="{{ route('business_listing_add') }}"><i class="lni lni-add-files me-2"></i>Add Listing</a></li>
-                                   </ul>
-                            </li>
+                                <li><a href="listing-detail.php">User Dashboard</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li>
+                                            <a href="{{ route('business.dashboard') }}"><i
+                                                    class="lni lni-dashboard me-2 "></i>Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('business_listing') }}"><i class="lni lni-files me-2"></i>My
+                                                Listings</a>
+                                        </li>
+                                        <li><a href="{{ route('business_listing_add') }}"><i
+                                                    class="lni lni-add-files me-2"></i>Add Listing</a></li>
+                                    </ul>
+                                </li>
                             @endauth
                             {{-- <li><a href="javascript:void(0);">Pages</a>
                                 <ul class="nav-dropdown nav-submenu">
@@ -116,25 +121,35 @@
                                 @endauth
                             </li>   --}}
                             @auth
-                            <li>
-                                <a>{{Auth::user()->name}}</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li>                                     
-                                        <!-- User is authenticated, show logout -->
-                                        <a href="{{ route('user.logout') }}" class="ft-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
-                                        </a>
-                                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
+                                <li>
+                                    <a>{{ Auth::user()->name }}</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li>
+                                            <!-- User is authenticated, show logout -->
+                                            <a href="{{ route('user.logout') }}" class="ft-bold"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
+                                            </a>
+                                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
                                     @else
-                                    <a href="{{ route ('login')}}">Business Sign In</a>
-                                    <li><a href="{{ route ('login')}}">User Sign In</a>
+                                        <li>
+                                            <a>Login</a>
+                                            <ul class="nav-dropdown nav-submenu">
+                                                <li>
+                                                    <a href="{{ route('login') }}">Login</a>
+                                                    <a href="{{ route('business.registerForm') }}">Business Sign In</a>
+                                                    <a href="{{ route('user.registerPage') }}">User Sign In</a>
+                                                </li>
+                                        </li>
                                     @endauth
                                 </ul>
                             </li>
-                        </ul>      
-                    </div>                      
+                        </ul>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -324,7 +339,7 @@
 
     </div>
 
- 
+
     <script src="{{ asset('front/js/popper.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('front/js/slick.js') }}"></script>
@@ -342,39 +357,43 @@
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
 
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 
     {{-- Toaster:: --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    {{-- Sweet Alert:: --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         toastr.options = {
-        "closeButton": true,
-        "progressBar": true
-    }
-    
-    @if(Session::has('message'))
-        toastr.success("{{ session('message') }}");
-    @endif
-    
-    @if(Session::has('error'))
-        toastr.error("{{ session('error') }}");
-    @endif
-    
-    @if(Session::has('info'))
-        toastr.info("{{ session('info') }}");
-    @endif
-    
-    @if(Session::has('warning'))
-        toastr.warning("{{ session('warning') }}");
-    @endif
-    
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
+            "closeButton": true,
+            "progressBar": true
+        }
+
+        @if (Session::has('message'))
+            toastr.success("{{ session('message') }}");
+        @endif
+
+        @if (Session::has('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}");
+            @endforeach
+        @endif
     </script>
 
     <!-- ============================================================== -->

@@ -1074,17 +1074,29 @@
         $(document).ready(function () {
             var amenitiesId = 1;
             $('#addNewButton').on('click', function () {
-                var newAmenity = prompt('Enter the name of the new amenity:');
+                // var newAmenity = prompt('Enter the name of the new amenity:');
 
-                if (newAmenity) {
-                    var newListItem = '<li class="am1" >' +
-                        '<input id="amenities_'+ amenitiesId +'" class="checkbox-custom" name="amenities[]" type="checkbox" value="' + newAmenity + '">' +
-                        '<label for="amenities_'+ amenitiesId +'" class="checkbox-custom-label">' + newAmenity + '</label>' +
-                        '</li>';
-                    
-                    $('#amenities-list').append(newListItem);
-                    amenitiesId++;
-                }
+                Swal.fire({
+                    title: "Add new amenity",
+                    input: "text",
+                    inputAttributes: {
+                        autocapitalize: "off"
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: "Add",
+                    showLoaderOnConfirm: true,
+                    allowOutsideClick: () => !Swal.isLoading()
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var newListItem = '<li class="am1" >' +
+                            '<input id="amenities_'+ amenitiesId +'" class="checkbox-custom" name="amenities[]" type="checkbox" value="' + result.value + '">' +
+                            '<label for="amenities_'+ amenitiesId +'" class="checkbox-custom-label">' + result.value + '</label>' +
+                            '</li>';
+                        
+                            $('#amenities-list').append(newListItem);
+                            amenitiesId++;
+                        }
+                    });
             });
         });
     </script>

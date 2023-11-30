@@ -11,7 +11,7 @@
 							<div class="signup-screen-wrap">
 								<div class="signup-screen-single">
 									<div class="text-center mb-4">
-										<h4 class="m-0 ft-medium">Login All Account</h4>
+										<h4 class="m-0 ft-medium">Login Your Account</h4>
 									</div>
 									
 									<form class="submit-form" action="{{ route ('user.login')}}" method="POST">	
@@ -41,9 +41,9 @@
 										<div class="form-group">
 											<button type="submit" class="btn btn-md full-width theme-bg text-light rounded ft-medium">Sign In</button>
 										</div>
-										<div class="form-group text-center mt-4 mb-0">
+										{{-- <div class="form-group text-center mt-4 mb-0">
 											<p class="mb-0">You Don't have any account? <a href="{{route('business.registerPage')}}" class="ft-medium text-success" style="font-weight: bold">Register</a></p>
-										</div>
+										</div> --}}
 										
 									</form>
 								</div>

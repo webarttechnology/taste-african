@@ -14,30 +14,37 @@ use Illuminate\Support\Facades\Password;
 
 class BusinessAuthenticationController extends Controller
 {
+
     
-    // public function register(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|unique:users',
-    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
-    //     ]);
-
-    //     User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->password), 
-    //         'role' => $request->role,
-    //         'status' => "active",
-    //     ]);
-
-    //     return redirect()->route('business.loginPage')->with('message','Register Successfully!!!');
-    // }
-
-    public function loginPage()
-    {  
-        return view('admin.sign-in');
+    // Business Owner register Page:
+    public function registerForm()
+    {
+        return view ('front.user-authentication.signup');
     }
+
+    // Business Owner register :
+    public function businessRegister(Request $request)
+    {
+        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|unique:users',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', new PhoneNumber],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password), 
+            'role' => "business_owner",
+            'status' => "active",
+        ]);
+
+        return redirect()->route('login')->with('message','Register Successfully!!!');
+    }
+
 
     public function login(Request $request)
     {
@@ -53,13 +60,6 @@ class BusinessAuthenticationController extends Controller
         } else {
             return redirect()->route('login')->with('error', 'Invalid email or password');
         }
-    }
-
-
-    public function logout()
-    {  
-        Auth::logout();
-        return redirect()->route('admin.loginPage')->with('message', 'Logout Successfully!!!');
     }
 
     public function forgot_Pass()
@@ -110,66 +110,20 @@ class BusinessAuthenticationController extends Controller
         }
     }
 
-    public function userRegisterPage()
-    {
-        return view ('front.user-authentication.signup');
-    }
 
-    public function userRegister(Request $request)
-    {
-        
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|unique:users',
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', new PhoneNumber],
-        ]);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password), 
-            'role' => "business_owner",
-            'status' => "active",
-        ]);
-
-        return redirect()->route('login')->with('message','Register Successfully!!!');
-    }
+    
 
     public function businessDashboard()
     {
         return view ('front.user-authentication.dashboard');
-    }
+    } 
 
-    public function userLoginPage()
-    {
-        return view ('front.user-authentication.login');
-    }
-
-    public function userLogin(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' =>'required',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('user.dashboard')->with('message', 'Login Successfully!!!');
-        } else {
-            return redirect()->route('user.loginPage')->with('error', 'Invalid email or password');
-        }
-    }
+   
 
     public function userLogout()
     {
         Auth::logout();
         return redirect()->route('front');
     }
-
-
-
     
 }

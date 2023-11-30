@@ -43,7 +43,7 @@
 				<div class="ec-navigation" data-simplebar>
 					<ul class="nav sidebar-inner" id="sidebar-menu">
 						<li class="active">
-							<a class="sidenav-item-link" href="{{ route ('dashboard')}}">
+							<a class="sidenav-item-link" href="{{ route ('admin.dashboard')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>
 								<span class="nav-text">Dashboard</span>
 							</a>

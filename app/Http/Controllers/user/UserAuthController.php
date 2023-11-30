@@ -12,35 +12,74 @@ use App\Http\Controllers\Controller;
 class UserAuthController extends Controller
 {
 
-    public function registerPage()
+     // User register Page:
+     public function registerForm()
+     {
+         return view ('user.authentication.register');
+     }
+
+     public function register(Request $request)
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|unique:users',
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'phone' => ['required', new PhoneNumber],
+            ]);
+
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password), 
+                'role' => "user",
+                'status' => "active",
+            ]);
+
+            return redirect()->route('login')->with('message','Register Successfully!!!');
+        }
+
+     
+    public function loginForm()
     {
-        return view ('user.authentication.register');
+        return view ('front.user-authentication.login');
     }
 
-    public function login()
-    {
-        return view ('user.authentication.login');
-    }
 
-
-    public function register(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|unique:users',
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', new PhoneNumber],
+            'email' => 'required|email',
+            'password' =>'required',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password), 
-            'role' => "user",
-            'status' => "active",
-        ]);
+        $credentials = $request->only('email', 'password');
 
-        return redirect()->route('login')->with('message','Register Successfully!!!');
+        if (Auth::attempt($credentials)) 
+        {
+            $user = Auth::user();
+
+            if ($user->role === 'user') {
+                return redirect()->route('user.dashboard')->with('message', 'Login Successfully!!!');
+            } else {
+                return redirect()->route('business.dashboard')->with('message', 'Login Successfully!!!');
+            }
+        } 
+        else 
+        {
+            return redirect()->route('login')->with('error', 'Invalid email or password');
+        }
     }
+
+
+    
+ 
+
+    // public function login()
+    // {
+    //     return view ('user.authentication.login');
+    // }
+
+
+    
 }
