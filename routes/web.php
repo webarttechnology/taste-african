@@ -5,7 +5,7 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\user\UserDashboardController;
 use App\Http\Controllers\admin\CategotyController;
 use App\Http\Controllers\admin\AuthController;
-use App\Http\Controllers\user\BusinessListingController;
+use App\Http\Controllers\business\BusinessListingController;
 use App\Http\Controllers\user\UserProfileController;
 use App\Http\Controllers\user\UserAuthController;
 use App\Http\Controllers\business\BusinessAuthenticationController;
@@ -32,8 +32,8 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 
 
  // Business Owner register Page:
- Route::get('business/register', [BusinessAuthenticationController::class, 'registerForm'])->name('business.registerForm');
- Route::post('business/register', [BusinessAuthenticationController::class, 'businessRegister'])->name('business.register');
+    Route::get('business/register', [BusinessAuthenticationController::class, 'registerForm'])->name('business.registerForm');
+    Route::post('business/register', [BusinessAuthenticationController::class, 'businessRegister'])->name('business.register');
 
 
   // User register Page:
@@ -47,10 +47,21 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
     Route::post('user/forget-password', [BusinessAuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');
     Route::post('user/logout', [BusinessAuthenticationController::class, 'userLogout'])->name('user.logout');
 
-    // Business Listing Dashboard Page:
-     Route::get('/business-listing', [BusinessListingController::class, 'businessListing'])->name('business_listing');
+    // User Profile Page:
+    Route::get('/user/profile', [UserProfileController::class, 'profile'])->name('user.profile');
+    Route::get('/user/password', [UserProfileController::class, 'changepassword'])->name('user.changepassword');
+    Route::post('/user/password', [UserProfileController::class, 'changepasswordStore'])->name('user.changepasswordStore');
+    Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');    
+  });
 
-    // Business Listing Page:
+    Route::middleware(['auth', 'checkRole:user'])->group(function () {
+        Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
+        Route::get('author-deatils/{listing_user_id}', [UserDashboardController::class, 'authorDetails'])->name('user.authorDetails');
+        Route::get('user/author-listing-details/{id}', [UserDashboardController::class, 'viewDetails'])->name('user_listing_viewDetails');
+    });
+
+Route::middleware(['auth', 'checkRole:business_owner'])->group(function () {
+    Route::get('business/dashboard', [BusinessAuthenticationController::class, 'businessDashboard'])->name('business.dashboard');
     Route::get('/business-listing', [BusinessListingController::class, 'businessListing'])->name('business_listing');
     Route::get('/business-listing/add', [BusinessListingController::class, 'add'])->name('business_listing_add');
     Route::post('/business-listing/store', [BusinessListingController::class, 'store'])->name('business_listing_store');
@@ -60,22 +71,6 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
     Route::put('/business-listing/update/{id}', [BusinessListingController::class, 'update'])->name('business_update');
     Route::get('/business-listing/delete/{id}', [BusinessListingController::class, 'delete'])->name('business_delete');
     Route::post('/delete-image',  [BusinessListingController::class, 'deleteImage'])->name('delete.image');
-
-
-    // User Profile Page:
-    Route::get('/user/profile', [UserProfileController::class, 'profile'])->name('user.profile');
-    Route::get('/user/password', [UserProfileController::class, 'changepassword'])->name('user.changepassword');
-    Route::post('/user/password', [UserProfileController::class, 'changepasswordStore'])->name('user.changepasswordStore');
-    Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');
-    
-  });
-
-Route::middleware(['auth', 'checkRole:user'])->group(function () {
-    Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
-});
-
-Route::middleware(['auth', 'checkRole:business_owner'])->group(function () {
-    Route::get('business/dashboard', [BusinessAuthenticationController::class, 'businessDashboard'])->name('business.dashboard');
 });
 
 

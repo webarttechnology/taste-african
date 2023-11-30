@@ -16,6 +16,7 @@ class UserProfileController extends Controller
     {
         $user = Auth::user();
         $userWithInfo = User::with('info')->find($user->id);
+        // return $userWithInfo;exit; 
         return view ('front.profile.user-profile',  compact('userWithInfo'));
     }
 
@@ -51,7 +52,7 @@ class UserProfileController extends Controller
             'zip_code' => $request->zip_code,
         ]);
 
-        return redirect()->back()->with('success', 'Profile updated successfully.');
+        return redirect()->back()->with('message', 'Profile updated successfully.');
     }
 
     public function changepassword()

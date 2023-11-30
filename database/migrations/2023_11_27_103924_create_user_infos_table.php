@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('state');
-            $table->string('city');
-            $table->string('address');
-            $table->string('zip_code');
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->string('zip_code')->nullable();
             $table->timestamps();
         });
     }

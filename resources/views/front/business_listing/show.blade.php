@@ -35,13 +35,6 @@
                 <div class="row">
                     <div class="colxl-12 col-lg-12 col-md-12">
                         <h1 class="ft-medium">Manage Listings</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item text-muted"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="theme-cl">Manage Listings</a></li>
-                            </ol>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -50,12 +43,6 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
                         <div class="dashboard-list-wraps bg-white rounded mb-4">
-                            <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                <div class="dashboard-list-wraps-flx">
-                                    <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-file-alt me-2 theme-cl fs-sm"></i>My Listings</h4>
-                                </div>
-                            </div>
-
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="dashboard-listing-wraps">
                                     @if( count($listings) > 0)
@@ -104,7 +91,7 @@
                                     @endforeach
                                     @else
                                     <center>
-                                        <p>You Have Not Listed a single Item. </p>
+                                        <p class="zero-listing">You Have Not Listed a single Item. </p>
                                         <a class="btn bg-warning" href="{{route ('business_listing_add')}}"> Add New </a><center>
                                     @endif
                                 </div>

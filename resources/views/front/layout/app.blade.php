@@ -60,11 +60,13 @@
                     <div class="nav-menus-wrapper" style="transition-property: none;">
                         <ul class="nav-menu">
                             <li class="active"><a href="index.php">Home</a></li>
+                            @if(Auth::user()->role == 'user')
                             <li><a href="listings.php">Listings</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li><a href="{{ route('authorDetails') }}">Author Detail</a>
                                 </ul>
                             </li>
+                            @endif
                             @auth
                                 <li><a href="listing-detail.php">User Dashboard</a>
                                     <ul class="nav-dropdown nav-submenu">
@@ -97,29 +99,7 @@
                             </li> --}}
                         </ul>
 
-                        <ul class="nav-menu nav-menu-social align-to-right">
-                            {{-- <li>
-                                @auth
-                                    <!-- User is authenticated, show logout -->
-                                    <a href="{{ route('user.logout') }}" class="ft-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                @else
-                                    <!-- User is not authenticated, show login -->
-                                    <a href="{{ route ('login')}}" class="ft-bold"> 
-                                        <i class="fas fa-sign-in-alt me-1 theme-cl"></i>Business Sign In
-                                    </a>
-                                    <li class="add-listing">
-                                        <a href="{{ route ('user.registerPage')}}">
-                                            Business Register
-                                            
-                                        </a>
-                                    </li>
-                                @endauth
-                            </li>   --}}
+                        <ul class="nav-menu nav-menu-social align-to-right">                          
                             @auth
                                 <li>
                                     <a>{{ Auth::user()->name }}</a>
@@ -137,12 +117,12 @@
                                         </li>
                                     @else
                                         <li>
-                                            <a>Login</a>
+                                            <a class=" rounded bg-warning">Login</a>
                                             <ul class="nav-dropdown nav-submenu">
                                                 <li>
-                                                    <a href="{{ route('login') }}">Login</a>
-                                                    <a href="{{ route('business.registerForm') }}">Business Sign In</a>
-                                                    <a href="{{ route('user.registerPage') }}">User Sign In</a>
+                                                    <a href="{{ route('login') }}">Login</a>                                                    
+                                                    <a href="{{ route('business.registerForm') }}">Business Register</a>
+                                                    <a href="{{ route('user.registerPage') }}">User Register</a>
                                                 </li>
                                         </li>
                                     @endauth
@@ -170,10 +150,9 @@
             <div class="footer-middle">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                             <div class="footer_widget">
-                                <img src="assets/img/logos/logo.png" class="img-footer small mb-2" alt="" />
+                                <img src="{{asset('front/img/logos/logo.png')}}" class="img-footer small mb-2" alt="" />
                                 <!-- <h3>LOGO</h3> -->
 
                                 <div class="address mt-2">

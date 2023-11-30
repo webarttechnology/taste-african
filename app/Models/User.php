@@ -53,6 +53,6 @@ class User extends Authenticatable
 
     public function info()
     {
-        return $this->hasMany(UserInfo::class);
+        return $this->hasOne(UserInfo::class);
     }
 }

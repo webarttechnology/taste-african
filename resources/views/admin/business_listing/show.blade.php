@@ -19,8 +19,8 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Title</th>
-                                            {{-- <th scope="col">Description</th> --}}
+                                            <th scope="col">Publiser Name</th>
+                                            <th scope="col">Listing Title</th>
 											<th scope="col">City</th>
                                             <th scope="col">State</th>
                                             <th scope="col">Mobile</th>
@@ -30,11 +30,8 @@
                                     <tbody>
                                         @foreach ($listings as $listing)
                                             <tr>
-                                                {{-- @foreach ($listings->users as $user)
-                                                <td>{{ $user->name }}</td>
-                                                @endforeach --}}
+                                                <td>{{ $listing->user->name }}</td>
                                                 <td>{{ $listing->title }}</td>
-                                                {{-- <td>{{ $listing->description }}</td> --}}
                                                 <td>{{ $listing->city }}</td>
                                                 <td>{{ $listing->state }}</td>
                                                 <td>{{ $listing->mobile }}</td>
@@ -97,7 +94,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('statusChange') }}',
+                url: '',
                 data: {
                     status: action,
                     user_id: installerId,

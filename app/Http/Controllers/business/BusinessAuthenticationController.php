@@ -108,17 +108,12 @@ class BusinessAuthenticationController extends Controller
         } else {
             return redirect()->with('error', 'Password & Confirm Password Must Be Same');
         }
-    }
-
-
-    
+    }    
 
     public function businessDashboard()
     {
         return view ('front.user-authentication.dashboard');
-    } 
-
-   
+    }    
 
     public function userLogout()
     {

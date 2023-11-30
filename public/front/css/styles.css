@@ -6049,7 +6049,8 @@ div#myTabContent {
     border-radius:6px;
     padding-bottom: 30px;
     z-index:1;
-    background: #fff;
+    background: #a89a20;
+    border: 2px solid black;
 }
 .goodup-dashboard-inner{
     position:relative;
@@ -6086,13 +6087,13 @@ div#myTabContent {
 }
 .goodup-dashboard-nav ul li.active, .goodup-dashboard-nav ul li:hover{
     border-color:#0c6018;
-	background-color:rgba(244, 27, 59,0.1);
+	background-color:#974f4f;
 }
 .goodup-dashboard-nav ul li.active a, .goodup-dashboard-nav ul li:hover a{
-    color:#0c6018;
+    color:#ffffff;
 }
 .goodup-dashboard-nav ul li a {
-    color:#555962;
+    color:#ffffff;
     display: block;
     padding:12px 25px;
     transition: 0.3s;
@@ -8245,4 +8246,10 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 
 .image-div{
     padding-top: 8px;
+}
+
+.zero-listing{
+    font-size: 20px;
+    color: #0909bf;
+    font-weight: 600;
 }

@@ -3,23 +3,20 @@
 
     <!-- ======================= Searchbar Banner ======================== -->
     {{-- @foreach ($data as $listing) --}}
-        <div class="featured-slick">
-            <div class="featured-gallery-slide">
-                <div class="dlf-flew">
-                    @if ($listing->images && is_iterable($listing->images))
-                    @foreach ($listing->images as $listing_image)
-                            <a href="{{asset($listing_image->images) }}" class="mfp-gallery">
-                                <img src="{{asset( $listing_image->images) }}" class="img-fluid mx-auto" alt=""/>
-                            </a>
-                    @endforeach
-                    @else
-                        <p>No images available for this listing.</p>
-                    @endif
-                </div>
+    <div class="featured-slick">
+        <div class="featured-gallery-slide">
+            <div class="dlf-flew">
+                @if ($listing->images && is_iterable($listing->images))
+                @foreach ($listing->images as $image)
+                        <a href="{{asset($image->images) }}" class="mfp-gallery">
+                            <img src="{{asset( $image->images) }}" class="img-fluid mx-auto" alt=""/>
+                        </a>
+                @endforeach
+                @else
+                    <p>No images available for this listing.</p>
+                @endif
             </div>
-
-
-            
+        </div>
 
             
 
@@ -150,70 +147,127 @@
                         </div>
     
 
-    <!-- Recommended Reviews -->
-    <div class="bg-white rounded mb-4">
-        <div class="jbd-01 px-4 py-4">
-            <div class="jbd-details mb-4">
-                <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
-                <div class="reviews-comments-wrap">
+        <!-- Recommended Reviews -->
+        <div class="bg-white rounded mb-4">
+            <div class="jbd-01 px-4 py-4">
+                <div class="jbd-details mb-4">
+                    <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
+                    <div class="reviews-comments-wrap">
 
-                    <!-- reviews-comments-item -->
-                    <div class="reviews-comments-item">
-                        <div class="review-comments-avatar">
-                            <img src="assets/img/t-1.png" class="img-fluid" alt="">
-                        </div>
-                        <div class="reviews-comments-item-text">
-                            <h4><a href="#">Kayla E. Claxton</a><span class="reviews-comments-item-date"><i
-                                        class="ti-calendar theme-cl me-1"></i>27 Oct 2019</span>
-                            </h4>
-                            <span class="agd-location"><i class="lni lni-map-marker me-1"></i>San
-                                Francisco, USA</span>
-                            <div class="listing-rating high"><i class="fas fa-star active"></i><i
-                                    class="fas fa-star active"></i><i class="fas fa-star active"></i><i
-                                    class="fas fa-star active"></i><i class="fas fa-star active"></i>
+                        <!-- reviews-comments-item -->
+                        <div class="reviews-comments-item">
+                            <div class="review-comments-avatar">
+                                <img src="assets/img/t-1.png" class="img-fluid" alt="">
                             </div>
-                            <div class="clearfix"></div>
-                            <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                cupidatat non proident. "</p>
-                            <div class="pull-left reviews-reaction">
-                                <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
-                                    12</a>
-                                <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                <a href="#" class="comment-love active"><i class="ti-heart"></i>
-                                    07</a>
+                            <div class="reviews-comments-item-text">
+                                <h4><a href="#">Kayla E. Claxton</a><span class="reviews-comments-item-date"><i
+                                            class="ti-calendar theme-cl me-1"></i>27 Oct 2019</span>
+                                </h4>
+                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>San
+                                    Francisco, USA</span>
+                                <div class="listing-rating high"><i class="fas fa-star active"></i><i
+                                        class="fas fa-star active"></i><i class="fas fa-star active"></i><i
+                                        class="fas fa-star active"></i><i class="fas fa-star active"></i>
+                                </div>
+                                <div class="clearfix"></div>
+                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                    cupidatat non proident. "</p>
+                                <div class="pull-left reviews-reaction">
+                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
+                                        12</a>
+                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
+                                    <a href="#" class="comment-love active"><i class="ti-heart"></i>
+                                        07</a>
+                                </div>
                             </div>
                         </div>
+                        <!--reviews-comments-item end-->
+
+                        <!-- reviews-comments-item -->
+                        <div class="reviews-comments-item">
+                            <div class="review-comments-avatar">
+                                <img src="assets/img/t-2.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="reviews-comments-item-text">
+                                <h4><a href="#">Amy M. Taylor</a><span class="reviews-comments-item-date"><i
+                                            class="ti-calendar theme-cl me-1"></i>2 Nov May 2019</span>
+                                </h4>
+                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>Liverpool,
+                                    London UK</span>
+                                <div class="listing-rating mid"><i class="fas fa-star active"></i><i
+                                        class="fas fa-star active"></i><i class="fas fa-star active"></i><i
+                                        class="fas fa-star active"></i><i class="fas fa-star"></i></div>
+                                <div class="clearfix"></div>
+                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                    cupidatat non proident. "</p>
+                                <div class="pull-left reviews-reaction">
+                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
+                                        12</a>
+                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
+                                    <a href="#" class="comment-love active"><i class="ti-heart"></i>
+                                        07</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--reviews-comments-item end-->
+
+                        <!-- reviews-comments-item -->
+                        <div class="reviews-comments-item">
+                            <div class="review-comments-avatar">
+                                <img src="assets/img/t-3.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="reviews-comments-item-text">
+                                <h4><a href="#">Susan C. Daggett</a><span class="reviews-comments-item-date"><i
+                                            class="ti-calendar theme-cl me-1"></i>10 Nov 2019</span>
+                                </h4>
+                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>Denver,
+                                    United State</span>
+                                <div class="listing-rating good"><i class="fas fa-star active"></i><i
+                                        class="fas fa-star active"></i><i class="fas fa-star active"></i><i
+                                        class="fas fa-star active"></i><i class="fas fa-star"></i></div>
+                                <div class="clearfix"></div>
+                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                    cupidatat non proident. "</p>
+                                <div class="pull-left reviews-reaction">
+                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
+                                        12</a>
+                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
+                                    <a href="#" class="comment-love active"><i class="ti-heart"></i>
+                                        07</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--reviews-comments-item end-->
+
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span class="fas fa-arrow-circle-right"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">18</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span class="fas fa-arrow-circle-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+
                     </div>
-                    <!--reviews-comments-item end-->
-
-                  
-                   
-
-                    {{-- <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span class="fas fa-arrow-circle-right"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">18</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span class="fas fa-arrow-circle-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul> --}}
-
                 </div>
             </div>
         </div>
-    </div>
+
+
 
     <!-- Location & Hours -->
     <div class="bg-white rounded mb-4">
@@ -280,6 +334,68 @@
         </div>
     </div>
 
+    	<!-- Drop Your Review -->
+        <div class="bg-white rounded mb-4">
+            <div class="jbd-01 px-4 py-4">
+                <div class="jbd-details mb-4">
+                    <h5 class="ft-bold fs-lg">Drop Your Review</h5>
+                    <div class="review-form-box form-submit mt-3">
+                        <form>
+                            <div class="row">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label class="ft-medium small mb-1">Choose Rate</label>
+                                        <select class="form-control rounded">
+                                            <option>Choose Rating</option>
+                                            <option>1 Star</option>
+                                            <option>2 Star</option>
+                                            <option>3 Star</option>
+                                            <option>4 Star</option>
+                                            <option>5 Star</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label class="ft-medium small mb-1">Name</label>
+                                        <input class="form-control rounded" type="text"
+                                            placeholder="Your Name">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label class="ft-medium small mb-1">Email</label>
+                                        <input class="form-control rounded" type="email"
+                                            placeholder="Your Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group mb-3">
+                                        <label class="ft-medium small mb-1">Review</label>
+                                        <textarea class="form-control rounded ht-140"
+                                            placeholder="Review"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <button type="submit"
+                                            class="btn theme-bg text-light rounded">Submit
+                                            Review</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Sidebar -->
@@ -342,7 +458,7 @@
     <!-- ============================ Listing Details End ================================== -->
 
     <!-- ======================= Related Listings ======================== -->
-    {{-- <section class="space min">
+    <section class="space min">
         <div class="container">
 
             <div class="row justify-content-center">
@@ -591,10 +707,12 @@
                     </div>
                 </div>
 
-            </div>          
+            </div>
+            <!-- row -->
 
-        </div>       
-    </section> --}}
+        </div>
+        {{-- @endforeach --}}
+    </section>
     <!-- ======================= Related Listings ======================== -->
 
     <!-- ======================= Newsletter Start ============================ -->

@@ -10,7 +10,7 @@ class AdminBusinessListingController extends Controller
 {
     public function businessListing()
     {
-       $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'users')->get();
+       $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'user')->get();
         return view ('admin.business_listing.show' , compact('listings'));
     }
 }
