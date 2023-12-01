@@ -79,6 +79,6 @@ class UserProfileController extends Controller
 
        Auth::logout();
    
-       return redirect()->route('user.loginPage')->with('message', 'Password changed successfully. Login Again With New Password!!');   
+       return redirect()->route('login')->with('message', 'Password changed successfully. Login Again With New Password!!');   
     }
 }

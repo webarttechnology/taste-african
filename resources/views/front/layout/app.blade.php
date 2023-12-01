@@ -30,107 +30,135 @@
 <body>
 
     <div id="main-wrapper">
-        <div class="header header-transparent change-logo">
+        <div class="header header-transparent change-logo  navbar-light bg-light">
             <div class="container">
-                <nav id="navigation" class="navigation navigation-landscape">
-                    <div class="nav-header">
-                        <a class="nav-brand static-logo" href="{{ route('front') }}">
-                            <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt="" />
-                        </a>
-                        <a class="nav-brand fixed-logo" href="{{ route('front') }}">
-                            <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt="" />
-                        </a>
-                        <div class="nav-toggle"></div>
-                        <div class="mobile_nav">
-                            <ul>
-                                @auth
-                                    <li>
-                                        <a href="{{ route('login') }}" class="theme-cl fs-lg"> <i class="lni lni-user"></i>
-                                            Login</a>
-                                    </li>
-                                @else
-                                    <li class="add-listing">
-                                        <a href=""> <i class="fas fa-plus me-2"></i>Register </a>
-                                    </li>
-                                @endauth
+                <nav class="navbar navbar-expand-lg">
+                    {{-- <div class="container-fluid"> --}}
 
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="nav-menus-wrapper" style="transition-property: none;">
-                        <ul class="nav-menu">
-                            <li class="active"><a href="index.php">Home</a></li>
-                            @if(Auth::user()->role == 'user')
-                            <li><a href="listings.php">Listings</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="{{ route('authorDetails') }}">Author Detail</a>
-                                </ul>
+                    <a class="navbar-brand static-logo" href="{{ route('front') }}">
+                        <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt=""
+                            width="80px" />
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
+
+                            @if (Auth::check() && Auth::user()->role == 'user')
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Listings
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ route('authorDetails') }}"><i
+                                                    class="lni lni-files me-2"></i>Author Detail</a></li>
+                                    </ul>
+                                </li>
                             @endif
-                            @auth
-                                <li><a href="listing-detail.php">User Dashboard</a>
-                                    <ul class="nav-dropdown nav-submenu">
-                                        <li>
-                                            <a href="{{ route('business.dashboard') }}"><i
-                                                    class="lni lni-dashboard me-2 "></i>Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('business_listing') }}"><i class="lni lni-files me-2"></i>My
-                                                Listings</a>
-                                        </li>
-                                        <li><a href="{{ route('business_listing_add') }}"><i
+                            @if (Auth::check() && Auth::user()->role == 'business_owner')
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        User Dashboard
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ route('business.dashboard') }}"><i
+                                                    class="lni lni-files me-2"></i>My
+                                                Listings</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('business_listing_add') }}"><i
                                                     class="lni lni-add-files me-2"></i>Add Listing</a></li>
                                     </ul>
                                 </li>
-                            @endauth
-                            {{-- <li><a href="javascript:void(0);">Pages</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="blog.php">Blog Style</a></li>
-                                    <li><a href="about-us.php">About Us</a></li>
-                                    <li><a href="contact.php">Contact</a></li>
-                                    <li><a href="checkout.php">Checkout</a></li>
-                                    <li><a href="pricing.php">Pricing</a></li>
-                                    <li><a href="signup.php">Sign Up</a></li>
-                                    <li><a href="login.php">Sign In</a></li>
-                                    <li><a href="privacy.php">Privacy Policy</a></li>
-                                    <li><a href="faq.php">FAQs</a></li>
-                                    <li><a href="404.php">404 Page</a></li>
-                                </ul>
-                            </li> --}}
-                        </ul>
+                            @endif
 
-                        <ul class="nav-menu nav-menu-social align-to-right">                          
-                            @auth
-                                <li>
-                                    <a>{{ Auth::user()->name }}</a>
-                                    <ul class="nav-dropdown nav-submenu">
-                                        <li>
-                                            <!-- User is authenticated, show logout -->
-                                            <a href="{{ route('user.logout') }}" class="ft-bold"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
-                                            </a>
-                                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
-                                                style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </li>
-                                    @else
-                                        <li>
-                                            <a class=" rounded bg-warning">Login</a>
-                                            <ul class="nav-dropdown nav-submenu">
-                                                <li>
-                                                    <a href="{{ route('login') }}">Login</a>                                                    
-                                                    <a href="{{ route('business.registerForm') }}">Business Register</a>
-                                                    <a href="{{ route('user.registerPage') }}">User Register</a>
-                                                </li>
-                                        </li>
-                                    @endauth
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pages
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="lni lni-files me-2"></i>About
+                                            Us</a></li>
+
+                                    {{-- <li><a href="blog.php">Blog Style</a></li>
+                                                    <li><a href="about-us.php">About Us</a></li>
+                                                    <li><a href="contact.php">Contact</a></li>
+                                                    <li><a href="checkout.php">Checkout</a></li>
+                                                    <li><a href="pricing.php">Pricing</a></li>
+                                                    <li><a href="signup.php">Sign Up</a></li>
+                                                    <li><a href="login.php">Sign In</a></li>
+                                                    <li><a href="privacy.php">Privacy Policy</a></li>
+                                                    <li><a href="faq.php">FAQs</a></li>
+                                                    <li><a href="404.php">404 Page</a></li> --}}
                                 </ul>
                             </li>
                         </ul>
+
+                            @auth
+                                <a href="{{ route('user.logout') }}" class="ft-bold"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            @else
+                            <li class="nav-item dropdown" style="list-style: none">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Login
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('login') }}"><i
+                                                class="lni lni-files me-2"></i>Login</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('business.registerForm') }}"><i
+                                                class="lni lni-add-files me-2"></i>Business Register</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.registerPage') }}"><i
+                                                class="lni lni-add-files me-2"></i>User Register</a></li>
+                                </ul>
+                            </li>
+                            @endauth
                     </div>
+                    {{-- </div> --}}
                 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
         <!-- End Navigation -->
@@ -152,7 +180,8 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                             <div class="footer_widget">
-                                <img src="{{asset('front/img/logos/logo.png')}}" class="img-footer small mb-2" alt="" />
+                                <img src="{{ asset('front/img/logos/logo.png') }}" class="img-footer small mb-2"
+                                    alt="" />
                                 <!-- <h3>LOGO</h3> -->
 
                                 <div class="address mt-2">

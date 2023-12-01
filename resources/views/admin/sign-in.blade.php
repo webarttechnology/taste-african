@@ -56,17 +56,7 @@
 									</div>
 									
 									<div class="col-md-12">
-										<div class="d-flex my-2 justify-content-between">
-											<div class="d-inline-block mr-3">
-												<div class="control control-checkbox">Remember me
-													<input type="checkbox" />
-													<div class="control-indicator"></div>
-												</div>
-											</div>											
-										</div>
-										
 										<button type="submit" class="btn btn-primary btn-block mb-4">Sign In</button>
-										
 									</div>
 								</div>
 							</form>

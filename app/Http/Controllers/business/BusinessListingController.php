@@ -218,6 +218,23 @@ class BusinessListingController extends Controller
             ->where('id', $id)
             ->first();
 
+
+             // Business Listing Keywords Add
+            $keywords = json_decode($request->keywords, true);
+            $business_listing->keywords()->delete();
+            foreach ($keywords as $keyword) {
+                $keywordValue = $keyword['value'];
+
+                if (!is_null($keywordValue)) {
+                    BusinessListingKeywords::create([
+                        'business_listing_id' => $business_listing->id,
+                        'keywords' => $keywordValue,
+                    ]);
+                }
+            }
+        
+
+
         // Business Listing Update
         $business_listing->update([
             'user_id' => Auth::id(),
@@ -323,6 +340,8 @@ class BusinessListingController extends Controller
 
             $menu->save();
         }
+
+        
 
         return redirect()
             ->route('business_listing')

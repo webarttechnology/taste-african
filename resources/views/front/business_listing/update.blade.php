@@ -51,6 +51,50 @@
                         @method('PUT')
                         @csrf
                         <div class="submit-form">
+
+                                  <!-- Image & Gallery Option -->
+                                  <div class="dashboard-list-wraps bg-white rounded mb-4">
+                                    <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                                        <div class="dashboard-list-wraps-flx">
+                                            <h4 class="mb-0 ft-medium fs-md">
+                                                <i class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option
+                                            </h4>
+                                        </div>
+                                    </div>
+    
+                                    <div class="dashboard-list-wraps-body py-3 px-3">
+                                        <div id="image-container">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 image-div">
+                                                    <input type="file" class="form-control rounded file"
+                                                        name="image[]" onchange="showImageOnFile(this)">
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 uploadForm image-div"></div>
+    
+                                                @foreach ($listing->images as $listing_image)
+                                                    <div class="col-lg-6 col-md-6 image-div">
+                                                        <img src="{{ asset($listing_image->images) }}"
+                                                            class="img-fluid mx-auto" width="150px" />
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 image-div">
+                                                        <a href="#"
+                                                            class="btn theme-cl rounded theme-bg-light ft-medium delete-image"
+                                                            data-image-id="{{ $listing_image->id }}">Delete</a>
+                                                    </div>
+                                                @endforeach
+    
+                                                <div class="col-lg-6 col-md-6 uploadForm image-div"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <button type="button" class="btn theme-cl rounded bg-warning ft-medium"
+                                                    id="add-image-div">Add New</button>
+                                            </div>
+                                        </div>
+                                    </div>                               
+                                </div>
+    
                             <!-- Listing Info -->
                             <div class="dashboard-list-wraps bg-white rounded mb-4">
                                 <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
@@ -293,49 +337,7 @@
                                 </div>
                             </div>
 
-                            <!-- Image & Gallery Option -->
-                            <div class="dashboard-list-wraps bg-white rounded mb-4">
-                                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                    <div class="dashboard-list-wraps-flx">
-                                        <h4 class="mb-0 ft-medium fs-md">
-                                            <i class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option
-                                        </h4>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-list-wraps-body py-3 px-3">
-                                    <div id="image-container">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 image-div">
-                                                <input type="file" class="form-control rounded file"
-                                                    name="image[]" onchange="showImageOnFile(this)">
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 uploadForm image-div"></div>
-
-                                            @foreach ($listing->images as $listing_image)
-                                                <div class="col-lg-6 col-md-6 image-div">
-                                                    <img src="{{ asset($listing_image->images) }}"
-                                                        class="img-fluid mx-auto" width="150px" />
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 image-div">
-                                                    <a href="#"
-                                                        class="btn theme-cl rounded theme-bg-light ft-medium delete-image"
-                                                        data-image-id="{{ $listing_image->id }}">Delete</a>
-                                                </div>
-                                            @endforeach
-
-                                            <div class="col-lg-6 col-md-6 uploadForm image-div"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <button type="button" class="btn theme-cl rounded bg-warning ft-medium"
-                                                id="add-image-div">Add New</button>
-                                        </div>
-                                    </div>
-                                </div>                               
-                            </div>
-
+                      
 
                             <!-- Menu Items -->
                             <div class="container mt-5">

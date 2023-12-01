@@ -35,7 +35,7 @@
                         <div class="Goodup-lkp-title">
                             <h1 class="text-light mb-0 ft-bold">{{$listing->title}}</h4>
                         </div>
-                        <div class="Goodup-ft-first">
+                        {{-- <div class="Goodup-ft-first">
                             <div class="Goodup-rating">
                                 <div class="Goodup-rates">
                                     <i class="fas fa-star"></i>
@@ -53,11 +53,11 @@
                                     <span class="active"><i class="fas fa-dollar-sign"></i></span>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="d-block mt-3">
                             <div class="list-lioe">
                                 <div class="list-lioe-single"><span class="ft-medium text-info"><i
-                                            class="fas fa-check-circle me-1"></i>Claimed</span></div>
+                                            class="fas fa-check-circle me-1"></i>Keywords</span></div>
                                 <div class="list-lioe-single ms-2 ps-3 seperate">
 									@foreach ($listing->keywords as $listing_keywords)
                                     <a href="javascript:void(0);" class="text-light ft-medium">{{$listing_keywords->keywords}}</a>,
@@ -67,7 +67,7 @@
                         </div>
                         <div class="d-block mt-1">
                             <div class="list-lioe">
-                                <div class="list-lioe-single"><span class="ft-medium text-danger">Closed</span>
+                                <div class="list-lioe-single"><span class="ft-medium text-danger">Today Timing</span>
 									<span class="text-light ft-medium ms-2">11:00 AM - 12:00 AM</span></div>
                             </div>
                         </div>
