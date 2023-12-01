@@ -11,7 +11,7 @@ class UserDashboardController extends Controller
 {
     public function userDashboard()
     {
-        $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'user')->get();
+        $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'user')->where('status', 'approve')->get();
 
         return view ('user.authentication.dashboard', compact('listings'));
     }
