@@ -60,11 +60,11 @@
                                                     <h5>{{ $listing->title }}</h5>
                                                 </div>
                                                 <span class="agd-location"><i class="fa fa-user-o" aria-hidden="true"></i>Author:
-													<a href="{{ url ('author-deatils/'. $listing->user->id)}}" class="dsd-single-lst-title"> {{ $listing->user->name }}</a>
+													<a href="{{ url ('user/author-listing-details/'. $listing->user->id)}}" class="dsd-single-lst-title"> {{ $listing->user->name }}</a>
 												</span>
                                                 
                                                 <div class="dsd-single-lst-footer">
-                                                    <a href="{{ url ('business-listing/edit/'.$listing->id) }}" class="btn btn-edit mr-1"><i
+                                                    <a href="{{ url ('author-deatils/'. $listing->user->id)}}" class="btn btn-edit mr-1"><i
 														class="fas fa-eye me-1"></i>View</a>
                                                     <a href="{{ url ('business-listing/details/'.$listing->id) }}" class="btn btn-view mr-1"><i
                                                             class="fas fa-eye me-1"></i>Review</a>

@@ -22,6 +22,7 @@ class BusinessListing extends Model
         'mobile',
         'email',
         'website',
+        'status',
     ];
 
     public function amenties()

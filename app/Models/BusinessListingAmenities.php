@@ -12,6 +12,7 @@ class BusinessListingAmenities extends Model
     protected $fillable = [
         'business_listing_id',
         'amenities',
+        'custom',
     ];
 
    

@@ -106,5 +106,6 @@ Route::prefix('admin')->group(function ()
     Route::get('/amenities/delete/{id}', [AdminAmenityController::class, 'delete'])->name('amenities_delete');
 
     Route::get('/business-listing/show', [AdminBusinessListingController::class, 'businessListing'])->name('admin.business_listing_show');
+    Route::post('/business-listing/status-change', [AdminBusinessListingController::class, 'statusChange'])->name('admin.statusChange');
 
 });

@@ -73,12 +73,6 @@ class UserAuthController extends Controller
 
 
     
- 
-
-    // public function login()
-    // {
-    //     return view ('user.authentication.login');
-    // }
 
 
     

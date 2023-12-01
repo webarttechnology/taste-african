@@ -16,7 +16,6 @@ class UserProfileController extends Controller
     {
         $user = Auth::user();
         $userWithInfo = User::with('info')->find($user->id);
-        // return $userWithInfo;exit; 
         return view ('front.profile.user-profile',  compact('userWithInfo'));
     }
 

@@ -25,6 +25,8 @@
                                             <th scope="col">State</th>
                                             <th scope="col">Mobile</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -35,11 +37,25 @@
                                                 <td>{{ $listing->city }}</td>
                                                 <td>{{ $listing->state }}</td>
                                                 <td>{{ $listing->mobile }}</td>
-                                                <td>{{ $listing->email }}</td>                                               
-                                                <td>
-                                                </td>
+                                                <td>{{ $listing->email }}</td>   
+                                                <td class="status-column" 
+                                                    data-approvel-status="{{ $listing->status }}">
+                                                    @php
+                                                        switch ($listing->status) {
+                                                            case 'pending':
+                                                                echo 'Pending';
+                                                                break;
+                                                            case 'approve':
+                                                                echo 'Approved';
+                                                                break;
+                                                            default:
+                                                                echo 'Rejected';
+                                                                break;
+                                                        }
+                                                    @endphp
+                                                </td>   
 
-                                                {{-- <td>
+                                                <td>
                                                     <div class="btn-group mb-1">
                                                         <button type="button" class="btn btn-outline-success">Info</button>
                                                         <button type="button"
@@ -49,12 +65,11 @@
                                                             <span class="sr-only">Info</span>
                                                         </button>
                                                         <div class="dropdown-menu">
-															<a class="dropdown-item update-status" href="{{ url ('admin/category-listing/edit/'.$categories->id)}}">Edit</a>
-															<a class="dropdown-item update-status" href="{{ url ('admin/category-listing/delete/'.$categories->id)}}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>	
+															<a class="dropdown-item update-status" data-list-id="{{ $listing->id }}" href="#" data-action="approved">Approve</a>
+                                                            <a class="dropdown-item update-status" data-list-id="{{ $listing->id }}" href="#"  data-action="reject">Reject</a>
                                                         </div>
                                                     </div>
-                                                </td> --}}
-												
+                                                </td>												
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -80,10 +95,14 @@
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $('.update-status').on('click', function(e) {
+            
             e.preventDefault();
 
             var action = $(this).data('action'); 
-            var installerId = $(this).data('id'); 
+           // alert(action);
+            var listingId = $(this).data('list-id'); 
+
+            console.log(this, listingId);
             var statusColumn = $(this).closest('tr').find('.status-column');
 
             $.ajaxSetup({
@@ -94,14 +113,15 @@
 
             $.ajax({
                 type: 'POST',
-                url: '',
+                url: '{{ route('admin.statusChange') }}',
                 data: {
                     status: action,
-                    user_id: installerId,
+                    listingId: listingId,
                 },
                 success: function(response) {
+                    console.log(response);
                     if (response.success) {
-                        statusColumn.text(response.status);
+                        window.location.reload();
                     } else {
                         console.error('Failed to update status.');
                     }
