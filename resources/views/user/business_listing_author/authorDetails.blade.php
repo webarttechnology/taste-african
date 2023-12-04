@@ -12,7 +12,11 @@
                     <div class="author-wrap-ngh">
                         <div class="author-wrap-head-ngh">
                             <div class="author-wrap-ngh-thumb">
-                                <img src="{{ asset('front/img/t-1.png') }}" class="img-fluid circle" alt="" />
+                                @if(Auth::user()->image == null)
+                                <img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+                                @else
+                                <img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+                                @endif
                             </div>
                             <div class="author-wrap-ngh-info">
                                 <h5>{{ $userInfo->name }}</h5>

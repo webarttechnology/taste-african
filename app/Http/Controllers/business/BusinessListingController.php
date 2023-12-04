@@ -20,6 +20,7 @@ class BusinessListingController extends Controller
     {       
         $listings = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
             ->where('user_id', Auth::guard('web')->id())
+            // ->where('approval', 'show')
             ->get();
         return view('front.business_listing.show', compact('listings'));
     }
@@ -62,7 +63,8 @@ class BusinessListingController extends Controller
         $business_listing = BusinessListing::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
-            'category' => $request->category,
+            'approval' => $request->approval,
+            'category_id' => $request->category,
             'description' => $request->description,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
@@ -239,6 +241,7 @@ class BusinessListingController extends Controller
         $business_listing->update([
             'user_id' => Auth::id(),
             'title' => $request->title,
+            'approval' => $request->approval,
             'category' => $request->category,
             'description' => $request->description,
             'latitude' => $request->latitude,
@@ -361,5 +364,7 @@ class BusinessListingController extends Controller
 
         return redirect()->route('business_listing')->with('message', 'Data Deleted Successfully!!!');
     }
+
+    
 
 }

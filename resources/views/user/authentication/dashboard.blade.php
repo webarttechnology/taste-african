@@ -26,7 +26,7 @@
     <!-- =============================== Dashboard Header ========================== -->
 
     <!-- ======================= dashboard Detail ======================== -->
-    @include('front.layout.sidebar')
+    @include('front.layout.user_sidebar')
 
         <div class="goodup-dashboard-content">
             <div class="dashboard-tlbar d-block mb-5">

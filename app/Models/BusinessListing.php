@@ -11,7 +11,8 @@ class BusinessListing extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'category',
+        'approval',
+        'category_id',
         'description',
         'latitude',
         'longitude',

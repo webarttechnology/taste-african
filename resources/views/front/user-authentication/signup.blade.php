@@ -13,7 +13,7 @@
 										<h4 class="m-0 ft-medium">Create Business Account</h4>
 									</div>
 									
-									<form class="submit-form" action="{{ route ('business.register')}}" method="POST">
+									<form class="submit-form" action="{{ route ('business.register')}}" method="POST" enctype="multipart/form-data">
 										@csrf
 										<div class="row">
 											<div class="col-6">
@@ -46,6 +46,12 @@
 												<div class="form-group">
 													<label class="mb-1">Confirem Password</label>
 													<input type="password" class="form-control rounded" name="password_confirmation">
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="form-group">
+													<label class="mb-1">Image</label>
+													<input type="file" class="form-control rounded" name="image">
 												</div>
 											</div>
 											</div>		

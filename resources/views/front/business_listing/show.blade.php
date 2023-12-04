@@ -12,7 +12,11 @@
                         
                     <div class="dashboard-head-author-clicl">
                         <div class="dashboard-head-author-thumb">
-                            <img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
+                            @if(Auth::user()->image === null)
+									<img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+									@else
+									<img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+									@endif
                         </div>
                         <div class="dashboard-head-author-caption">
                             <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
@@ -58,8 +62,11 @@
                                             </div>
                                             <div class="dsd-single-lst-caption">
                                                 <div class="dsd-single-lst-title">
-                                                    <h5>{{ $listing->title }}</h5>
-                                                </div>
+                                                    <h5>{{ $listing->title }}</h5>  
+                                                    @if($listing->approval == 'hide')
+                                                    <button type="button" class="btn btn-outline-danger">Hide</button>
+                                                        @endif                                                  
+                                                </div>                                                
                                                 <span class="agd-location"><i
                                                         class="lni lni-map-marker me-1"></i>{{ $listing->city }}</span>
                                                 <div class="ico-content">
@@ -85,6 +92,7 @@
                                                             class="fas fa-eye me-1"></i>View</a>
                                                     <a href="{{ url ('business-listing/delete/'.$listing->id) }}" class="btn btn-delete"><i
                                                             class="fas fa-trash me-1"></i>Delete</a>
+                                                            
                                                 </div>
                                             </div>
                                         </div>

@@ -7,7 +7,6 @@
         <div class="goodup-dashboard-nav sticky-top">
             <div class="goodup-dashboard-inner">
                 <ul data-submenu-title="Main Navigation">
-                    <li class="{{ Route::is('business.dashboard') ? 'active' : ''}}"><a href="{{route ('business.dashboard')}}"><i class="lni lni-dashboard me-2"></i>Dashboard</a></li>
                     <li class="{{ Route::is('business_listing') ? 'active' : ''}}">
                         <a href="{{route ('business_listing')}}"><i class="lni lni-files me-2"></i>All Listings </a>
                     </li>
@@ -16,7 +15,7 @@
                 <ul data-submenu-title="My Accounts">
                     <li class="{{ Route::is('user.profile') ? 'active' : ''}}"><a href="{{route ('user.profile')}}"><i class="lni lni-user me-2"></i>My Profile </a></li>
                     <li class="{{ Route::is('user.changepassword') ? 'active' : ''}}"><a href="{{route ('user.changepassword')}}"><i class="lni lni-lock-alt me-2"></i>Change Password</a></li>
-                    <li class=""><a href="{{ route('user.logout') }}"><i class="lni lni-power-switch me-2"></i>Log Out</a></li>
+                    
                 </ul>
             </div>
         </div>

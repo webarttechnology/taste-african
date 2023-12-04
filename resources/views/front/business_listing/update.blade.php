@@ -106,7 +106,7 @@
 
                                     <div class="dashboard-list-wraps-body py-3 px-3">
                                         <div class="row">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Listing Title</label>
                                                     <input type="text" class="form-control rounded" placeholder=""
@@ -116,6 +116,16 @@
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Listing Title</label>
+                                                    <select class="form-control"name="approval">
+                                                        <option>---- Select ----</option>                                                      
+                                                            <option value="hide"{{$listing->approval == 'hide' ? 'selected' : ''}}>hide</option>
+                                                            <option value="show"{{$listing->approval == 'show' ? 'selected' : ''}}>show</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">

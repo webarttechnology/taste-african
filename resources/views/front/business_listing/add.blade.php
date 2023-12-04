@@ -10,7 +10,11 @@
                         
                     <div class="dashboard-head-author-clicl">
                         <div class="dashboard-head-author-thumb">
-                            <img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
+                            @if(Auth::user()->image === null)
+									<img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+									@else
+									<img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+									@endif
                         </div>
                         <div class="dashboard-head-author-caption">
                             <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
@@ -58,7 +62,7 @@
 
                                     <div class="dashboard-list-wraps-body py-3 px-3">
                                         <div class="row">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Listing Title</label>
                                                     <input type="text" class="form-control rounded" placeholder=""
@@ -72,12 +76,22 @@
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
+                                                    <label class="mb-1">Listing Title</label>
+                                                    <select class="form-control"name="approval">
+                                                        <option>---- Select ----</option>                                                      
+                                                            <option value="hide">hide</option>
+                                                            <option value="show">show</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="form-group">
                                                     <label class="mb-1">Categories</label>
                                                     <select class="form-control"name="category"
                                                         value="{{ old('category') }}">
                                                         <option>---- Select ----</option>
                                                         @foreach ($categories as $category)
-                                                            <option>{{ $category->name }}</option>
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                         @endforeach
                                                     </select>
                                                     <div class="validation-error">
