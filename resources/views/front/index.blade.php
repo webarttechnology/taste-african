@@ -7,7 +7,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
-
                     <div class="banner_caption text-center mb-5">
                         <h1 class="banner_title ft-bold mb-1">Find Great Place in Your Areas</h1>
                         <p class="fs-md ft-medium">Explore wonderful place to stay, salon, shoping, massage or visit
@@ -16,45 +15,19 @@
 
                     <div class="Goodup-top-cates">
                         <ul>
-                            <li><a href="#" class="Goodup-top-cat-box">
-                                    <div class="Goodup-tp-ico"><i class="fas fa-fish"></i></div>
-                                    <div class="Goodup-tp-title">
-                                        <h5>MEAT & SEA FOOD</h5>
-                                    </div>
-                                </a></li>
-                            <li><a href="#" class="Goodup-top-cat-box">
-                                    <div class="Goodup-tp-ico"><i class="fas fa-utensils"></i></div>
-                                    <div class="Goodup-tp-title">
-                                        <h5>RESTAURANTS</h5>
-                                    </div>
-                                </a></li>
-                            <li><a href="#" class="Goodup-top-cat-box">
-                                    <div class="Goodup-tp-ico"><i class="fas fa-cocktail"></i></div>
-                                    <div class="Goodup-tp-title">
-                                        <h5>CONDIMENTS</h5>
-                                    </div>
-                                </a></li>
-                            <li><a href="#" class="Goodup-top-cat-box">
-                                    <div class="Goodup-tp-ico"><i class="fas fa-wine-glass-alt"></i></div>
-                                    <div class="Goodup-tp-title">
-                                        <h5>DRINKS & BEVERGES</h5>
-                                    </div>
-                                </a></li>
-                            <li><a href="#" class="Goodup-top-cat-box">
-                                    <div class="Goodup-tp-ico"><i class="fas fa-carrot"></i></div>
-                                    <div class="Goodup-tp-title">
-                                        <h5>FRUITS & VEGETABLES</h5>
-                                    </div>
-                                </a></li>
-                            <li><a href="#" class="Goodup-top-cat-box">
-                                    <div class="Goodup-tp-ico"><i class="fas fa-bread-slice"></i></div>
-                                    <div class="Goodup-tp-title">
-                                        <h5>GRAINS, FLOUR & CEREAL</h5>
-                                    </div>
-                                </a></li>
+                            @foreach ($business_category as $category )     
+                                <li><a href="#" class="Goodup-top-cat-box">
+                                        <div class="Goodup-tp-ico">
+                                            <img src="{{asset($category->image)}}" alt="{{$category->name}}" width="40px">
+                                        </div>
+                                        <div class="Goodup-tp-title">
+                                            <h5>{{$category->name}}</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -3142,166 +3115,21 @@
 
             <!-- row -->
             <div class="row align-items-center">
-
+                @foreach ($business_category as $category )     
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="cats-wrap text-center">
                         <a href="#" class="Goodup-catg-wrap">
-                            <div class="Goodup-catg-city">07 Cities</div>
-                            <div class="Goodup-catg-icon"><i class="fas fa-fish"></i></div>
+                            {{-- <div class="Goodup-catg-city">07 Cities</div> --}}
+                            <div class="Goodup-catg-icon"><img src="{{asset($category->image)}}" alt="{{$category->name}}" width="40px"></div>
                             <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">MEAT & SEA FOOD</h4>
-                                <span class="text-muted">607 Listings</span>
+                                <h4 class="fs-md mb-0 ft-medium m-catrio">{{$category->name}}</h4>
+                                <span class="text-muted">{{$category->listings_count}} Listings</span>
                             </div>
                         </a>
                     </div>
                 </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
-                            <div class="Goodup-catg-city">17 Cities</div>
-                            <div class="Goodup-catg-icon"><i class="fas fa-utensils"></i></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">RESTAURANTS</h4>
-                                <span class="text-muted">76 Listings</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
-                            <div class="Goodup-catg-city">19 Cities</div>
-                            <div class="Goodup-catg-icon"><i class="fas  fa-cocktail"></i></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">CONDIMENTS</h4>
-                                <span class="text-muted">112 Listings</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
-                            <div class="Goodup-catg-city">32 Cities</div>
-                            <div class="Goodup-catg-icon"><i class="fas fa-wine-glass-alt"></i></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">DRINKS & BEVERGES</h4>
-                                <span class="text-muted">322 Listings</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
-                            <div class="Goodup-catg-city">27 Cities</div>
-                            <div class="Goodup-catg-icon"><i class="fas fa-carrot"></i></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">FRUITS & VEGETABLES</h4>
-                                <span class="text-muted">161 Listings</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
-                            <div class="Goodup-catg-city">26 Cities</div>
-                            <div class="Goodup-catg-icon"><i class="fas fa-bread-slice"></i></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">GRAINS, FLOUR & CEREAL</h4>
-                                <span class="text-muted">172 Listings</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- jj -->
-                <!-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-          <div class="cats-wrap text-center">
-           <a href="#" class="Goodup-catg-wrap">
-            <div class="Goodup-catg-city">10 Cities</div>
-            <div class="Goodup-catg-icon"><i class="fas fa-book-open"></i></div>
-            <div class="Goodup-catg-caption">
-             <h4 class="fs-md mb-0 ft-medium m-catrio">Education</h4>
-             <span class="text-muted">144 Listings</span>
+               @endforeach  
             </div>
-           </a>
-          </div>
-         </div>
-
-         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-          <div class="cats-wrap text-center">
-           <a href="#" class="Goodup-catg-wrap">
-            <div class="Goodup-catg-city">24 Cities</div>
-            <div class="Goodup-catg-icon"><i class="fas fa-house-damage"></i></div>
-            <div class="Goodup-catg-caption">
-             <h4 class="fs-md mb-0 ft-medium m-catrio">Real Estate</h4>
-             <span class="text-muted">210 Listings</span>
-            </div>
-           </a>
-          </div>
-         </div>
-
-         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-          <div class="cats-wrap text-center">
-           <a href="#" class="Goodup-catg-wrap">
-            <div class="Goodup-catg-city">18 Cities</div>
-            <div class="Goodup-catg-icon"><i class="fas fa-wine-glass"></i></div>
-            <div class="Goodup-catg-caption">
-             <h4 class="fs-md mb-0 ft-medium m-catrio">Event Palnning</h4>
-             <span class="text-muted">241 Listings</span>
-            </div>
-           </a>
-          </div>
-         </div>
-
-         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-          <div class="cats-wrap text-center">
-           <a href="#" class="Goodup-catg-wrap">
-            <div class="Goodup-catg-city">06 Cities</div>
-            <div class="Goodup-catg-icon"><i class="fas fa-car-alt"></i></div>
-            <div class="Goodup-catg-caption">
-             <h4 class="fs-md mb-0 ft-medium m-catrio">Automotive</h4>
-             <span class="text-muted">52 Listings</span>
-            </div>
-           </a>
-          </div>
-         </div>
-
-         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-          <div class="cats-wrap text-center">
-           <a href="#" class="Goodup-catg-wrap">
-            <div class="Goodup-catg-city">08 Cities</div>
-            <div class="Goodup-catg-icon"><i class="fas fa-pencil-ruler"></i></div>
-            <div class="Goodup-catg-caption">
-             <h4 class="fs-md mb-0 ft-medium m-catrio">Art &amp; Design</h4>
-             <span class="text-muted">97 Listings</span>
-            </div>
-           </a>
-          </div>
-         </div>
-
-         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-          <div class="cats-wrap text-center">
-           <a href="#" class="Goodup-catg-wrap">
-            <div class="Goodup-catg-city">05 Cities</div>
-            <div class="Goodup-catg-icon"><i class="fas fa-plane"></i></div>
-            <div class="Goodup-catg-caption">
-             <h4 class="fs-md mb-0 ft-medium m-catrio">Hotel & Travel</h4>
-             <span class="text-muted">42 Listings</span>
-            </div>
-           </a>
-          </div>
-         </div> -->
-
-            </div>
-            <!-- row -->
-
         </div>
     </section>
     <!-- ======================= Listing Categories End ======================== -->

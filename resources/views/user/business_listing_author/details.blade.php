@@ -154,13 +154,16 @@
                     <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
                     <div class="reviews-comments-wrap">
 
+                        @foreach ($review as $reviews )
+                            
+                       
                         <!-- reviews-comments-item -->
                         <div class="reviews-comments-item">
                             <div class="review-comments-avatar">
                                 <img src="assets/img/t-1.png" class="img-fluid" alt="">
                             </div>
                             <div class="reviews-comments-item-text">
-                                <h4><a href="#">Kayla E. Claxton</a><span class="reviews-comments-item-date"><i
+                                <h4><a href="#">{{$reviews->name}}</a><span class="reviews-comments-item-date"><i
                                             class="ti-calendar theme-cl me-1"></i>27 Oct 2019</span>
                                 </h4>
                                 <span class="agd-location"><i class="lni lni-map-marker me-1"></i>San
@@ -183,66 +186,11 @@
                             </div>
                         </div>
                         <!--reviews-comments-item end-->
-
-                        <!-- reviews-comments-item -->
-                        <div class="reviews-comments-item">
-                            <div class="review-comments-avatar">
-                                <img src="assets/img/t-2.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="reviews-comments-item-text">
-                                <h4><a href="#">Amy M. Taylor</a><span class="reviews-comments-item-date"><i
-                                            class="ti-calendar theme-cl me-1"></i>2 Nov May 2019</span>
-                                </h4>
-                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>Liverpool,
-                                    London UK</span>
-                                <div class="listing-rating mid"><i class="fas fa-star active"></i><i
-                                        class="fas fa-star active"></i><i class="fas fa-star active"></i><i
-                                        class="fas fa-star active"></i><i class="fas fa-star"></i></div>
-                                <div class="clearfix"></div>
-                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                    cupidatat non proident. "</p>
-                                <div class="pull-left reviews-reaction">
-                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
-                                        12</a>
-                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                    <a href="#" class="comment-love active"><i class="ti-heart"></i>
-                                        07</a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+                       
                         <!--reviews-comments-item end-->
 
-                        <!-- reviews-comments-item -->
-                        <div class="reviews-comments-item">
-                            <div class="review-comments-avatar">
-                                <img src="assets/img/t-3.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="reviews-comments-item-text">
-                                <h4><a href="#">Susan C. Daggett</a><span class="reviews-comments-item-date"><i
-                                            class="ti-calendar theme-cl me-1"></i>10 Nov 2019</span>
-                                </h4>
-                                <span class="agd-location"><i class="lni lni-map-marker me-1"></i>Denver,
-                                    United State</span>
-                                <div class="listing-rating good"><i class="fas fa-star active"></i><i
-                                        class="fas fa-star active"></i><i class="fas fa-star active"></i><i
-                                        class="fas fa-star active"></i><i class="fas fa-star"></i></div>
-                                <div class="clearfix"></div>
-                                <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                    cupidatat non proident. "</p>
-                                <div class="pull-left reviews-reaction">
-                                    <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
-                                        12</a>
-                                    <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                    <a href="#" class="comment-love active"><i class="ti-heart"></i>
-                                        07</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--reviews-comments-item end-->
-
-                        <ul class="pagination">
+                        {{-- <ul class="pagination">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span class="fas fa-arrow-circle-right"></span>
@@ -260,7 +208,7 @@
                                     <span class="sr-only">Next</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> --}}
 
                     </div>
                 </div>
@@ -340,19 +288,19 @@
                 <div class="jbd-details mb-4">
                     <h5 class="ft-bold fs-lg">Drop Your Review</h5>
                     <div class="review-form-box form-submit mt-3">
-                        <form>
+                        <form action="{{ route ('user.review')}}" method="POST">
+                            @csrf
                             <div class="row">
-
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="ft-medium small mb-1">Choose Rate</label>
-                                        <select class="form-control rounded">
+                                        <select class="form-control rounded" name="star">
                                             <option>Choose Rating</option>
-                                            <option>1 Star</option>
-                                            <option>2 Star</option>
-                                            <option>3 Star</option>
-                                            <option>4 Star</option>
-                                            <option>5 Star</option>
+                                            <option value="1">1 Star</option>
+                                            <option value="2">2 Star</option>
+                                            <option value="3">3 Star</option>
+                                            <option value="4">4 Star</option>
+                                            <option value="5">5 Star</option>
                                         </select>
                                     </div>
                                 </div>
@@ -360,7 +308,8 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="ft-medium small mb-1">Name</label>
-                                        <input class="form-control rounded" type="text"
+                                        <input name="list_id" type="hidden" value="{{$listing->id}}">
+                                        <input class="form-control rounded" name="name" type="text"
                                             placeholder="Your Name">
                                     </div>
                                 </div>
@@ -368,7 +317,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="ft-medium small mb-1">Email</label>
-                                        <input class="form-control rounded" type="email"
+                                        <input class="form-control rounded" name="email" type="email"
                                             placeholder="Your Email">
                                     </div>
                                 </div>
@@ -376,7 +325,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="ft-medium small mb-1">Review</label>
-                                        <textarea class="form-control rounded ht-140"
+                                        <textarea class="form-control rounded ht-140" name="review"
                                             placeholder="Review"></textarea>
                                     </div>
                                 </div>

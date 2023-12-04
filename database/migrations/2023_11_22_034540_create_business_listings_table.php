@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('title')->nullable();
+             $table->string('approval');
             $table->string('category')->nullable();  
             $table->longText('description')->nullable();  
             $table->string('latitude')->nullable();

@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BusinessListing;
 use App\Models\User;
+use App\Models\Review;
 
 class UserDashboardController extends Controller
 {
     public function userDashboard()
     {
         $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'user')->where('status', 'approve')->get();
-
         return view ('user.authentication.dashboard', compact('listings'));
     }
 
@@ -26,7 +26,7 @@ class UserDashboardController extends Controller
     public function viewDetails($id)
     {
         $listing = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems')->find($id);
-              // return $listings; exit;
-        return view ('user.business_listing_author.details', compact('listing'));
+        $review = Review::where('list_id', $id)->get();
+        return view ('user.business_listing_author.details', compact('listing', 'review'));
     }
 }

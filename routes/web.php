@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\business\BusinessListingController;
 use App\Http\Controllers\user\UserProfileController;
 use App\Http\Controllers\user\UserAuthController;
+use App\Http\Controllers\user\UserReviewController;
 use App\Http\Controllers\business\BusinessAuthenticationController;
 use App\Http\Controllers\admin\AdminAmenityController;
 use App\Http\Controllers\admin\AdminBusinessListingController;
@@ -24,7 +25,10 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 
 //All Pages
     Route::get('/', [HomeController::class, 'front'])->name('front');
-    Route::get('/authorDetails', [HomeController::class, 'authorDetails'])->name('authorDetails');
+    Route::get('/about', [HomeController::class, 'about'])->name('front.about');
+    Route::get('/blog', [HomeController::class, 'blog'])->name('front.blog');
+    Route::get('/pricing', [HomeController::class, 'pricing'])->name('front.pricing');
+    Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');
 
 //Login Pages
     Route::get('login', [UserAuthController::class, 'loginForm'])->name('login');
@@ -58,6 +62,8 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
         Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
         Route::get('author-deatils/{listing_user_id}', [UserDashboardController::class, 'authorDetails'])->name('user.authorDetails');
         Route::get('user/author-listing-details/{id}', [UserDashboardController::class, 'viewDetails'])->name('user_listing_viewDetails');
+        Route::post('user/review', [UserReviewController::class, 'review'])->name('user.review');
+
     });
 
 Route::middleware(['auth', 'checkRole:business_owner'])->group(function () {

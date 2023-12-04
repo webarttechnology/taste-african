@@ -27,8 +27,13 @@ class UserAuthController extends Controller
                 'phone' => ['required', new PhoneNumber],
             ]);
 
+            $image = $request->image;
+            $imageName = 'images/User/' . time() . '_' . $image->getClientOriginalName();
+            $image->move('images/User', $imageName);
+
             User::create([
                 'name' => $request->name,
+                'image' => $imageName,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password), 

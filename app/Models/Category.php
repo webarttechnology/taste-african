@@ -13,4 +13,9 @@ class Category extends Model
         'name',
         'image',
     ];
+
+    public function listings()
+    {
+        return $this->hasMany(BusinessListing::class);
+    }
 }

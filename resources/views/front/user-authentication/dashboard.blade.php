@@ -10,7 +10,11 @@
 								
 							<div class="dashboard-head-author-clicl">
 								<div class="dashboard-head-author-thumb">
-									<img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
+									@if(Auth::user()->image === null)
+									<img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+									@else
+									<img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+									@endif
 								</div>
 								<div class="dashboard-head-author-caption">
 									<div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>

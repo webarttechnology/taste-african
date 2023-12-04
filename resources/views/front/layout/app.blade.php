@@ -33,13 +33,10 @@
         <div class="header header-transparent change-logo  navbar-light bg-light">
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
-                    {{-- <div class="container-fluid"> --}}
-
                     <a class="navbar-brand static-logo" href="{{ route('front') }}">
                         <img src="{{ asset('front/img/logos/logo.png') }}" class="logo" alt=""
                             width="80px" />
                     </a>
-
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +45,27 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="{{ route('front') }}">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('front.about') }}">About</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('front.blog') }}">Blog</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('front.blog') }}">Business Listings</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('front.contact') }}">Contact</a>
                             </li>
 
                             @if (Auth::check() && Auth::user()->role == 'user')
@@ -57,10 +74,7 @@
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Listings
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="{{ route('authorDetails') }}"><i
-                                                    class="lni lni-files me-2"></i>Author Detail</a></li>
-                                    </ul>
+                                    
                                 </li>
                             @endif
                             @if (Auth::check() && Auth::user()->role == 'business_owner')
@@ -78,87 +92,30 @@
                                     </ul>
                                 </li>
                             @endif
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Pages
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#"><i class="lni lni-files me-2"></i>About
-                                            Us</a></li>
-
-                                    {{-- <li><a href="blog.php">Blog Style</a></li>
-                                                    <li><a href="about-us.php">About Us</a></li>
-                                                    <li><a href="contact.php">Contact</a></li>
-                                                    <li><a href="checkout.php">Checkout</a></li>
-                                                    <li><a href="pricing.php">Pricing</a></li>
-                                                    <li><a href="signup.php">Sign Up</a></li>
-                                                    <li><a href="login.php">Sign In</a></li>
-                                                    <li><a href="privacy.php">Privacy Policy</a></li>
-                                                    <li><a href="faq.php">FAQs</a></li>
-                                                    <li><a href="404.php">404 Page</a></li> --}}
-                                </ul>
-                            </li>
                         </ul>
 
-                            @auth
-                                <a href="{{ route('user.logout') }}" class="ft-bold"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
-                                </a>
-                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-                            @else
-                            <li class="nav-item dropdown" style="list-style: none">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Login
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('login') }}"><i
-                                                class="lni lni-files me-2"></i>Login</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('business.registerForm') }}"><i
-                                                class="lni lni-add-files me-2"></i>Business Register</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('user.registerPage') }}"><i
-                                                class="lni lni-add-files me-2"></i>User Register</a></li>
-                                </ul>
-                            </li>
-                            @endauth
+                        @auth
+
+                            <a href="{{ route('user.logout') }}" class="ft-bold"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt me-1 theme-cl"></i>Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                        @else
+                        
+                        <a class="nav-link active" id="places-tab" href="{{ route('login') }}"
+                            aria-selected="true">Login</a>
+                            <a class="nav-link active" id="places-tab" href="{{ route('business.registerForm') }}"
+                                aria-selected="true">Business Register</a>
+                            <a class="nav-link active" id="places-tab" href="{{ route('user.registerPage') }}"
+                                aria-selected="true">User Register</a>
+                        @endauth
                     </div>
                     {{-- </div> --}}
                 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
         <!-- End Navigation -->
