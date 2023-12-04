@@ -3142,43 +3142,16 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <div class="m-spaced">
                         <div class="position-relative">
-                            <div class="mb-2"><span class="bg-light-sky text-sky px-2 py-1 rounded">Our
-                                    Mission</span></div>
-                            <h2 class="ft-bold mb-3">Claim Your Business & <br>Get Started Today!</h2>
-                            <p class="mb-2">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                                inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                            <p class="mb-4">At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                                blanditiis deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt
-                                mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
-                                expedita distinctio. </p>
-                        </div>
-                        <div class="position-relative row">
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <h3 class="ft-bold text-sky mb-0"><span class="count">07</span>+</h3>
-                                <p class="ft-medium">Business Listing</p>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <h3 class="ft-bold text-warning mb-0"><span class="count">06</span>k+</h3>
-                                <p class="ft-medium">Popular Authors</p>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <h3 class="ft-bold text-danger mb-0"><span class="count">200</span>+</h3>
-                                <p class="ft-medium">Countries</p>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-12 mt-3">
-                                <a href="javascript:void(0);"
-                                    class="btn btn-md theme-bg-light rounded theme-cl hover-theme">See Details<i
-                                        class="lni lni-arrow-right-circle ms-2"></i></a>
-                            </div>
+                            <div class="mb-2"><span class="bg-light-sky text-sky px-2 py-1 rounded">{{$abouts[0]->about_short_title}}</span></div>
+                            <h2 class="ft-bold mb-3">{{$abouts[0]->about_long_title}}</h2>
+                            <p> {{$abouts[0]->description}} </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                     <div class="position-relative">
-                        <img src="assets/img/bn-5.png" class="img-fluid" alt="" />
+                        <img src="{{asset($abouts[0]->image)}}" class="img-fluid" alt="" />
                     </div>
                 </div>
             </div>
@@ -3195,7 +3168,7 @@
 
                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                     <div class="position-relative">
-                        <img src="assets/img/bn-4.png" class="img-fluid" alt="" />
+                        <img src="{{asset($abouts[0]->image_1)}}" class="img-fluid" alt="" />
                     </div>
                 </div>
 
@@ -3203,50 +3176,9 @@
                     <div class="m-spaced">
                         <div class="position-relative">
                             <div class="mb-1"><span
-                                    class="bg-light-success text-success px-2 py-1 rounded">Process</span></div>
-                            <h2 class="ft-bold mb-3">How it works & features <br>Around The Globe</h2>
-                            <p class="mb-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                                inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        </div>
-                        <div class="uli-list-features">
-                            <ul>
-
-                                <li>
-                                    <div class="list-uiyt">
-                                        <div class="list-iobk"><i class="fas fa-globe"></i></div>
-                                        <div class="list-uiyt-capt">
-                                            <h5>Find Businesses</h5>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                                                blanditiis praesentium voluptatum deleniti atque corrupti quos
-                                                dolores.</p>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="list-uiyt">
-                                        <div class="list-iobk"><i class="fas fa-envelope"></i></div>
-                                        <div class="list-uiyt-capt">
-                                            <h5>Review Listings</h5>
-                                            <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
-                                                impedit quo minus id quod maxime placeat facere possimus.</p>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="list-uiyt">
-                                        <div class="list-iobk"><i class="fas fa-phone"></i></div>
-                                        <div class="list-uiyt-capt">
-                                            <h5>Make a Reservation</h5>
-                                            <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
-                                                voluptatibus maiores alias consequatur aut perferendis.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                                    class="bg-light-success text-success px-2 py-1 rounded">{{$abouts[0]->about_short_title_1}}</span></div>
+                            <h2 class="ft-bold mb-3"> {{$abouts[0]->about_long_title_1}}</h2>
+                         {!! $abouts[0]->description_1 !!}
                     </div>
                 </div>
 
@@ -3257,7 +3189,7 @@
     <!-- ======================= About Start ============================ -->
 
     <!-- ============================ Pricing Start ==================================== -->
-    <section class="space min gray">
+    {{-- <section class="space min gray">
         <div class="container">
 
             <div class="row justify-content-center">
@@ -3373,161 +3305,8 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
     <!-- ============================ Pricing End ==================================== -->
-
-    <!-- ======================= Blog Start ============================ -->
-    <section class="space min">
-        <div class="container">
-
-            <div class="row justify-content-center">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <div class="sec_title position-relative text-center mb-4">
-                        <h6 class="theme-cl mb-0">Latest News</h6>
-                        <h2 class="ft-bold">Pickup New Updates</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row justify-content-center">
-
-                <!-- Single Item -->
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                    <div class="gup_blg_grid_box">
-                        <div class="gup_blg_grid_thumb">
-                            <a href="#"><img src="assets/img/b-4.jpg" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="gup_blg_grid_caption">
-                            <div class="blg_tag"><span>Marketing</span></div>
-                            <div class="blg_title">
-                                <h4><a href="#">What Is a VPN and How Does It Work?</a></h4>
-                            </div>
-                            <div class="blg_desc">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum</p>
-                            </div>
-                        </div>
-                        <div class="crs_grid_foot">
-                            <div class="crs_flex d-flex align-items-center justify-content-between br-top px-3 py-2">
-                                <div class="crs_fl_first">
-                                    <div class="crs_tutor">
-                                        <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                    src="assets/img/team-2.jpg" class="img-fluid circle"
-                                                    width="35" alt=""></a></div>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="foot_list_info">
-                                        <ul>
-                                            <li>
-                                                <div class="elsio_ic"><i class="fa fa-eye text-success"></i></div>
-                                                <div class="elsio_tx">10k Views</div>
-                                            </li>
-                                            <li>
-                                                <div class="elsio_ic"><i class="fa fa-clock text-warning"></i></div>
-                                                <div class="elsio_tx">10 July 2021</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Item -->
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                    <div class="gup_blg_grid_box">
-                        <div class="gup_blg_grid_thumb">
-                            <a href="#"><img src="assets/img/b-5.jpg" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="gup_blg_grid_caption">
-                            <div class="blg_tag"><span>Business</span></div>
-                            <div class="blg_title">
-                                <h4><a href="#">What Is Ransomware: The Ultimate Guide?</a></h4>
-                            </div>
-                            <div class="blg_desc">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum</p>
-                            </div>
-                        </div>
-                        <div class="crs_grid_foot">
-                            <div class="crs_flex d-flex align-items-center justify-content-between br-top px-3 py-2">
-                                <div class="crs_fl_first">
-                                    <div class="crs_tutor">
-                                        <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                    src="assets/img/team-3.jpg" class="img-fluid circle"
-                                                    width="35" alt=""></a></div>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="foot_list_info">
-                                        <ul>
-                                            <li>
-                                                <div class="elsio_ic"><i class="fa fa-eye text-success"></i></div>
-                                                <div class="elsio_tx">10k Views</div>
-                                            </li>
-                                            <li>
-                                                <div class="elsio_ic"><i class="fa fa-clock text-warning"></i></div>
-                                                <div class="elsio_tx">10 July 2021</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Item -->
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                    <div class="gup_blg_grid_box">
-                        <div class="gup_blg_grid_thumb">
-                            <a href="#"><img src="assets/img/b-6.jpg" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="gup_blg_grid_caption">
-                            <div class="blg_tag"><span>Accounting</span></div>
-                            <div class="blg_title">
-                                <h4><a href="#">Can iPads Get Viruses? What You Need</a></h4>
-                            </div>
-                            <div class="blg_desc">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                    praesentium voluptatum</p>
-                            </div>
-                        </div>
-                        <div class="crs_grid_foot">
-                            <div class="crs_flex d-flex align-items-center justify-content-between br-top px-3 py-2">
-                                <div class="crs_fl_first">
-                                    <div class="crs_tutor">
-                                        <div class="crs_tutor_thumb"><a href="javascript:void(0);"><img
-                                                    src="assets/img/team-5.jpg" class="img-fluid circle"
-                                                    width="35" alt=""></a></div>
-                                    </div>
-                                </div>
-                                <div class="crs_fl_last">
-                                    <div class="foot_list_info">
-                                        <ul>
-                                            <li>
-                                                <div class="elsio_ic"><i class="fa fa-eye text-success"></i></div>
-                                                <div class="elsio_tx">10k Views</div>
-                                            </li>
-                                            <li>
-                                                <div class="elsio_ic"><i class="fa fa-clock text-warning"></i></div>
-                                                <div class="elsio_tx">10 July 2021</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-    <!-- ======================= Blog Start ============================ -->
 
     <!-- ======================= Newsletter Start ============================ -->
     <section class="space bg-cover" style="background:#03343b url(assets/img/landing-bg.png) no-repeat;">

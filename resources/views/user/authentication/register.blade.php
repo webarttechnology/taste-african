@@ -48,6 +48,12 @@
 													<input type="password" class="form-control rounded" name="password_confirmation">
 												</div>
 											</div>
+											<div class="col-12">
+												<div class="form-group">
+													<label class="mb-1">Image</label>
+													<input type="file" class="form-control rounded" name="image">
+												</div>
+											</div>
 											</div>		
 										<div class="form-group">
 											<button type="submit" class="btn btn-md full-width bg-sky text-light rounded ft-medium">Sign Up</button>

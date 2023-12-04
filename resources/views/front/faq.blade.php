@@ -1,5 +1,5 @@
-<?php include("header.php") ?>
-			<!-- ============================================================== -->
+@extends('front.layout.app')
+@section('content')
 			
 			<!-- ======================= Top Breadcrubms ======================== -->
 			<div class="bg-dark py-3">
@@ -224,4 +224,4 @@
 			</section>
 			<!-- ======================= Newsletter Start ============================ -->
 			
-			<?php include("footer.php") ?>
+@stop

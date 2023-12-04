@@ -26,6 +26,10 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+     <!-- Include TinyMCE library -->
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	{{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+	<!-- Include TinyMCE library -->
 </head>
 
 <body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-light" id="body">
@@ -86,6 +90,13 @@
 							<a class="sidenav-item-link" href="{{ route ('admin.business_listing_show')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>
 								<span class="nav-text">Business Listing</span>
+							</a>
+							<hr>
+						</li>
+						<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.about')}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">About</span>
 							</a>
 							<hr>
 						</li>
@@ -206,5 +217,41 @@
 		@endforeach
 	@endif
 </script>
+
+{{-- Editor jS --}}
+<script>
+    tinymce.init({
+      selector: 'textarea#file-picker',
+      plugins: 'image code',
+      toolbar: 'undo redo | link image | code',
+      image_title: true,
+      automatic_uploads: true,
+      file_picker_types: 'image',
+      file_picker_callback: function (cb, value, meta) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+
+        input.onchange = function () {
+          var file = this.files[0];
+
+          var reader = new FileReader();
+          reader.onload = function () {
+            var id = 'blobid' + (new Date()).getTime();
+            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+            var base64 = reader.result.split(',')[1];
+            var blobInfo = blobCache.create(id, file, base64);
+            blobCache.add(blobInfo);
+            cb(blobInfo.blobUri(), { title: file.name });
+          };
+          reader.readAsDataURL(file);
+        };
+        input.click();
+      },
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+  </script>
+{{-- Editor jS --}}
+
 </body>
 </html>

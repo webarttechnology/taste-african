@@ -290,7 +290,7 @@ html body .db {
 	background:#1a212e;
 }
 .gray{
-	background:#f4f4f7;
+	background:#cfcfdb;
 }
 
 .border{
@@ -1523,6 +1523,9 @@ ul {
 .align-to-right {
     float: right;
     letter-spacing: 0.5px;
+}
+.header{
+    border-bottom: 2px solid black;
 }
 
 .nav-header {
@@ -5704,6 +5707,13 @@ select.form-control, select {
 .nav-link {
     display: block;
     padding: .8rem 1.4rem;
+    font-weight:500;
+    font-size: 18px;
+    color: #000;
+    margin-right: 0.8rem;
+}
+.auth-link{
+    display: block;
     font-weight:500;
     font-size: 18px;
     color: #000;
