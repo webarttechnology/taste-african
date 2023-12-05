@@ -3,10 +3,7 @@
 
     <!-- =============================== Dashboard Header ========================== -->
     <section class="bg-cover position-relative" style="background:url({{asset('front/img/cover.jpg')}}) no-repeat #C90000;">
-        <div class="abs-list-sec">
-			<a href="dashboard-add-listing.html" class="add-list-btn"><i class="fas fa-plus me-2">
-				</i>Add Listing</a>
-		</div>
+        
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">

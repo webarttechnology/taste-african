@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">Listing Title</label>
+                                                    <label class="mb-1">Listing Status</label>
                                                     <select class="form-control"name="approval">
                                                         <option>---- Select ----</option>                                                      
                                                             <option value="hide">hide</option>

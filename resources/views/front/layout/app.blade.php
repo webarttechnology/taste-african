@@ -1,3 +1,7 @@
+@php
+    $contact = App\Models\ContactDetails::get();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +38,7 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand static-logo" href="{{ route('front') }}">
-                        <img src="{{ asset('front/img/logos.png') }}" class="logo" alt="" width="100px" />
+                        <img src="{{ asset($contact[0]->logo) }} " class="logo" alt="" width="100px" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -119,7 +123,6 @@
                     </div>
             </div>
             </nav>
-            {{-- </div> --}}
         </div>
         <!-- End Navigation -->
         <div class="clearfix"></div>
@@ -140,25 +143,25 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                             <div class="footer_widget">
-                                <img src="{{ asset('front/img/logos.png') }}" class="img-footer small mb-2"/>
+                                <img src="{{ asset($contact[0]->logo)}}" class="img-footer small mb-2"/>
 
                                 <div class="address mt-2">
-                                    7742 Sadar Street Range Road, USA<br>United Kingdom GHQ11
+                                   {{$contact[0]->address}}
                                 </div>
                                 <div class="address mt-3">
-                                    123 456 7890<br>info@demo.com
+                                    {{$contact[0]->phone}}<br>{{$contact[0]->email}}
                                 </div>
                                 <div class="address mt-2">
                                     <ul class="list-inline">
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->facebook}}" class="theme-cl"><i
                                                     class="lni lni-facebook-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->twitter}}" class="theme-cl"><i
                                                     class="lni lni-twitter-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->youtube}}" class="theme-cl"><i
                                                     class="lni lni-youtube"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->instragram}}" class="theme-cl"><i
                                                     class="lni lni-instagram-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->linkdin}}" class="theme-cl"><i
                                                     class="lni lni-linkedin-original"></i></a></li>
                                     </ul>
                                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\business;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class BusinessAuthenticationController extends Controller
     // Business Owner register Page:
     public function registerForm()
     {
-        return view ('front.user-authentication.signup');
+        $contact = ContactDetails::get();
+        return view ('front.user-authentication.signup', compact('contact'));
     }
 
     // Business Owner register :
@@ -117,7 +119,8 @@ class BusinessAuthenticationController extends Controller
 
     public function businessDashboard()
     {
-        return view ('front.user-authentication.dashboard');
+        $contact = ContactDetails::get();
+        return view ('front.user-authentication.dashboard', compact('contact'));
     }    
 
     public function userLogout()

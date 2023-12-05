@@ -16,7 +16,7 @@
                     <div class="Goodup-top-cates">
                         <ul>
                             @foreach ($business_category as $category)
-                                <li><a href="#" class="Goodup-top-cat-box">
+                                <li><a href="{{url('category/listings/'.$category->id)}}" class="Goodup-top-cat-box">
                                         <div class="Goodup-tp-ico">
                                             <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
                                                 width="40px">
@@ -205,47 +205,10 @@
 
             <!-- row -->
             <div class="row align-items-center">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <ul class="nav nav-tabs small-tab mb-3" id="myTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="places-tab" data-bs-toggle="tab"
-                                data-bs-target="#places" type="button" role="tab" aria-controls="places"
-                                aria-selected="true">Places</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events"
-                                type="button" role="tab" aria-controls="events"
-                                aria-selected="false">Events</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="doctor-tab" data-bs-toggle="tab" data-bs-target="#doctor"
-                                type="button" role="tab" aria-controls="doctor"
-                                aria-selected="false">Doctors</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="car-tab" data-bs-toggle="tab" data-bs-target="#car"
-                                type="button" role="tab" aria-controls="car" aria-selected="false">Cars</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="real-tab" data-bs-toggle="tab" data-bs-target="#real"
-                                type="button" role="tab" aria-controls="real" aria-selected="false">Real
-                                Estate</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="hotels-tab" data-bs-toggle="tab" data-bs-target="#hotels"
-                                type="button" role="tab" aria-controls="hotels"
-                                aria-selected="false">Hotels</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="jobs-tab" data-bs-toggle="tab" data-bs-target="#jobs"
-                                type="button" role="tab" aria-controls="jobs" aria-selected="false">jobs</button>
-                        </li>
-                    </ul>
-                </div>
+                
 
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="tab-content" id="myTabsContent">
-
                         <!-- Places -->
                         <div class="tab-pane fade show active" id="places" role="tabpanel"
                             aria-labelledby="places-tab">
@@ -2687,10 +2650,9 @@
             <!-- row -->
             <div class="row align-items-center">
                 @foreach ($business_category as $category)
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
                         <div class="cats-wrap text-center">
-                            <a href="#" class="Goodup-catg-wrap">
-                                {{-- <div class="Goodup-catg-city">07 Cities</div> --}}
+                            <a href="{{url('category/listings/'.$category->id)}}" class="Goodup-catg-wrap">
                                 <div class="Goodup-catg-icon"><img src="{{ asset($category->image) }}"
                                         alt="{{ $category->name }}" width="40px"></div>
                                 <div class="Goodup-catg-caption">

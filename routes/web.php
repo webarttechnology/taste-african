@@ -34,6 +34,7 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
     Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');
     Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSend');
 
+
 //Login Pages
     Route::get('login', [UserAuthController::class, 'loginForm'])->name('login');
     Route::post('login', [UserAuthController::class, 'login'])->name('user.login');
@@ -50,6 +51,7 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 
 Route::middleware('auth')->group(function () 
   {
+    Route::get('/category/listings/{id}', [HomeController::class, 'listingByCategory'])->name('category.listings');
     // User Forget Passwordd Page:
     Route::get('user/forget-password', [BusinessAuthenticationController::class, 'forgot_Pass'])->name('user.forgot_Pass');
     Route::post('user/forget-password', [BusinessAuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');

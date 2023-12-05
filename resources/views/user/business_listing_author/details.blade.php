@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="Goodup-price-range">
-                            <span class="ft-medium text-light">{{$totalReviews}} Reviews</span>                           
+                            <span class="ft-medium text-light">{{ $totalReviews }} Reviews</span>
                         </div>
                     </div>
                     <div class="d-block mt-3">
@@ -134,7 +134,8 @@
                                                             alt="" />
                                                     </div>
                                                     <div class="Goodup-sng-menu-caption">
-                                                        <h4 class="ft-medium fs-md">{{ $listing_menuitems->item_name }}</h4>
+                                                        <h4 class="ft-medium fs-md">{{ $listing_menuitems->item_name }}
+                                                        </h4>
                                                         <div class="lkji-oiyt"><span>Start From</span>
                                                             <h5 class="theme-cl ft-bold">{{ $listing_menuitems->price }}
                                                             </h5>
@@ -175,87 +176,86 @@
 
 
                     <!-- Recommended Reviews -->
-                    <div class="bg-white rounded mb-4">
-                        <div class="jbd-01 px-4 py-4">
-                            <div class="jbd-details mb-4">
-                                <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
-                                <div class="reviews-comments-wrap">
+                    @if (count($review) > 0)
+                        <div class="bg-white rounded mb-4">
+                            <div class="jbd-01 px-4 py-4">
+                                <div class="jbd-details mb-4">
+                                    <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
+                                    <div class="reviews-comments-wrap">
+                                        @foreach ($review as $reviews)
+                                            <div class="reviews-comments-item">
+                                                <div class="review-comments-avatar">
+                                                    <img src="{{ asset('front/img/user.png') }}" class="img-fluid"
+                                                        alt="">
+                                                </div>
+                                                <div class="reviews-comments-item-text">
+                                                    <h4><a href="#">{{ $reviews->name }}</a><span
+                                                            class="reviews-comments-item-date"><i
+                                                                class="ti-calendar theme-cl me-1"></i>{{ $reviews->created_at->format('d M Y') }}
+                                                        </span>
+                                                    </h4>
 
-                                    @foreach ($review as $reviews)
-
-                                        <div class="reviews-comments-item">
-                                            <div class="review-comments-avatar">
-                                                <img src="{{ asset('front/img/user.png') }}" class="img-fluid"
-                                                    alt="">
-                                            </div>
-                                            <div class="reviews-comments-item-text">
-                                                <h4><a href="#">{{ $reviews->name }}</a><span
-                                                        class="reviews-comments-item-date"><i
-                                                            class="ti-calendar theme-cl me-1"></i>{{ $reviews->created_at->format('d M Y') }}  </span>
-                                                </h4>
-
-                                                @if ($reviews->star == 1)
-                                                    <div class="listing-rating high">
-                                                        <i class="fas fa-star active"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                @elseif ($reviews->star == 2)
-                                                    <div class="listing-rating high">
-                                                        <i class="fas fa-star active"></i>
-                                                        <i class="fas fa-star active"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                @elseif ($reviews->star == 3)
-                                                    <div class="listing-rating high">
-                                                        <i class="fas fa-star active"></i>
-                                                        <i class="fas fa-star active"></i>
-                                                        <i class="fas fa-star active"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                @elseif ($reviews->star == 4)
-                                                    <div class="listing-rating high">
-                                                        <i class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i>
+                                                    @if ($reviews->star == 1)
+                                                        <div class="listing-rating high">
+                                                            <i class="fas fa-star active"></i>
                                                             <i class="fas fa-star"></i>
-                                                    </div>
-                                                @elseif ($reviews->star == 5)
-                                            
-                                                    <div class="listing-rating high">
-                                                        <i class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i><i
-                                                            class="fas fa-star active"></i>
-                                                    </div>
-                                                @else
-                                                    <!-- Handle the case where $reviews->star is not 1, 2, 3, 4, or 5 -->
-                                                @endif
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                    @elseif ($reviews->star == 2)
+                                                        <div class="listing-rating high">
+                                                            <i class="fas fa-star active"></i>
+                                                            <i class="fas fa-star active"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                    @elseif ($reviews->star == 3)
+                                                        <div class="listing-rating high">
+                                                            <i class="fas fa-star active"></i>
+                                                            <i class="fas fa-star active"></i>
+                                                            <i class="fas fa-star active"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                    @elseif ($reviews->star == 4)
+                                                        <div class="listing-rating high">
+                                                            <i class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i>
+                                                            <i class="fas fa-star"></i>
+                                                        </div>
+                                                    @elseif ($reviews->star == 5)
+                                                        <div class="listing-rating high">
+                                                            <i class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i><i
+                                                                class="fas fa-star active"></i>
+                                                        </div>
+                                                    @else
+                                                        <!-- Handle the case where $reviews->star is not 1, 2, 3, 4, or 5 -->
+                                                    @endif
 
-                                                <div class="clearfix"></div>
-                                                <p>" {{ $reviews->review }} "</p>
-                                                {{-- <div class="pull-left reviews-reaction">
-                <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
-                    12</a>
-                <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                <a href="#" class="comment-love active"><i class="ti-heart"></i>
-                    07</a>
-            </div> --}}
+                                                    <div class="clearfix"></div>
+                                                    <p>" {{ $reviews->review }} "</p>
+                                                    {{-- <div class="pull-left reviews-reaction">
+                        <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
+                            12</a>
+                        <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
+                        <a href="#" class="comment-love active"><i class="ti-heart"></i>
+                            07</a>
+                    </div> --}}
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
 
 
-                                    <!--reviews-comments-item end-->
+                                        <!--reviews-comments-item end-->
 
-                                    {{-- <ul class="pagination">
+                                        {{-- <ul class="pagination">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span class="fas fa-arrow-circle-right"></span>
@@ -275,11 +275,11 @@
                             </li>
                         </ul> --}}
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endif
 
 
                     <!-- Location & Hours -->

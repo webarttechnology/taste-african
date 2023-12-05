@@ -77,7 +77,7 @@
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 									<div class="form-group">
 										<label class="small text-dark ft-medium">Message</label>
-										<textarea class="form-control ht-80" name="message">Your Message...</textarea>
+										<textarea class="form-control ht-80" name="message" placeholder="Your Message..."></textarea>
 										@error('message')
 											<div style="color: red">{{ $message }}</div>
 										@enderror
@@ -96,22 +96,21 @@
 							<div class="row">
 								<div class="col-xl-4 col-lg-4 col-md-12">
 									<div class="bg-white rounded p-3 mb-2 contact-details">
-										<h4 class="ft-medium mb-3 theme-cl">Address info:</h4>
-										<p>1354 Green Street Nashville Drive Dodge City,<br> KS 67801 United States</p>
+										<h4 class="ft-medium mb-3 theme-cl">Address:</h4>
+										<p>{{$contact[0]->address}}</p>
 									</div>
 								</div>
 								<div class="col-xl-4 col-lg-4 col-md-12">
 									<div class="bg-white rounded p-3 mb-2 contact-details">
 										<h4 class="ft-medium mb-3 theme-cl">Call Us:</h4>
-										<h6 class="ft-medium mb-1">Customer Care:</h6>
-										<p class="mb-2">+91 458 753 6924</p>
+										<p class="mb-2">{{$contact[0]->phone}}</p>
 									</div>
 								</div>
 								<div class="col-xl-4 col-lg-4 col-md-12">
 									<div class="bg-white rounded p-3 mb-2 contact-details">
 										<h4 class="ft-medium mb-3 theme-cl">Drop A Mail:</h4>
 										<p>Drop mail we will contact you within 24 hours.</p>
-										<p class="lh-1 text-dark">dhananjaypreet@gmail.com</p>
+										<p class="lh-1 text-dark">{{$contact[0]->email}}</p>
 									</div>
 								</div>
 							</div>

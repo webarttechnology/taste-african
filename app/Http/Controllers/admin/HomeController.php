@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\About;
 use App\Mail\MyEmail;
+use App\Models\ContactDetails;
 use App\Models\Category;
 use App\Models\BusinessListing;
 use Illuminate\Http\Request;
@@ -23,7 +24,19 @@ class HomeController extends Controller
         ->where('status', 'approve')
         ->where('approval', 'show')
         ->get();
-        return view('front.index', compact('business_category',  'abouts', 'listings'));
+        $contact = ContactDetails::get();
+        return view('front.index', compact('business_category',  'abouts', 'listings', 'contact'));
+    }
+
+    public function listingByCategory($id)
+    {
+        $listings = BusinessListing::with('amenties', 'reviews' ,'images', 'infos' , 'keywords' , 'menuitems', 'user', 'category')
+        ->where('status', 'approve')
+        ->where('approval', 'show')
+        ->where('category_id', $id)
+        ->get();
+        $contact = ContactDetails::get();
+        return view('user.business_listing_author.categoryListing', compact( 'listings', 'contact'));
     }
 
     public function emailSend(Request $request)
@@ -50,32 +63,38 @@ class HomeController extends Controller
     {
         $business_category = Category::withCount('listings')->get();
         $abouts = About::get();
-        return view('front.about-us', compact('business_category','abouts'));
+        $contact = ContactDetails::get();
+        return view('front.about-us', compact('business_category','abouts', 'contact'));
     }
 
     public function blog()
     {
-        return view('front.blog');
+        $contact = ContactDetails::get();
+        return view('front.blog' , compact('contact'));
     }
 
     public function faq()
     {
-        return view('front.faq');
+        $contact = ContactDetails::get();
+        return view('front.faq', compact('contact'));
     }
 
     public function pricing()
     {
-        return view('front.pricing');
+        $contact = ContactDetails::get();
+        return view('front.pricing', compact('contact'));
     }
 
     public function registerPage()
     {
-        return view('admin.sign-up');
+        $contact = ContactDetails::get();
+        return view('admin.sign-up', compact('contact'));
     }
 
     public function contact()
     {
-        return view('front.contact');
+        $contact = ContactDetails::get();
+        return view('front.contact', compact('contact'));
     }
 
     
