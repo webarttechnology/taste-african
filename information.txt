@@ -1,0 +1,31 @@
+African Food:
+
+1> First login Home page will open.
+
+
+Role: Business Owner:ladan@gmail.com
+1> Business Owner can Register.
+2> Business Owner can login with their id and add, delete , edit their lists.
+3> Business Owner added those lists can hide , unhide tags.
+4> Business Owner can update their profiles, change password and logout.
+
+Role: Admin:
+
+1> Admin Will Login with their ids.
+2> Admin can check all business listings and aproved and disapprove.
+3> Admin aproved those listings will show on user profile otherwise doesn't show.
+3> Admin Can add category and aminities of listings.
+4> Admin Can add About informations.
+
+Role: User:
+1> User can login with their id and View, give review business listins.
+2> User can give reviews and check how many reviews have that listings.
+3> Average Reviews will display on top of listing.
+3> User also can check Today's dynamic date and according to that date timings will change.
+
+
+
+
+
+
+

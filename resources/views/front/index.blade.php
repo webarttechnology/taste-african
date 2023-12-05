@@ -15,13 +15,14 @@
 
                     <div class="Goodup-top-cates">
                         <ul>
-                            @foreach ($business_category as $category )     
+                            @foreach ($business_category as $category)
                                 <li><a href="#" class="Goodup-top-cat-box">
                                         <div class="Goodup-tp-ico">
-                                            <img src="{{asset($category->image)}}" alt="{{$category->name}}" width="40px">
+                                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
+                                                width="40px">
                                         </div>
                                         <div class="Goodup-tp-title">
-                                            <h5>{{$category->name}}</h5>
+                                            <h5>{{ $category->name }}</h5>
                                         </div>
                                     </a>
                                 </li>
@@ -251,513 +252,84 @@
                             <div class="row justify-content-center">
 
                                 <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status close me-2">Closed</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-01.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average high">4.8</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>46 Reviews</span></div>
+                                @foreach ($listings as $listing)
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <div class="Goodup-grid-wrap">
+                                            <div class="Goodup-grid-upper">
+                                                <div class="Goodup-pos ab-left">
+                                                    <div class="Goodup-status close me-2">Open</div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-1.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">Pretty Woman Smart Batra</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>California,
-                                                    USA</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
+                                                <div class="Goodup-grid-thumb">
+                                                    <a href="{{ url('user/author-listing-details/' . $listing->id) }}"
+                                                        class="d-block text-center m-auto"><img
+                                                            src="{{ asset($listing->images[0]->images) }}"
+                                                            class="img-fluid" alt=""></a>
                                                 </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-2"><i class="lni lni-slim"></i>
-                                                        </div><span class="cats-title">Beauty &amp; Makeup</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
+                                                <div class="Goodup-rating overlay">
+                                                    @php
+                                                        $totalStars = 0;
+                                                        $totalReviews = count($listing->reviews);
+
+                                                        foreach ($listing->reviews as $review) {
+                                                            $totalStars += $review->star;
+                                                        }
+
+                                                        $averageStars = $totalReviews > 0 ? round($totalStars / $totalReviews, 2) : 0;
+                                                    @endphp
+                                                    <div class="Goodup-pr-average high">{{ $averageStars }}</div>
+                                                    <div class="Goodup-aldeio">
+                                                        <div class="Goodup-rates">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $averageStars)
+                                                                    <i class="fas fa-star"></i>
+                                                                @else
+                                                                    <i class="far fa-star"></i>
+                                                                @endif
+                                                            @endfor
                                                         </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
+                                                        <div class="Goodup-all-review"><span>{{ $totalReviews }} Reviews</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Goodup-grid-fl-wrap">
+                                                <div class="Goodup-caption px-3 py-2">
+                                                    <div class="Goodup-author"><a href="#"><img
+                                                                src="assets/img/t-1.png" class="img-fluid circle"
+                                                                alt=""></a></div>
+                                                    <h4 class="mb-0 ft-medium medium"><a
+                                                            href="{{ url('user/author-listing-details/' . $listing->id) }}"
+                                                            class="text-dark fs-md">{{ $listing->title }}</a></h4>
+                                                    <div class="Goodup-location"><i
+                                                            class="fas fa-map-marker-alt me-1 theme-cl"></i>{{ $listing->city }},
+                                                        {{ $listing->state }}</div>
+                                                    <div class="Goodup-middle-caption mt-3">
+                                                        <p>{{ Illuminate\Support\Str::limit($listing->description, $limit = 150, $end = '...') }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="Goodup-grid-footer py-2 px-3">
+                                                    <div class="Goodup-ft-first">
+                                                        <a href="#" class="Goodup-cats-wrap">
+                                                            <div class="cats-ico bg-2"><i class="lni lni-slim"></i>
+                                                            </div><span
+                                                                class="cats-title">{{ $listing->category->name }}</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="Goodup-ft-last">
+                                                        <div class="Goodup-inline">
+                                                            <div class="Goodup-bookmark-btn"><button type="button"><i
+                                                                        class="lni lni-envelope position-absolute"></i></button>
+                                                            </div>
+                                                            <div class="Goodup-bookmark-btn"><button type="button"><i
+                                                                        class="lni lni-heart-filled position-absolute"></i></button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status open me-2">Open</div>
-                                                <div class="Goodup-featured-tag">Featured</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-02.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average high">4.1</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>17 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-2.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">The Sartaj Blue Night</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>San
-                                                    Francisco, USA</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-3"><i class="lni lni-cake"></i>
-                                                        </div><span class="cats-title">Night Party</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status open me-2">Open</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-03.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average mid">3.6</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>30 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-3.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">Pizza Delight Cafe Shop</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>102 Satirio,
-                                                    Canada</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-4"><i class="lni lni-coffee-cup"></i>
-                                                        </div><span class="cats-title">Coffee &amp; Bars</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status close me-2">Closed</div>
-                                                <div class="Goodup-featured-tag">Featured</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-04.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average poor">2.3</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>42 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-4.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">The Great Allante Shop</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>Oliy Denver,
-                                                    USA</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-5"><i class="lni lni-shopping-basket"></i>
-                                                        </div><span class="cats-title">Shopping Mall</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status open me-2">Open</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-05.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average high">4.2</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>12 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-5.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">Unisex Blue Spa Massage</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>Warmingham,
-                                                    London</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-5"><i class="lni lni-surf-board"></i>
-                                                        </div><span class="cats-title">Spa &amp; Salon</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status close me-2">Closed</div>
-                                                <div class="Goodup-featured-tag">Featured</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-06.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average poor">2.7</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>36 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-6.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">Washington, Canada</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>Liverpool,
-                                                    London</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-6"><i class="lni lni-burger"></i>
-                                                        </div><span class="cats-title">Food Services</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status close me-2">Closed</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-07.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average high">4.3</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>22 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-7.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">Ubber Shopping Services</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>Metrio
-                                                    General Store</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-7"><i class="lni lni-car"></i></div>
-                                                        <span class="cats-title">Tour &amp; Travels</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single -->
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                    <div class="Goodup-grid-wrap">
-                                        <div class="Goodup-grid-upper">
-                                            <div class="Goodup-pos ab-left">
-                                                <div class="Goodup-status open me-2">Open</div>
-                                                <div class="Goodup-featured-tag">Featured</div>
-                                            </div>
-                                            <div class="Goodup-grid-thumb">
-                                                <a href="#" class="d-block text-center m-auto"><img
-                                                        src="assets/img/foods/food-08.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="Goodup-rating overlay">
-                                                <div class="Goodup-pr-average mid">3.5</div>
-                                                <div class="Goodup-aldeio">
-                                                    <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                    <div class="Goodup-all-review"><span>12 Reviews</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Goodup-grid-fl-wrap">
-                                            <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-author"><a href="#"><img
-                                                            src="assets/img/t-8.png" class="img-fluid circle"
-                                                            alt=""></a></div>
-                                                <h4 class="mb-0 ft-medium medium"><a href="#"
-                                                        class="text-dark fs-md">Rajwara Marriage Home</a></h4>
-                                                <div class="Goodup-location"><i
-                                                        class="fas fa-map-marker-alt me-1 theme-cl"></i>Old
-                                                    California, USA</div>
-                                                <div class="Goodup-middle-caption mt-3">
-                                                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="Goodup-grid-footer py-2 px-3">
-                                                <div class="Goodup-ft-first">
-                                                    <a href="#" class="Goodup-cats-wrap">
-                                                        <div class="cats-ico bg-8"><i class="lni lni-gift"></i>
-                                                        </div><span class="cats-title">Wedding</span>
-                                                    </a>
-                                                </div>
-                                                <div class="Goodup-ft-last">
-                                                    <div class="Goodup-inline">
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-envelope position-absolute"></i></button>
-                                                        </div>
-                                                        <div class="Goodup-bookmark-btn"><button type="button"><i
-                                                                    class="lni lni-heart-filled position-absolute"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                @endforeach
                             </div>
                         </div>
                         <!-- /Places -->
@@ -1466,8 +1038,7 @@
                                         </div>
                                         <div class="Goodup-grid-fl-wrap">
                                             <div class="Goodup-caption px-3 py-2">
-                                                <div class="Goodup-cates multi"><a href="#"
-                                                        class="cats-1">Tata</a>
+                                                <div class="Goodup-cates multi"><a href="#" class="cats-1">Tata</a>
                                                 </div>
                                                 <h4 class="mb-0 ft-medium medium"><a href="#"
                                                         class="text-dark fs-md">New Hyundai Creta<span
@@ -3115,20 +2686,21 @@
 
             <!-- row -->
             <div class="row align-items-center">
-                @foreach ($business_category as $category )     
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a href="#" class="Goodup-catg-wrap">
-                            {{-- <div class="Goodup-catg-city">07 Cities</div> --}}
-                            <div class="Goodup-catg-icon"><img src="{{asset($category->image)}}" alt="{{$category->name}}" width="40px"></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">{{$category->name}}</h4>
-                                <span class="text-muted">{{$category->listings_count}} Listings</span>
-                            </div>
-                        </a>
+                @foreach ($business_category as $category)
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                        <div class="cats-wrap text-center">
+                            <a href="#" class="Goodup-catg-wrap">
+                                {{-- <div class="Goodup-catg-city">07 Cities</div> --}}
+                                <div class="Goodup-catg-icon"><img src="{{ asset($category->image) }}"
+                                        alt="{{ $category->name }}" width="40px"></div>
+                                <div class="Goodup-catg-caption">
+                                    <h4 class="fs-md mb-0 ft-medium m-catrio">{{ $category->name }}</h4>
+                                    <span class="text-muted">{{ $category->listings_count }} Listings</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-               @endforeach  
+                @endforeach
             </div>
         </div>
     </section>
@@ -3142,16 +2714,18 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                     <div class="m-spaced">
                         <div class="position-relative">
-                            <div class="mb-2"><span class="bg-light-sky text-sky px-2 py-1 rounded">{{$abouts[0]->about_short_title}}</span></div>
-                            <h2 class="ft-bold mb-3">{{$abouts[0]->about_long_title}}</h2>
-                            <p> {{$abouts[0]->description}} </p>
+                            <div class="mb-2"><span
+                                    class="bg-light-sky text-sky px-2 py-1 rounded">{{ $abouts[0]->about_short_title }}</span>
+                            </div>
+                            <h2 class="ft-bold mb-3">{{ $abouts[0]->about_long_title }}</h2>
+                            <p> {{ $abouts[0]->description }} </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                     <div class="position-relative">
-                        <img src="{{asset($abouts[0]->image)}}" class="img-fluid" alt="" />
+                        <img src="{{ asset($abouts[0]->image) }}" class="img-fluid" alt="" />
                     </div>
                 </div>
             </div>
@@ -3168,7 +2742,7 @@
 
                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                     <div class="position-relative">
-                        <img src="{{asset($abouts[0]->image_1)}}" class="img-fluid" alt="" />
+                        <img src="{{ asset($abouts[0]->image_1) }}" class="img-fluid" alt="" />
                     </div>
                 </div>
 
@@ -3176,15 +2750,16 @@
                     <div class="m-spaced">
                         <div class="position-relative">
                             <div class="mb-1"><span
-                                    class="bg-light-success text-success px-2 py-1 rounded">{{$abouts[0]->about_short_title_1}}</span></div>
-                            <h2 class="ft-bold mb-3"> {{$abouts[0]->about_long_title_1}}</h2>
-                         {!! $abouts[0]->description_1 !!}
+                                    class="bg-light-success text-success px-2 py-1 rounded">{{ $abouts[0]->about_short_title_1 }}</span>
+                            </div>
+                            <h2 class="ft-bold mb-3"> {{ $abouts[0]->about_long_title_1 }}</h2>
+                            {!! $abouts[0]->description_1 !!}
+                        </div>
                     </div>
+
                 </div>
 
             </div>
-
-        </div>
     </section>
     <!-- ======================= About Start ============================ -->
 

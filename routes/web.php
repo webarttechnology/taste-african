@@ -6,6 +6,7 @@ use App\Http\Controllers\user\UserDashboardController;
 use App\Http\Controllers\admin\CategotyController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\AboutController;
+use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\business\BusinessListingController;
 use App\Http\Controllers\user\UserProfileController;
 use App\Http\Controllers\user\UserAuthController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
     Route::get('/faq', [HomeController::class, 'faq'])->name('front.faq');
     Route::get('/pricing', [HomeController::class, 'pricing'])->name('front.pricing');
     Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');
+    Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSend');
 
 //Login Pages
     Route::get('login', [UserAuthController::class, 'loginForm'])->name('login');
@@ -123,5 +125,13 @@ Route::prefix('admin')->group(function ()
     Route::get('/about/edit/{id}', [AboutController::class, 'edit'])->name('admin.about_edit');
     Route::put('/about/update/{id}', [AboutController::class, 'update'])->name('admin.about_update');
     Route::get('/about/delete/{id}', [AboutController::class, 'delete'])->name('admin.about_delete');
+
+
+    Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact');
+    Route::get('/contact/add', [ContactController::class, 'add'])->name('admin.contact_add');
+    Route::post('/contact/store', [ContactController::class, 'store'])->name('admin.contact_store');
+    Route::get('/contact/edit/{id}', [ContactController::class, 'edit'])->name('admin.contact_edit');
+    Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('admin.contact_update');
+    Route::get('/contact/delete/{id}', [ContactController::class, 'delete'])->name('admin.contact_delete');
 
 });

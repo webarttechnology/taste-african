@@ -61,7 +61,7 @@
                     <div class="d-block mt-3">
                         <div class="list-lioe">
                             <div class="list-lioe-single"><span class="ft-medium text-info"><i
-                                        class="fas fa-check-circle me-1"></i>Claimed</span></div>
+                                        class="fas fa-check-circle me-1"></i>Keywords</span></div>
                             <div class="list-lioe-single ms-2 ps-3 seperate">
                                 @foreach ($listing->keywords as $listing_keywords)
                                     <a href="javascript:void(0);"
@@ -308,7 +308,7 @@
                                             <table class="table table-borderless">
                                                 <tbody>
                                                     <tr>
-                                                        <th scope="row">Mon</th>
+                                                        <td>Mon</td>
                                                         <td>{{ $listing->infos->monday_opening_time }} -
                                                             {{ $listing->infos->monday_opening_time }}</td>
                                                     </tr>

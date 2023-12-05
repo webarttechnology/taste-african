@@ -64,7 +64,7 @@
                                     href="{{ route('front.contact') }}">Contact</a>
                             </li>
 
-                            @if (Auth::check() && Auth::user()->role == 'user')
+                            {{-- @if (Auth::check() && Auth::user()->role == 'user')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,7 +87,7 @@
                                                     class="lni lni-add-files me-2"></i>Add Listing</a></li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
                         </ul>
 
                         @auth

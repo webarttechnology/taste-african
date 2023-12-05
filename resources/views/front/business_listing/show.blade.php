@@ -19,9 +19,7 @@
 									@endif
                         </div>
                         <div class="dashboard-head-author-caption">
-                            <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
-                            {{-- <div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span></div>
-                            <div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div> --}}
+                            <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>                           
                         </div>
                     </div>
                 
@@ -62,29 +60,14 @@
                                             </div>
                                             <div class="dsd-single-lst-caption">
                                                 <div class="dsd-single-lst-title">
-                                                    <h5>{{ $listing->title }}</h5>  
+                                                    <div class="col-6"> <h5>{{ $listing->title }}</h5> </div>
                                                     @if($listing->approval == 'hide')
-                                                    <button type="button" class="btn btn-outline-danger">Hide</button>
+                                                    <small style="color: red; font-size:22px;">Inactive</small>
                                                         @endif                                                  
                                                 </div>                                                
                                                 <span class="agd-location"><i
                                                         class="lni lni-map-marker me-1"></i>{{ $listing->city }}</span>
-                                                <div class="ico-content">
-                                                    <div class="Goodup-ft-first">
-                                                        <div class="Goodup-rating">
-                                                            <div class="Goodup-rates">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="Goodup-price-range">
-                                                            <span class="ft-medium">34 Reviews</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="dsd-single-lst-footer">
                                                     <a href="{{ url ('business-listing/edit/'.$listing->id) }}" class="btn btn-edit mr-1"><i
                                                             class="fas fa-edit me-1"></i>Edit</a>

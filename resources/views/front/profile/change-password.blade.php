@@ -13,13 +13,15 @@
 
                     <div class="dashboard-head-author-clicl">
                         <div class="dashboard-head-author-thumb">
-                            <img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
+                            @if(Auth::user()->image === null)
+                            <img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+                            @else
+                            <img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+                            @endif
                         </div>
                         <div class="dashboard-head-author-caption">
                             <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
-                            {{-- <div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span></div>
-                            <div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div> --}}
-                        </div>
+                            </div>
                     </div>
 
                 </div>
@@ -41,13 +43,7 @@
                 <div class="row">
                     <div class="colxl-12 col-lg-12 col-md-12">
                         <h1 class="ft-medium">Change Password</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item text-muted"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="theme-cl">Change Password</a></li>
-                            </ol>
-                        </nav>
+                        
                     </div>
                 </div>
             </div>
@@ -56,12 +52,6 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="_dashboard_content bg-white rounded mb-4">
-                            <div class="_dashboard_content_header br-bottom py-3 px-3">
-                                <div class="_dashboard__header_flex">
-                                    <h4 class="mb-0 ft-medium fs-md"><i class="fa fa-lock me-2 theme-cl fs-sm"></i>Change
-                                        Password</h4>
-                                </div>
-                            </div>
 
                             <div class="_dashboard_content_body py-3 px-3">
                                 <form class="row submit-form" action="{{ route ('user.changepasswordStore')}}" method="POST">

@@ -7,19 +7,23 @@
         <div class="goodup-dashboard-nav sticky-top">
             <div class="goodup-dashboard-inner">
                 <ul data-submenu-title="Main Navigation">
+                    @if (Auth::user()->role == 'business_owner')
                     <li class="{{ Route::is('business.dashboard') ? 'active' : ''}}"><a href="{{route ('business.dashboard')}}"><i class="lni lni-dashboard me-2"></i>Dashboard</a></li>
-                    <li class="{{ Route::is('business_listing') ? 'active' : ''}}">
-                        <a href="{{route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings </a>
-                    </li>
                     <li class="{{ Route::is('business_listing_add') ? 'active' : ''}}"><a href="{{route ('business_listing_add')}}"><i class="lni lni-add-files me-2"></i>Add Listing</a></li>
+                    @endif                 
+                    <li class="{{ Route::is('business_listing') ? 'active' : ''}}">
+                        @if (Auth::user()->role == 'business_owner')
+                        <a href="{{route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings </a>
+                        @else
+                        <a href="{{route ('user.dashboard')}}"><i class="lni lni-files me-2"></i>My Listings </a>
+                        @endif 
+                    </li>                 
                    
                 </ul>
                 <ul data-submenu-title="My Accounts">
                     <li class="{{ Route::is('user.profile') ? 'active' : ''}}"><a href="{{route ('user.profile')}}"><i class="lni lni-user me-2"></i>My Profile </a></li>
                     <li class="{{ Route::is('user.changepassword') ? 'active' : ''}}"><a href="{{route ('user.changepassword')}}"><i class="lni lni-lock-alt me-2"></i>Change Password</a></li>
-                    {{-- <li><a href="javascript:void(0);"><i class="lni lni-trash-can me-2"></i>Delete Account</a></li> --}}
-                    <li class=""><a href="{{ route('user.logout') }}"><i class="lni lni-power-switch me-2"></i>Log Out</a></li>
-                </ul>
+                    </ul>
             </div>
         </div>
     </div>

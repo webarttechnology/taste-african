@@ -12,12 +12,16 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">                        
                     <div class="dashboard-head-author-clicl">
-                        {{-- <div class="dashboard-head-author-thumb">
-                            <img src="{{asset('front/img/t-7.png')}}" class="img-fluid" alt="" />
+                        <div class="dashboard-head-author-thumb">
+                            @if(Auth::user()->image === null)
+                            <img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+                            @else
+                            <img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+                            @endif
                         </div>
                         <div class="dashboard-head-author-caption">
-                            <div class="dashploio"><h4></h4></div>                           
-                        </div> --}}
+                            <div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>                           
+                        </div>
                     </div>                
                 </div>
             </div>
@@ -26,24 +30,16 @@
     <!-- =============================== Dashboard Header ========================== -->
 
     <!-- ======================= dashboard Detail ======================== -->
-    @include('front.layout.user_sidebar')
+    @include('front.layout.sidebar')
 
         <div class="goodup-dashboard-content">
             <div class="dashboard-tlbar d-block mb-5">
                 <div class="row">
                     <div class="colxl-12 col-lg-12 col-md-12">
                         <h1 class="ft-medium">All Listings</h1>
-                        {{-- <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item text-muted"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="theme-cl">Manage Listings</a></li>
-                            </ol>
-                        </nav> --}}
                     </div>
                 </div>
             </div>
-
 			
             <div class="dashboard-widg-bar d-block">
                 <div class="row">
@@ -53,26 +49,25 @@
                             <div class="dashboard-list-wraps-body py-3 px-3">
                                 <div class="dashboard-listing-wraps">
                                     @foreach ($listings as $listing)
-                                        <!-- Single Listing Item -->
-                                        <div class="dsd-single-listing-wraps">                                           
-                                            <div class="dsd-single-lst-caption">
-                                                <div class="dsd-single-lst-title">
-                                                    <h5>{{ $listing->title }}</h5>
-                                                </div>
-                                                <span class="agd-location"><i class="fa fa-user-o" aria-hidden="true"></i>Author:
-													<a href="{{ url ('user/author-listing-details/'. $listing->user->id)}}" class="dsd-single-lst-title"> {{ $listing->user->name }}</a>
-												</span>
-                                                
-                                                <div class="dsd-single-lst-footer">
-                                                    <a href="{{ url ('author-deatils/'. $listing->user->id)}}" class="btn btn-edit mr-1"><i
-														class="fas fa-eye me-1"></i>View</a>
-                                                    <a href="{{ url ('business-listing/details/'.$listing->id) }}" class="btn btn-view mr-1"><i
-                                                            class="fas fa-eye me-1"></i>Review</a>
-                                                </div>
+                                    <!-- Single Listing Item -->
+                                    <div class="dsd-single-listing-wraps">                                           
+                                        <div class="dsd-single-lst-caption">
+                                            <div class="dsd-single-lst-title">
+                                                <h5>{{ $listing->title }}</h5>
+                                            </div>
+                                            <span class="agd-location"><i class="fa fa-user-o" aria-hidden="true"></i>Author:
+                                                <a href="{{ url ('author-deatils/'. $listing->user->id)}}" class="dsd-single-lst-title"> {{ $listing->user->name }}</a>
+                                            </span>
+                                            
+                                            <div class="dsd-single-lst-footer">
+                                                <a href="{{ url('user/author-listing-details/' . $listing->id) }}" class="btn btn-edit mr-1"><i
+                                                    class="fas fa-eye me-1"></i>View</a>
+                                                {{-- <a href="{{ url('user/author-listing-details/' . $listing->id) }}" class="btn btn-view mr-1"><i
+                                                        class="fas fa-eye me-1"></i>Review</a> --}}
                                             </div>
                                         </div>
-                                    @endforeach
-                                   
+                                    </div>
+                                @endforeach                                   
                                 </div>
                             </div>
                         </div>

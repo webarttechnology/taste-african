@@ -961,9 +961,16 @@
                 </div>
             </div>
 
-            {{-- Div for Menu --}}
-            <div class="row menu-row d-none mb-2" style="border:2px solid black">
-                <h2> Add Another Menu Items</h2>
+            {{-- Div for Menu --}}           
+            <div class="row menu-row d-none mb-2" >
+                <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                    <div class="dashboard-list-wraps-flx">
+                        <h4 class="mb-0 ft-medium fs-md"><i
+                                class="fas fa-utensils me-2 theme-cl fs-sm"></i>
+                            Add New Menu Items
+                        </h4>
+                    </div>
+                </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                     <div class="form-group">
                         <label class="mb-1">Item Name</label>
@@ -1011,13 +1018,13 @@
 
             {{-- Div for Image --}}
             <div class="row image-row d-none mt-2">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <input type="file" class="form-control rounded file" name="image[]"
                         onchange="showImageOnFile(this)">
                 </div>
-                <div class="col-lg-6 col-md-6 uploadForm"></div>
+                <div class="col-lg-4 col-md-6 uploadForm"></div>
 
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="input-group-append">
                         <button type="button" onclick="removeImageRow(this, event)"
                             class="btn btn-danger removeRow">Remove</button>

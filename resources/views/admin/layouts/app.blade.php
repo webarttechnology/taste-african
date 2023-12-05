@@ -28,7 +28,6 @@
 
      <!-- Include TinyMCE library -->
 	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-	{{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> --}}
 	<!-- Include TinyMCE library -->
 </head>
 
@@ -97,6 +96,13 @@
 							<a class="sidenav-item-link" href="{{ route ('admin.about')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>
 								<span class="nav-text">About</span>
+							</a>
+							<hr>
+						</li>
+						<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.contact')}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">Contact-Details</span>
 							</a>
 							<hr>
 						</li>

@@ -33,7 +33,7 @@
                                             <div class="gdup-kvty-icon bg-light-sky text-sky"><i class="fas fa-file"></i>
                                             </div>
                                             <div class="gdup-kvty-ctr">
-                                                <h6 class="count">310</h6>
+                                                <h6 class="count">{{count($listings)}}</h6>
                                             </div>
                                             <div class="gdup-kvty-text">Listings</div>
                                         </div>
@@ -101,57 +101,13 @@
                                         </div>
                                     </div>
                                 </li>
-                                {{-- <li>
-                                    <div class="jhk-list-inf">
-                                        <div class="jhk-list-inf-ico"><i class="fas fa-globe"></i></div>
-                                        <div class="jhk-list-inf-caption">
-                                            <h5>Live Web:</h5>
-                                            <p>https://www.Goodup.com/</p>
-                                        </div>
-                                    </div>
-                                </li> --}}
                             </ul>
                         </div>
 
                     </div>
                 </div>
 
-                <div class="col-xl-8 col-lg-8 col-md-12">
-                    <div class="auth-filter-headers d-none">
-                        <div class="auth-filter-headers-title">
-                            <h5 class="ft-bold fs-md m-0">You have total<span class="theme-cl px-2">412</span>Listings</h5>
-                        </div>
-                        <div class="auth-filter-headers-filts">
-                            <ul class="no-ul-list">
-                                <li>
-                                    <input id="alls" class="checkbox-custom" name="alls" type="checkbox"
-                                        checked="">
-                                    <label for="alls" class="checkbox-custom-label">All</label>
-                                </li>
-                                <li>
-                                    <input id="pls" class="checkbox-custom" name="pls" type="checkbox">
-                                    <label for="pls" class="checkbox-custom-label">Places</label>
-                                </li>
-                                <li>
-                                    <input id="prty" class="checkbox-custom" name="prty" type="checkbox">
-                                    <label for="prty" class="checkbox-custom-label">Property</label>
-                                </li>
-                                <li>
-                                    <input id="crs" class="checkbox-custom" name="crs" type="checkbox">
-                                    <label for="crs" class="checkbox-custom-label">Cars</label>
-                                </li>
-                                <li>
-                                    <input id="htls" class="checkbox-custom" name="htls" type="checkbox">
-                                    <label for="htls" class="checkbox-custom-label">Hotels</label>
-                                </li>
-                                <li>
-                                    <input id="jbsd" class="checkbox-custom" name="jbsd" type="checkbox">
-                                    <label for="jbsd" class="checkbox-custom-label">Jobs</label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
+                <div class="col-xl-8 col-lg-8 col-md-12">                 
                     <!-- row -->
                     <div class="row justify-content-center gx-3">
                         @foreach ($listings as $listing)
@@ -162,7 +118,11 @@
                                         <div class="Goodup-bookmark-btn"><button type="button"><i
                                                     class="lni lni-heart-filled position-absolute"></i></button></div>
                                         <div class="Goodup-pos ab-left">
+                                            @if($listing->approval == 'hide')
+                                            <div class="Goodup-status open me-2">Inactive</div>
+                                            @else
                                             <div class="Goodup-status open me-2">open</div>
+                                            @endif
                                         </div>
                                         <div class="Goodup-grid-thumb">
                                             <a href="{{ url('user/author-listing-details/' . $listing->id) }}"
@@ -178,9 +138,9 @@
                                     </div>
                                     <div class="Goodup-grid-fl-wrap">
                                         <div class="Goodup-caption px-3 py-2">
-                                            <div class="Goodup-cates"><a href="search.html">{{ $listing->category }}</a>
+                                            <div class="Goodup-cates"><a>{{ $listing->category->name }}</a>
                                             </div>
-                                            <h4 class="mb-0 ft-medium medium"><a href="listing-search-v1.html"
+                                            <h4 class="mb-0 ft-medium medium"><a href="{{ url('user/author-listing-details/' . $listing->id) }}"
                                                     class="text-dark fs-md">{{ $listing->title }}<span
                                                         class="verified-badge"><i
                                                             class="fas fa-check-circle"></i></span></a></h4>
