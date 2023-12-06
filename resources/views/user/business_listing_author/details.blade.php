@@ -18,8 +18,6 @@
             </div>
         </div>
 
-
-
         <div class="ftl-diope">
             <a href="javascript:void(0);" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
         </div>
@@ -185,11 +183,11 @@
                                         @foreach ($review as $reviews)
                                             <div class="reviews-comments-item">
                                                 <div class="review-comments-avatar">
-                                                    <img src="{{ asset('front/img/user.png') }}" class="img-fluid"
+                                                    <img src="{{ asset( $reviews->user->image)  }}" class="img-fluid"
                                                         alt="">
                                                 </div>
                                                 <div class="reviews-comments-item-text">
-                                                    <h4><a href="#">{{ $reviews->name }}</a><span
+                                                    <h4><a>{{ $reviews->name }}</a><span
                                                             class="reviews-comments-item-date"><i
                                                                 class="ti-calendar theme-cl me-1"></i>{{ $reviews->created_at->format('d M Y') }}
                                                         </span>
@@ -777,3 +775,5 @@
 
 
 @stop
+
+

@@ -11,10 +11,16 @@ class Review extends Model
 
     protected $fillable = [
         'list_id',
+        'user_id',
         'star',
         'name',
         'image',
         'email',
         'review',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

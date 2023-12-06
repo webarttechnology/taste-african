@@ -205,7 +205,7 @@
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </li> --}}
-                                {{ $listings->links() }}
+                                {{ $listings->links('vendor.pagination.bootstrap-4') }}
                             </ul>
                         </div>
                     </div>
