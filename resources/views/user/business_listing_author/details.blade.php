@@ -5,21 +5,17 @@
     {{-- @foreach ($data as $listing) --}}
     <div class="featured-slick">
         <div class="featured-gallery-slide">
-            <div class="dlf-flew">
-                @if ($listing->images && is_iterable($listing->images))
-                    @foreach ($listing->images as $image)
-                        <a href="{{ asset($image->images) }}" class="mfp-gallery">
+            @if ($listing->images && is_iterable($listing->images))
+                @foreach ($listing->images as $image)
+                    <div class="dlf-flew">
+                        <a target="_blank" href="{{ asset($image->images) }}" class="mfp-gallery">
                             <img src="{{ asset($image->images) }}" class="img-fluid mx-auto" alt="" />
                         </a>
-                    @endforeach
-                @else
-                    <p>No images available for this listing.</p>
-                @endif
-            </div>
-        </div>
-
-        <div class="ftl-diope">
-            <a href="javascript:void(0);" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a>
+                    </div>
+                @endforeach
+            @else
+                <p>No images available for this listing.</p>
+            @endif
         </div>
         <div class="Goodup-ops-bhri">
             <div class="Goodup-lkp-flex d-flex align-items-start justify-content-start">

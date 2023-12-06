@@ -1,3 +1,88 @@
+
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300);
+
+body {
+	background: #c2e59c; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #c2e59c , #64b3f4); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #c2e59c , #64b3f4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+	
+	color: #666;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+table {
+	 /* position: absolute;
+	top: 50%;
+	left: 50%; */
+	/*transition: all 0.2s ease;	
+	transform: translateX(-50%) translateY(-50%);	 */
+	padding: 20px;
+}
+
+.name {
+	font-size: 30px;
+	border-bottom: 2px solid #888;
+	margin-bottom: 20px;
+}
+.name:first-letter {
+	font-size: 300%;
+}
+
+.label {
+	width: 70px;
+	font-weight: bold;
+}
+
+.label, .phone, .mobile, .email {
+	display: inline-block;
+}
+
+.details-td {
+	border-right: 1px solid #eee;
+	white-space: nowrap;
+	
+	padding: 20px;
+	padding-right: 30px;
+}
+
+.description-td {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: justify;
+	margin-top: 15px;
+}
+	.description {
+		outline: 0px solid transparent;
+		border: 0px solid transparent;
+	}
+	.edit {
+		position: absolute;
+		top: 0px;
+		right: 0;
+		
+		width: 13px;
+		height: 13px;
+		
+		cursor: pointer;
+	}
+	.update {
+		display: none;
+		position: absolute;
+		right: 20px;
+		bottom: 0;
+		background: #c2e59c;
+		border: 0;
+		padding: 5px;
+		width: 80px;
+		color: #333;
+		outline: 0px solid transparent;
+		border: 0px solid transparent;
+	}
+</style>
 @extends('front.layout.app')
 @section('content')
 			
@@ -17,9 +102,7 @@
 									@endif
 								</div>
 								<div class="dashboard-head-author-caption">
-									<div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>
-									{{-- <div class="dashploio"><span class="agd-location"><i class="lni lni-map-marker me-1"></i>San Francisco, USA</span></div>
-									<div class="listing-rating high"><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i><i class="fas fa-star active"></i></div> --}}
+									<div class="dashploio"><h4>{{ Auth::user()->name }}</h4></div>									
 								</div>
 							</div>
 						
@@ -31,280 +114,39 @@
 			
 			<!-- ======================= dashboard Detail ======================== -->
 			<div class="goodup-dashboard-wrap gray px-4 py-5">
-				<a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
-					<i class="fas fa-bars me-2"></i>Dashboard Navigation
-				</a>
-				
+							
 
 				@include('front.layout.sidebar')
 				
-				<div class="goodup-dashboard-content">
-					<div class="dashboard-tlbar d-block mb-5">
-						<div class="row">
-							<div class="colxl-12 col-lg-12 col-md-12">
-								<h1 class="ft-medium">{{ Auth::user()->name }}</h1>
-								<nav aria-label="breadcrumb">
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item text-muted"><a href="#">Home</a></li>
-										<li class="breadcrumb-item"><a href="#" class="theme-cl">Dashboard</a></li>
-									</ol>
-								</nav>
-							</div>
-						</div>
-					</div>
+				<div class="goodup-dashboard-content">			
 					
 					<div class="dashboard-widg-bar d-block">
-						<div class="row">
-							<div class="col-xl-12 col-lg-12 col-md-12 mb-3">
-								<div class="alert bg-inverse text-light d-flex align-items-center" role="alert">
-									<p class="p-0 m-0 ft-medium full-width">Your listing <a href="#" class="text-success">Wedding Willa Resort</a> has been approved!</p>
-									<button type="button" class="btn-close text-light" data-bs-dismiss="alert" aria-label="Close"></button>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-								<div class="dsd-boxed-widget py-5 px-4 bg-danger rounded">
-									<h2 class="ft-medium mb-1 fs-xl text-light count">46</h2>
-									<p class="p-0 m-0 text-light fs-md">Active Listings</p>
-									<i class="lni lni-empty-file"></i>
-								</div>
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-								<div class="dsd-boxed-widget py-5 px-4 bg-success rounded">
-									<h2 class="ft-medium mb-1 fs-xl text-light count">2615</h2>
-									<p class="p-0 m-0 text-light fs-md">Views Listing</p>
-									<i class="lni lni-eye"></i>
-								</div>
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-								<div class="dsd-boxed-widget py-5 px-4 bg-warning rounded">
-									<h2 class="ft-medium mb-1 fs-xl text-light count">312</h2>
-									<p class="p-0 m-0 text-light fs-md">Total Reviews</p>
-									<i class="lni lni-comments"></i>
-								</div>
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-								<div class="dsd-boxed-widget py-5 px-4 bg-purple rounded">
-									<h2 class="ft-medium mb-1 fs-xl text-light count">410</h2>
-									<p class="p-0 m-0 text-light fs-md">Total Bookings</p>
-									<i class="lni lni-wallet"></i>
-								</div>
-							</div>
-						</div>
-						
-						<!-- row -->
-						<div class="row">
-						
-							<!-- Area Chart -->
-							<div class="col-md-8 col-sm-12">
-								<div class="dash-card">
-									<div class="dash-card-header">
-										<h4 class="mb-0">View Chart</h4>
-									</div>
-									<div class="dash-card-body">
-										<div class="chart" id="revenue-chart" style="height:365px;"></div>
-									</div>
-								</div>
-							</div>
-							
-							<!-- Donut Chart -->
-							{{-- <div class="col-md-4 col-sm-12">
-								<div class="dash-card">
-									<div class="dash-card-header">
-										<h4>Followers</h4>
-									</div>
-									<div class="ground-list ground-hover-list">
-										<div class="ground ground-list-single">
-											<a href="#">
-												<img class="ground-avatar" src="assets/img/t-1.png" alt="...">
-												<span class="profile-status bg-online pull-right"></span>
-											</a>
-
-											<div class="ground-content">
-												<h6><a href="#">Maryam Amiri</a></h6>
-												<small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>New York, USA</small>
-											</div>
-										</div>
-										
-										<div class="ground ground-list-single">
-											<a href="#">
-												<img class="ground-avatar" src="assets/img/t-2.png" alt="...">
-												<span class="profile-status bg-offline pull-right"></span>
-											</a>
-
-											<div class="ground-content">
-												<h6><a href="#">Maryam Amiri</a></h6>
-												<small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>Canada, USA</small>
-											</div>
-										</div>
-										
-										<div class="ground ground-list-single">
-											<a href="#">
-												<img class="ground-avatar" src="assets/img/t-3.png" alt="...">
-												<span class="profile-status bg-working pull-right"></span>
-											</a>
-
-											<div class="ground-content">
-												<h6><a href="#">Maryam Amiri</a></h6>
-												<small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>Denver, USA</small>
-											</div>
-										</div>
-										
-										<div class="ground ground-list-single">
-											<a href="#">
-												<img class="ground-avatar" src="assets/img/t-4.png" alt="...">
-												<span class="profile-status bg-busy pull-right"></span>
-											</a>
-
-											<div class="ground-content">
-												<h6><a href="#">Maryam Amiri</a></h6>
-												<small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>Liverpool, UK</small>
-											</div>
-										</div>
-										
-										<div class="ground ground-list-single">
-											<a href="#">
-												<img class="ground-avatar" src="assets/img/t-5.png" alt="...">
-												<span class="profile-status bg-online pull-right"></span>
-											</a>
-
-											<div class="ground-content">
-												<h6><a href="#">Maryam Amiri</a></h6>
-												<small class="text-fade"><i class="fas fa-map-marker-alt me-1"></i>California</small>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div> --}}
-							
-						</div>
-						<!-- /.row -->
+						<div class="row">	
+						<table>
+							<tr>
+								<td colspan="3">
+									<div class="name" >{{ Auth::user()->name }}</div>
+									<span><img src="{{asset(Auth::user()->image)}}" width="50px"></span>
+								</td>
+								
+							</tr>
+							<tr>
+								<td class="details-td">
+									<div class="label">Phone</div> : <div class="phone">{{ Auth::user()->name }}</div>
+									<br><div class="label">Mobile</div> : <div class="mobile">+91 1234 567 890</div>
+									<br><div class="label">Email</div> : <div class="email">user@domain.com</div>
+								</td>
+								<td class="description-td">
+									<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI2OC43MjUgMjY4LjcyNSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjY4LjcyNSAyNjguNzI1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCI+CjxnIGlkPSJFZGl0Ij4KCTxwYXRoIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDsiIGQ9Ik0xNjEuMzU5LDU2LjMzN2MtNy4wNDEtNy4wNDktMTguNDU4LTcuMDQ5LTI1LjQ5OCwwbC02LjM3NCw2LjM4MSAgIGwtODkuMjQzLDg5LjMzN2wwLjAyMywwLjAyM2wtMi44MTIsMi44MmMwLDAtOC45NjgsOS4wMzItMjkuMjE2LDc0LjM5OWMtMC4xNDIsMC40NTctMC4yODMsMC45MTEtMC40MjYsMS4zNzQgICBjLTAuMzYxLDEuMTcxLTAuNzI2LDIuMzYxLTEuMDk0LDMuNTY3Yy0wLjMyNiwxLjA2Ni0wLjY1NiwyLjE1NC0wLjk4NywzLjI0OWMtMC4yNzksMC45MjMtMC41NTYsMS44MzYtMC44MzksMi43NzkgICBjLTAuNjQyLDIuMTQtMS4yOTIsNC4zMTgtMS45NTUsNi41NjdjLTEuNDU1LDQuOTM3LTUuMDA5LDE2LjA3LTAuOTksMjAuMWMzLjg3LDMuODgyLDE1LjEyLDAuNDY3LDIwLjA0My0wLjk5MyAgIGMyLjIzMi0wLjY2Miw0LjM5NS0xLjMxMSw2LjUxOS0xLjk1MmMwLjk4MS0wLjI5NiwxLjkzMi0wLjU4NiwyLjg5MS0wLjg3OGMxLjAzMS0wLjMxNCwyLjA1Ny0wLjYyNiwzLjA2Mi0wLjkzNSAgIGMxLjI2OS0wLjM5LDIuNTItMC43NzUsMy43NS0xLjE1N2MwLjM2Ny0wLjExNCwwLjcyNy0wLjIyNywxLjA5MS0wLjM0YzYyLjE5Mi0xOS4zNjUsNzMuMzU3LTI4LjQ1Myw3NC4yODUtMjkuMjg0ICAgYzAuMDA3LTAuMDA1LDAuMDA3LTAuMDA1LDAuMDEyLTAuMDFjMC4wMzktMC4wMzYsMC4wNjYtMC4wNiwwLjA2Ni0wLjA2bDIuODc5LTIuODg2bDAuMTkzLDAuMTkzbDg5LjI0NS04OS4zMzdsLTAuMDAxLTAuMDAxICAgbDYuMzc0LTYuMzgxYzcuMDQxLTcuMDQ4LDcuMDQxLTE4LjQ3NiwwLTI1LjUyNUwxNjEuMzU5LDU2LjMzN3ogTTEwMy4zOTksMjE5Ljc4MmMtMC4wNzgsMC4wNTMtMC4xODQsMC4xMjItMC4yOTYsMC4xOTMgICBjLTAuMDYyLDAuMDQtMC4xMzcsMC4wODctMC4yMTEsMC4xMzNjLTAuMDc1LDAuMDQ3LTAuMTU3LDAuMDk4LTAuMjQ0LDAuMTUxYy0wLjA3NywwLjA0Ny0wLjE1NywwLjA5NS0wLjI0MywwLjE0NyAgIGMtMi45NjksMS43NzctMTEuNjgyLDYuMzYyLTMyLjgyOCwxNC4wMTdjLTIuNDcxLDAuODk0LTUuMTYyLDEuODQyLTcuOTgxLDIuODE5bC0zMC4wNi0zMC4wOTFjMC45OC0yLjg0LDEuOTI5LTUuNTUxLDIuODI2LTguMDQxICAgYzcuNjM4LTIxLjIzNSwxMi4yMTktMjkuOTc0LDEzLjk4Ni0zMi45MzljMC4wNDMtMC4wNzEsMC4wODItMC4xMzYsMC4xMjEtMC4yYzAuMDYyLTAuMTAyLDAuMTItMC4xOTcsMC4xNzQtMC4yODQgICBjMC4wNDMtMC4wNjksMC4wODgtMC4xNDEsMC4xMjYtMC4yYzAuMDcxLTAuMTExLDAuMTQtMC4yMTcsMC4xOTMtMC4yOTZsMi4yLTIuMjA2bDU0LjQ4NSw1NC41NDJMMTAzLjM5OSwyMTkuNzgyeiBNMjYzLjM1MSw1Ni4zMzcgICBsLTUwLjk5Ny01MS4wNWMtNy4wNDEtNy4wNDgtMTguNDU2LTcuMDQ4LTI1LjQ5OCwwbC0xMi43NDgsMTIuNzYzYy03LjA0MSw3LjA0OC03LjA0MSwxOC40NzYsMCwyNS41MjRsNTAuOTk2LDUxLjA1ICAgYzcuMDQsNy4wNDgsMTguNDU3LDcuMDQ4LDI1LjQ5OCwwbDEyLjc0OS0xMi43NjJDMjcwLjM5Miw3NC44MTMsMjcwLjM5Miw2My4zODUsMjYzLjM1MSw1Ni4zMzd6IiBmaWxsPSIjODg4ODg4Ii8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" class="edit">
+									<div class="description" spellcheck="false">This is a Short Description of the Client</div>
+									
+									<input type="button" value="Update" class="update">
+								</td>
+							</tr>
+						</table>
+					</div>
 				
-						{{-- <div class="row">
-							<div class="col-lg-6 col-md-12">
-								<div class="goodup-dashboard-grouping-list with-icons">
-									<h4>Recent Activities</h4>
-									<ul>
-										<li>
-											<i class="dsd-icon-uiyo ti-layers text-purple bg-light-purple"></i> Your listing <strong><a href="#">Hotel The Lalit</a></strong> has been approved!
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-
-										<li>
-											<i class="dsd-icon-uiyo ti-star text-success bg-light-success"></i> Christopher K. Allen left a review <div class="grping-list-rates high" data-rating="5.0"></div> on <strong><a href="#">Bluchee Burger</a></strong>
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-
-										<li>
-											<i class="dsd-icon-uiyo ti-heart text-warning bg-light-warning"></i> Someone bookmarked your <strong><a href="#">Snow Valley House</a></strong> listing!
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-
-										<li>
-											<i class="dsd-icon-uiyo ti-star text-info bg-light-info"></i> Jesus A. Rhodes left a review <div class="grping-list-rates mid" data-rating="3.8"></div> on <strong><a href="#">Sonal Cafe</a></strong>
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-
-										<li>
-											<i class="dsd-icon-uiyo ti-heart text-danger bg-light-danger"></i> Someone bookmarked your <strong><a href="#">Blue Bear Bar</a></strong> listing!
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-
-										<li>
-											<i class="dsd-icon-uiyo ti-star text-success bg-light-success"></i> Michael H. Bright left a review <div class="grping-list-rates high" data-rating="4.7"></div> on <strong><a href="#">Lucky Dhaba</a></strong>
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-
-										<li>
-											<i class="dsd-icon-uiyo ti-star text-purple bg-light-purple"></i> Arnold A. Lynn left a review <div class="grping-list-rates low" data-rating="2.8"></div> on <strong><a href="#">Madhu Sweet House</a></strong>
-											<a href="#" class="close-list-item"><i class="fa fa-close"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
 							
-							<div class="col-lg-6 col-md-12">
-								<div class="goodup-dashboard-grouping-list invoices with-icons">
-									<h4>Invoices</h4>
-									<ul>
-										
-										<li><i class="dsd-icon-uiyo ti-files text-warning bg-light-warning"></i>
-											<strong>Starter Plan</strong>
-											<ul>
-												<li class="unpaid">Unpaid</li>
-												<li>Order: #LS5410</li>
-												<li>Date: 16 Sep 2022</li>
-											</ul>
-											<div class="buttons-to-right">
-												<a href="javascript:void(0);" class="button gray">View Invoice</a>
-											</div>
-										</li>
-										
-										<li><i class="dsd-icon-uiyo ti-files text-success bg-light-success"></i>
-											<strong>Basic Plan</strong>
-											<ul>
-												<li class="paid">Paid</li>
-												<li>Order: #LS5487</li>
-												<li>Date: 19 Aug 2022</li>
-											</ul>
-											<div class="buttons-to-right">
-												<a href="javascript:void(0);" class="button gray">View Invoice</a>
-											</div>
-										</li>
-
-										<li><i class="dsd-icon-uiyo ti-files text-danger bg-light-danger"></i>
-											<strong>Extended Plan</strong>
-											<ul>
-												<li class="pending">Pending</li>
-												<li>Order: #LS6413</li>
-												<li>Date: 07 Jul 2022</li>
-											</ul>
-											<div class="buttons-to-right">
-												<a href="javascript:void(0);" class="button gray">View Invoice</a>
-											</div>
-										</li>
-										
-										<li><i class="dsd-icon-uiyo ti-files text-success bg-light-success"></i>
-											<strong>Platinum Plan</strong>
-											<ul>
-												<li class="cancel">Cancel</li>
-												<li>Order: #LS6100</li>
-												<li>Date: 15 Jun 2022</li>
-											</ul>
-											<div class="buttons-to-right">
-												<a href="javascript:void(0);" class="button gray">View Invoice</a>
-											</div>
-										</li>
-										
-										<li><i class="dsd-icon-uiyo ti-files text-warning bg-light-warning"></i>
-											<strong>Extended Plan</strong>
-											<ul>
-												<li class="paid">Paid</li>
-												<li>Order: #LS6257</li>
-												<li>Date: 14 05 May 2022</li>
-											</ul>
-											<div class="buttons-to-right">
-												<a href="javascript:void(0);" class="button gray">View Invoice</a>
-											</div>
-										</li>
-										
-										<li><i class="dsd-icon-uiyo ti-files text-info bg-light-info"></i>
-											<strong>Platinum Plan</strong>
-											<ul>
-												<li class="unpaid">Unpaid</li>
-												<li>Order: #LS6548</li>
-												<li>Date: 10 May 2022</li>
-											</ul>
-											<div class="buttons-to-right">
-												<a href="javascript:void(0);" class="button gray">View Invoice</a>
-											</div>
-										</li>
-
-									</ul>
-								</div>
-							</div>	
-						</div>	 --}}
 							
 					</div>
 					

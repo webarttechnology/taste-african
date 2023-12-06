@@ -143,8 +143,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Latitude</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="latitude" value="{{ old('latitude') }}" />
+                                                    <input type="text" class="form-control rounded" placeholder="" name="latitude" id="latitude" value="{{ old('latitude') }}" />        
                                                     <div class="validation-error">
                                                         @error('latitude')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -155,8 +154,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Longitude</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="longitude" value="{{ old('longitude') }}" />
+                                                    <input type="text" class="form-control rounded" placeholder="" name="longitude" id="longitude" value="{{ old('longitude') }}" />       
                                                     <div class="validation-error">
                                                         @error('longitude')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -166,11 +164,8 @@
                                             </div>
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <iframe
-                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27437.803590312993!2d76.75937213955079!3d30.726117899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390feda9761bdc2f%3A0x5e764f7f18edc390!2sMidpoint%20Cafe!5e0!3m2!1sen!2sin!4v1649569611177!5m2!1sen!2sin"
-                                                        class="full-width" height="300" style="border:0;"
-                                                        allowfullscreen="" loading="lazy"
-                                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                    <iframe id="mapIframe" class="full-width" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                                    </iframe>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -1121,5 +1116,26 @@
             });
         });
     </script>
+
+
+<script>
+    $(document).ready(function () {
+        // // Function to update the map iframe
+        // function updateMapIframe(latitude, longitude) {
+        //     var mapIframe = $('#mapIframe');
+        //     var embedUrl = 'https://www.google.com/maps/embed/v1/view?key=AIzaSyBEZx_jd9mlykQdWsoaAA0GWS56aVLqlOM&center=' +     + ',' + longitude + '&zoom=15';
+        //     mapIframe.attr('src', embedUrl);
+        // }
+
+        // // Event handler for input changes
+        // $('#latitude, #longitude').on('input', function () {
+        //     var latitude = $('#latitude').val();
+        //     var longitude = $('#longitude').val();
+
+        //     // Update the map iframe with the new coordinates
+        //     updateMapIframe(latitude, longitude);
+        // });
+    });
+</script>
 
 @endsection

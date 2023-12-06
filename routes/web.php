@@ -51,8 +51,8 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 
 Route::middleware('auth')->group(function () 
   {
-    Route::get('/category/listings/{id}', [HomeController::class, 'listingByCategory'])->name('category.listings');
-    // User Forget Passwordd Page:
+    
+    // User Forget Password Page:
     Route::get('user/forget-password', [BusinessAuthenticationController::class, 'forgot_Pass'])->name('user.forgot_Pass');
     Route::post('user/forget-password', [BusinessAuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');
     Route::post('user/logout', [BusinessAuthenticationController::class, 'userLogout'])->name('user.logout');
@@ -63,12 +63,14 @@ Route::middleware('auth')->group(function ()
     Route::post('/user/password', [UserProfileController::class, 'changepasswordStore'])->name('user.changepasswordStore');
     Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');    
   });
+  
 
-Route::middleware(['auth', 'checkRole:user'])->group(function () {
+  Route::middleware(['auth', 'checkRole:user'])->group(function () {
     Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
     Route::get('author-deatils/{listing_user_id}', [UserDashboardController::class, 'authorDetails'])->name('user.authorDetails');
     Route::get('user/author-listing-details/{id}', [UserDashboardController::class, 'viewDetails'])->name('user_listing_viewDetails');
     Route::post('user/review', [UserReviewController::class, 'review'])->name('user.review');
+    Route::get('/category/listings/{id}', [HomeController::class, 'listingByCategory'])->name('category.listings');
 
 });
 

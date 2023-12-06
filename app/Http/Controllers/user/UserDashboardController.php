@@ -16,14 +16,14 @@ class UserDashboardController extends Controller
         $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'user')
         ->where('status', 'approve')
         ->where('approval', 'show')
-        ->get();
+        ->paginate(5);
         $contact = ContactDetails::get();
         return view ('user.authentication.dashboard', compact('listings', 'contact'));
     }
 
     public function authorDetails($listing_user_id)
     { 
-        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos' , 'keywords' , 'menuitems')->where('user_id', $listing_user_id)->paginate(1);
+        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos' , 'keywords' , 'menuitems')->where('user_id', $listing_user_id)->paginate(5);
         $userInfo = User::with('info')->find($listing_user_id);
         $contact = ContactDetails::get();
         return view ('user.business_listing_author.authorDetails', compact('listings', 'userInfo', 'contact'));

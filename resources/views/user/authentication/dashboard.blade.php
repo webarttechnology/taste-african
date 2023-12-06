@@ -96,9 +96,18 @@
                                                 {{-- <a href="{{ url('user/author-listing-details/' . $listing->id) }}" class="btn btn-view mr-1"><i
                                                         class="fas fa-eye me-1"></i>Review</a> --}}
                                             </div>
+
+                                            
                                         </div>
                                     </div>
-                                @endforeach                                   
+                                @endforeach  
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <ul class="pagination">                             
+                                            {{ $listings->links('vendor.pagination.bootstrap-4') }}
+                                        </ul>
+                                    </div>
+                                </div>                                 
                                 </div>
                             </div>
                         </div>

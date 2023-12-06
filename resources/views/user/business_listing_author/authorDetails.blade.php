@@ -79,7 +79,9 @@
                                         <div class="jhk-list-inf-ico"><i class="fas fa-envelope"></i></div>
                                         <div class="jhk-list-inf-caption">
                                             <h5>Mail Us</h5>
-                                            <p>{{ $userInfo->email }}</p>
+                                            <p>
+                                                <a href="mailto:{{ $userInfo->email }}">{{ $userInfo->email }}</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </li>
@@ -88,7 +90,7 @@
                                         <div class="jhk-list-inf-ico"><i class="fas fa-phone"></i></div>
                                         <div class="jhk-list-inf-caption">
                                             <h5>Make Call</h5>
-                                            <p>{{ $userInfo->email }}</p>
+                                            <p> <a href="tel:+{{ $userInfo->phone }}">{{ $userInfo->phone }}</a></p>
                                         </div>
                                     </div>
                                 </li>
@@ -187,24 +189,7 @@
 
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <ul class="pagination">
-                                {{-- <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span class="fas fa-arrow-circle-right"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">18</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span class="fas fa-arrow-circle-right"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li> --}}
+                            <ul class="pagination">                             
                                 {{ $listings->links('vendor.pagination.bootstrap-4') }}
                             </ul>
                         </div>
@@ -215,6 +200,7 @@
         </div>
     </section>
     <!-- ============================ Main Section End ================================== -->
+
 
     <!-- ======================= Newsletter Start ============================ -->
     <section class="space bg-cover" style="background:#03343b url(assets/img/landing-bg.png) no-repeat;">
@@ -231,18 +217,19 @@
 
             <div class="row align-items-center justify-content-center">
                 <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
-                    <form class="bg-white rounded p-1">
+                    <form class="bg-white rounded p-1" action="{{route ('subscribe_store')}}" method="POST">
+                        @csrf
                         <div class="row no-gutters">
                             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
                                 <div class="form-group mb-0 position-relative">
-                                    <input type="text" class="form-control b-0"
-                                        placeholder="Enter Your Email Address">
+                                    <input type="email" class="form-control b-0"
+                                        placeholder="Enter Your Email Address" name="email">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                 <div class="form-group mb-0 position-relative">
                                     <button class="btn full-width btn-height theme-bg text-light fs-md"
-                                        type="button">Subscribe</button>
+                                        type="submit">Subscribe</button>
                                 </div>
                             </div>
                         </div>

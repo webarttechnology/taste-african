@@ -25,8 +25,7 @@ class HomeController extends Controller
         ->where('status', 'approve')
         ->where('approval', 'show')
         ->get();
-        $contact = ContactDetails::get();
-        return view('front.index', compact('business_category',  'abouts', 'listings', 'contact'));
+        return view('front.index', compact('business_category',  'abouts', 'listings'));
     }
 
     public function listingByCategory($id)
@@ -36,8 +35,7 @@ class HomeController extends Controller
         ->where('approval', 'show')
         ->where('category_id', $id)
         ->get();
-        $contact = ContactDetails::get();
-        return view('user.business_listing_author.categoryListing', compact( 'listings', 'contact'));
+        return view('user.business_listing_author.categoryListing', compact( 'listings'));
     }
 
     public function emailSend(Request $request)
@@ -89,7 +87,8 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('front.contact');
+        $contact = ContactDetails::get();
+        return view('front.contact',  compact('contact'));
     }
 
     public function subscribeStore(Request $request)
