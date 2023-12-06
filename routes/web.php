@@ -33,7 +33,7 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
     Route::get('/pricing', [HomeController::class, 'pricing'])->name('front.pricing');
     Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');
     Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSend');
-
+    Route::post('/subscribe-store', [HomeController::class, 'subscribeStore'])->name('subscribe_store');
 
 //Login Pages
     Route::get('login', [UserAuthController::class, 'loginForm'])->name('login');

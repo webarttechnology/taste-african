@@ -17,7 +17,7 @@
 									<form class="submit-form" action="{{ route ('user.login')}}" method="POST">	
 										@csrf			
 										<div class="form-group">
-											<label class="mb-1">Name</label>
+											<label class="mb-1">Email</label>
 											<input type="email" class="form-control rounded" name="email">
 										</div>
 										

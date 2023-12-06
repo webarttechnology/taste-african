@@ -23,7 +23,7 @@ class UserDashboardController extends Controller
 
     public function authorDetails($listing_user_id)
     { 
-        $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems')->where('user_id', $listing_user_id)->get();
+        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos' , 'keywords' , 'menuitems')->where('user_id', $listing_user_id)->paginate(5);
         $userInfo = User::with('info')->find($listing_user_id);
         $contact = ContactDetails::get();
         return view ('user.business_listing_author.authorDetails', compact('listings', 'userInfo', 'contact'));

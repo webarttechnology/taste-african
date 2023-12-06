@@ -5,16 +5,17 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\About;
 use App\Mail\MyEmail;
+use App\Models\Subscribe;
 use App\Models\ContactDetails;
 use App\Models\Category;
 use App\Models\BusinessListing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
-{
-   
+{  
 
     public function front()
     {
@@ -63,38 +64,46 @@ class HomeController extends Controller
     {
         $business_category = Category::withCount('listings')->get();
         $abouts = About::get();
-        $contact = ContactDetails::get();
-        return view('front.about-us', compact('business_category','abouts', 'contact'));
+        return view('front.about-us', compact('business_category','abouts'));
     }
 
     public function blog()
     {
-        $contact = ContactDetails::get();
-        return view('front.blog' , compact('contact'));
+        return view('front.blog');
     }
 
     public function faq()
     {
-        $contact = ContactDetails::get();
-        return view('front.faq', compact('contact'));
+        return view('front.faq');
     }
 
     public function pricing()
     {
-        $contact = ContactDetails::get();
-        return view('front.pricing', compact('contact'));
+        return view('front.pricing');
     }
 
     public function registerPage()
     {
-        $contact = ContactDetails::get();
-        return view('admin.sign-up', compact('contact'));
+        return view('admin.sign-up');
     }
 
     public function contact()
     {
-        $contact = ContactDetails::get();
-        return view('front.contact', compact('contact'));
+        return view('front.contact');
+    }
+
+    public function subscribeStore(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        Subscribe::create([
+            'user_id' => Auth::user()->id,
+            'email' => $request->email,
+        ]);
+        return redirect()->back()->with('message', 'Email sent successfully!');
+
     }
 
     

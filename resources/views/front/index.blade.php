@@ -2860,18 +2860,19 @@
 
             <div class="row align-items-center justify-content-center">
                 <div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
-                    <form class="bg-white rounded p-1">
+                    <form class="bg-white rounded p-1" action="{{route ('subscribe_store')}}" method="POST">
+                        @csrf
                         <div class="row no-gutters">
                             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
                                 <div class="form-group mb-0 position-relative">
-                                    <input type="text" class="form-control b-0"
-                                        placeholder="Enter Your Email Address">
+                                    <input type="email" class="form-control b-0"
+                                        placeholder="Enter Your Email Address" name="email">
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                 <div class="form-group mb-0 position-relative">
                                     <button class="btn full-width btn-height theme-bg text-light fs-md"
-                                        type="button">Subscribe</button>
+                                        type="submit">Subscribe</button>
                                 </div>
                             </div>
                         </div>

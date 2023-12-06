@@ -3,9 +3,9 @@
 
     <!-- ======================= dashboard Detail ======================== -->
     <div class="goodup-dashboard-wrap gray px-4 py-5">
-        <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false"
+        {{-- <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false"
             aria-controls="MobNav">
-            <i class="fas fa-bars me-2"></i>Dashboard Navigation </a>
+            <i class="fas fa-bars me-2"></i>Dashboard Navigation </a> --}}
 
         @include('front.layout.sidebar')
 
@@ -94,9 +94,10 @@
                                         </div>                                       
                                     </div>
                                 </div>
+                             <center style="padding-bottom: 12px;">  <button class="btn btn-info" type="submit" >Submit</button></center>
                             </div>
 
-							<button class="btn btn-info" type="submit">Submit</button>
+							
                             
                         </form>
                     </div>

@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Subscribe extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'list_id',
-        'star',
-        'name',
-        'image',
+        'user_id',
         'email',
-        'review',
     ];
 }

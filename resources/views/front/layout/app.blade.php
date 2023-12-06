@@ -55,10 +55,11 @@
                                 <a class="nav-link active" aria-current="page"
                                     href="{{ route('front.about') }}">About</a>
                             </li>                           
-
+                            @if (Auth::check() && Auth::user()->role == 'user')
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('user.dashboard') }}"> Listings</a>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('front.faq') }}"> FAQ</a>
                             </li>

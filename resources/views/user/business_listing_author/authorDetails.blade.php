@@ -20,7 +20,7 @@
                             </div>
                             <div class="author-wrap-ngh-info">
                                 <h5>{{ $userInfo->name }}</h5>
-                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>{{ $userInfo->city }}
+                                <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>{{ $userInfo->info->city }}
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                                     class="lni lni-heart-filled position-absolute"></i></button></div>
                                         <div class="Goodup-pos ab-left">
                                             @if($listing->approval == 'hide')
-                                            <div class="Goodup-status open me-2">Inactive</div>
+                                            <div class="Goodup-status me-2">Inactive</div>
                                             @else
                                             <div class="Goodup-status open me-2">open</div>
                                             @endif
@@ -152,29 +152,32 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="Goodup-grid-footer py-3 px-3">
+                                        <div class="Goodup-grid-footer py-3 px-3">
                                             <div class="Goodup-ft-first">
+                                                @php
+                                                $totalStars = 0;
+                                                $totalReviews = count($listing->reviews);
+
+                                                foreach ($listing->reviews as $review) {
+                                                    $totalStars += $review->star;
+                                                }
+
+                                                $averageStars = $totalReviews > 0 ? round($totalStars / $totalReviews, 2) : 0;
+                                            @endphp
                                                 <div class="Goodup-rating">
-                                                    <div class="Goodup-pr-average mid">4.9</div>
+                                                    <div class="Goodup-pr-average mid">{{ $averageStars }}</div>
                                                     <div class="Goodup-rates">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $averageStars)
+                                                                    <i class="fas fa-star"></i>
+                                                                @else
+                                                                    <i class="far fa-star"></i>
+                                                                @endif
+                                                            @endfor
                                                     </div>
                                                 </div>
-                                                <div class="Goodup-price-range">
-                                                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                                                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                                                    <span class="active"><i class="fas fa-dollar-sign"></i></span>
-                                                    <span><i class="fas fa-dollar-sign"></i></span>
-                                                </div>
                                             </div>
-                                            <div class="Goodup-ft-last">
-                                                <span class="small">1 days ago</span>
-                                            </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +188,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <ul class="pagination">
-                                <li class="page-item">
+                                {{-- <li class="page-item">
                                     <a class="page-link" href="#" aria-label="Previous">
                                         <span class="fas fa-arrow-circle-right"></span>
                                         <span class="sr-only">Previous</span>
@@ -201,7 +204,8 @@
                                         <span class="fas fa-arrow-circle-right"></span>
                                         <span class="sr-only">Next</span>
                                     </a>
-                                </li>
+                                </li> --}}
+                                {{ $listings->links() }}
                             </ul>
                         </div>
                     </div>

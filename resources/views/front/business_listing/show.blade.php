@@ -67,6 +67,35 @@
                                                 </div>                                                
                                                 <span class="agd-location"><i
                                                         class="lni lni-map-marker me-1"></i>{{ $listing->city }}</span>
+
+                                                        <div class="ico-content">
+                                                            @php
+                                                                $totalStars = 0;
+                                                                $totalReviews = count($listing->reviews);
+            
+                                                                foreach ($listing->reviews as $review) {
+                                                                    $totalStars += $review->star;
+                                                                }
+            
+                                                                $averageStars = $totalReviews > 0 ? round($totalStars / $totalReviews, 2) : 0;
+                                                            @endphp
+                                                            <div class="Goodup-ft-first">
+                                                                <div class="Goodup-rating">
+                                                                    <div class="Goodup-rates">
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            @if ($i <= $averageStars)
+                                                                                <i class="fas fa-star"></i>
+                                                                            @else
+                                                                                <i class="far fa-star"></i>
+                                                                            @endif
+                                                                        @endfor
+                                                                    </div>
+                                                                </div>
+                                                                <div class="Goodup-price-range">
+                                                                    <span class="ft-medium">{{ $totalReviews }} Reviews</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                 
                                                 <div class="dsd-single-lst-footer">
                                                     <a href="{{ url ('business-listing/edit/'.$listing->id) }}" class="btn btn-edit mr-1"><i
