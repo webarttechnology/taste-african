@@ -1,3 +1,7 @@
+@php
+    $contact = App\Models\ContactDetails::get();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +17,12 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
     <!-- Custom CSS -->
     <link href="{{ asset('front/css/styles.css') }}" rel="stylesheet">
 
@@ -34,7 +44,7 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand static-logo" href="{{ route('front') }}">
-                        <img src="{{ asset('front/img/logos.png') }}" class="logo" alt="" width="100px" />
+                        <img src="{{ asset($contact[0]->logo) }} " class="logo" alt="" width="100px" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -51,10 +61,11 @@
                                 <a class="nav-link active" aria-current="page"
                                     href="{{ route('front.about') }}">About</a>
                             </li>                           
-
+                            @if (Auth::check() && Auth::user()->role == 'user')
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('user.dashboard') }}"> Listings</a>
                             </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('front.faq') }}"> FAQ</a>
                             </li>
@@ -64,7 +75,7 @@
                                     href="{{ route('front.contact') }}">Contact</a>
                             </li>
 
-                            @if (Auth::check() && Auth::user()->role == 'user')
+                            {{-- @if (Auth::check() && Auth::user()->role == 'user')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,7 +98,7 @@
                                                     class="lni lni-add-files me-2"></i>Add Listing</a></li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
                         </ul>
 
                         @auth
@@ -119,7 +130,6 @@
                     </div>
             </div>
             </nav>
-            {{-- </div> --}}
         </div>
         <!-- End Navigation -->
         <div class="clearfix"></div>
@@ -140,25 +150,25 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                             <div class="footer_widget">
-                                <img src="{{ asset('front/img/logos.png') }}" class="img-footer small mb-2"/>
+                                <img src="{{ asset($contact[0]->logo)}}" class="img-footer small mb-2"/>
 
                                 <div class="address mt-2">
-                                    7742 Sadar Street Range Road, USA<br>United Kingdom GHQ11
+                                   {{$contact[0]->address}}
                                 </div>
                                 <div class="address mt-3">
-                                    123 456 7890<br>info@demo.com
+                                    {{$contact[0]->phone}}<br>{{$contact[0]->email}}
                                 </div>
                                 <div class="address mt-2">
                                     <ul class="list-inline">
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->facebook}}" class="theme-cl"><i
                                                     class="lni lni-facebook-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->twitter}}" class="theme-cl"><i
                                                     class="lni lni-twitter-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->youtube}}" class="theme-cl"><i
                                                     class="lni lni-youtube"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->instragram}}" class="theme-cl"><i
                                                     class="lni lni-instagram-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="theme-cl"><i
+                                        <li class="list-inline-item"><a href="{{$contact[0]->linkdin}}" class="theme-cl"><i
                                                     class="lni lni-linkedin-original"></i></a></li>
                                     </ul>
                                 </div>
@@ -239,6 +249,7 @@
     </div>
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('front/js/popper.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('front/js/slick.js') }}"></script>
@@ -255,11 +266,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-
     {{-- Toaster:: --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     {{-- Sweet Alert:: --}}

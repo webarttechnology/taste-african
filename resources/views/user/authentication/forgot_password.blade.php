@@ -34,7 +34,7 @@
 					<div class="card">
 						<div class="card-header bg-primary">
 							<div class="ec-brand">
-								<a href="index.html" title="Ekka">
+								<a href="{{route ('front')}}" title="Ekka">
 									<img class="ec-brand-icon" src="{{asset('front/img/logos/logo4.png')}}" alt="" />
 								</a>
 							</div>

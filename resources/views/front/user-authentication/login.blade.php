@@ -17,7 +17,7 @@
 									<form class="submit-form" action="{{ route ('user.login')}}" method="POST">	
 										@csrf			
 										<div class="form-group">
-											<label class="mb-1">Name</label>
+											<label class="mb-1">Email</label>
 											<input type="email" class="form-control rounded" name="email">
 										</div>
 										
@@ -40,11 +40,7 @@
 										
 										<div class="form-group">
 											<button type="submit" class="btn btn-md full-width theme-bg text-light rounded ft-medium">Sign In</button>
-										</div>
-										{{-- <div class="form-group text-center mt-4 mb-0">
-											<p class="mb-0">You Don't have any account? <a href="{{route('business.registerPage')}}" class="ft-medium text-success" style="font-weight: bold">Register</a></p>
-										</div> --}}
-										
+										</div>																		
 									</form>
 								</div>
 							</div>

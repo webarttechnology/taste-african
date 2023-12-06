@@ -55,7 +55,7 @@ class UserProfileController extends Controller
     }
 
     public function changepassword()
-    {        
+    {   
         return view ('front.profile.change-password');
     }
 

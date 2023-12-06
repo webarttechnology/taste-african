@@ -3445,10 +3445,12 @@ button.map-btn {
     border-radius: 6px;
     overflow: hidden;
 	background:#ffffff;
+    height: 420px;
 }
 .Goodup-grid-fl-wrap {
     float: left;
     width: 100%;
+    height: 200px;
     position: relative;
     border: 1px solid #eeeeee;
     border-radius: 0 0 6px 6px;
@@ -4197,7 +4199,7 @@ ul.doc.ratting-view li i.filled {
     position: relative;
     width: 100%;
     padding:2rem 1rem;
-    height: auto;
+    height: 210px;
     background: #ffffff;
     display: block;
     border-radius: 6px;
@@ -6059,7 +6061,6 @@ div#myTabContent {
     border-radius:6px;
     padding-bottom: 30px;
     z-index:1;
-    background: #a89a20;
     border: 2px solid black;
 }
 .goodup-dashboard-inner{
@@ -6103,7 +6104,7 @@ div#myTabContent {
     color:#ffffff;
 }
 .goodup-dashboard-nav ul li a {
-    color:#ffffff;
+    color:#000;
     display: block;
     padding:12px 25px;
     transition: 0.3s;
@@ -8263,3 +8264,24 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
     color: #0909bf;
     font-weight: 600;
 }
+.contact-details{
+    height: 150px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

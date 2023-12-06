@@ -16,15 +16,9 @@
                         <p>No images available for this listing.</p>
                     @endif
                 </div>
-            </div>
+            </div>           
 
 
-            
-
-            
-
-        <div class="ftl-diope">
-            <a href="javascript:void(0);" class="btn bg-white text-dark ft-medium rounded">See 20+ Photos</a></div>
             <div class="Goodup-ops-bhri">
                 <div class="Goodup-lkp-flex d-flex align-items-start justify-content-start">
                     <div class="Goodup-lkp-thumb">
@@ -68,7 +62,17 @@
                         <div class="d-block mt-1">
                             <div class="list-lioe">
                                 <div class="list-lioe-single"><span class="ft-medium text-danger">Today Timing</span>
-									<span class="text-light ft-medium ms-2">11:00 AM - 12:00 AM</span></div>
+                                    @php
+                                    $currentDayOfWeek = date('N');
+                                    $currentDayName = strtolower(date('l'));
+
+                                    $currentDayOpeningKey = $currentDayName . '_opening_time';
+                                    $currentDayClosingKey = $currentDayName . '_closing_time';
+
+                                    $openingTime = $listing->infos[$currentDayOpeningKey];
+                                    $closingTime = $listing->infos[$currentDayClosingKey];
+                                @endphp
+									<span class="text-light ft-medium ms-2">    {{ $openingTime }} - {{ $closingTime }}</span></div>
                             </div>
                         </div>
                     </div>
@@ -150,70 +154,6 @@
                         </div>
     
 
-    <!-- Recommended Reviews -->
-    <div class="bg-white rounded mb-4">
-        <div class="jbd-01 px-4 py-4">
-            <div class="jbd-details mb-4">
-                <h5 class="ft-bold fs-lg">Recommended Reviews</h5>
-                <div class="reviews-comments-wrap">
-
-                    <!-- reviews-comments-item -->
-                    <div class="reviews-comments-item">
-                        <div class="review-comments-avatar">
-                            <img src="assets/img/t-1.png" class="img-fluid" alt="">
-                        </div>
-                        <div class="reviews-comments-item-text">
-                            <h4><a href="#">Kayla E. Claxton</a><span class="reviews-comments-item-date"><i
-                                        class="ti-calendar theme-cl me-1"></i>27 Oct 2019</span>
-                            </h4>
-                            <span class="agd-location"><i class="lni lni-map-marker me-1"></i>San
-                                Francisco, USA</span>
-                            <div class="listing-rating high"><i class="fas fa-star active"></i><i
-                                    class="fas fa-star active"></i><i class="fas fa-star active"></i><i
-                                    class="fas fa-star active"></i><i class="fas fa-star active"></i>
-                            </div>
-                            <div class="clearfix"></div>
-                            <p>" Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                cupidatat non proident. "</p>
-                            <div class="pull-left reviews-reaction">
-                                <a href="#" class="comment-like active"><i class="ti-thumb-up"></i>
-                                    12</a>
-                                <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                <a href="#" class="comment-love active"><i class="ti-heart"></i>
-                                    07</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--reviews-comments-item end-->
-
-                  
-                   
-
-                    {{-- <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span class="fas fa-arrow-circle-right"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">18</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span class="fas fa-arrow-circle-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul> --}}
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Location & Hours -->
     <div class="bg-white rounded mb-4">
@@ -225,7 +165,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-12">
                             <div class="list-map-lot">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.0148908503734!2d80.97350361499701!3d26.871267983145383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd9a9f6d1727%3A0xb87eabf63f7e4cee!2sCafe%20Repertwahr!5e0!3m2!1sen!2sin!4v1649059491407!5m2!1sen!2sin"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.0148908503734!2d!3d26.871267983145383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd9a9f6d1727%3A0xb87eabf63f7e4cee!2sCafe%20Repertwahr!5e0!3m2!1sen!2sin!4v1649059491407!5m2!1sen!2sin"
                                     width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
@@ -238,7 +178,7 @@
                             <table class="table table-borderless">                          
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Mon</th>
+                                        <td>Mon</td>
                                         <td>{{$listing->infos->monday_opening_time}} - {{$listing->infos->monday_opening_time}}</td>
                                     </tr>
                                     <tr>

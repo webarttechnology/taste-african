@@ -13,7 +13,7 @@
 										<h4 class="m-0 ft-medium">Create User Account</h4>
 									</div>
 									
-									<form class="submit-form" action="{{ route ('user.register')}}" method="POST">
+									<form class="submit-form" action="{{ route ('user.register')}}" method="POST" enctype="multipart/form-data">
 										@csrf
 										<div class="row">
 											<div class="col-6">
