@@ -34,6 +34,7 @@ class UserDashboardController extends Controller
         $listing = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems')->find($id);
         $contact = ContactDetails::get();
         $review = Review::with('user')->where('list_id', $id)->get();
+       // return   $review ; exit;
         return view ('user.business_listing_author.details', compact('listing', 'review', 'contact'));
     }
 }
