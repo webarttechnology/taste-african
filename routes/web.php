@@ -25,33 +25,35 @@ use App\Http\Controllers\admin\AdminBusinessListingController;
 |
 */
 
-//All Pages
-    Route::get('/', [HomeController::class, 'front'])->name('front');
-    Route::get('/about', [HomeController::class, 'about'])->name('front.about');
-    Route::get('/blog', [HomeController::class, 'blog'])->name('front.blog');
-    Route::get('/faq', [HomeController::class, 'faq'])->name('front.faq');
-    Route::get('/pricing', [HomeController::class, 'pricing'])->name('front.pricing');
-    Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');
-    Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSend');
-    Route::post('/subscribe-store', [HomeController::class, 'subscribeStore'])->name('subscribe_store');
 
-//Login Pages
+//All Pages
+Route::get('/', [HomeController::class, 'front'])->name('front');
+Route::get('/about', [HomeController::class, 'about'])->name('front.about');
+Route::get('/blog', [HomeController::class, 'blog'])->name('front.blog');
+Route::get('/faq', [HomeController::class, 'faq'])->name('front.faq');
+Route::get('/pricing', [HomeController::class, 'pricing'])->name('front.pricing');
+Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');
+Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSend');
+Route::post('/subscribe-store', [HomeController::class, 'subscribeStore'])->name('subscribe_store');
+
+Route::group(['middleware' => 'guest'], function () {
+
+
+    //Login Pages
     Route::get('login', [UserAuthController::class, 'loginForm'])->name('login');
     Route::post('login', [UserAuthController::class, 'login'])->name('user.login');
+    Route::get('verify/{string}', [UserAuthController::class, 'verify'])->name('user.verify');
 
-
- // Business Owner register Page:
+    // Business Owner register Page:
     Route::get('business/register', [BusinessAuthenticationController::class, 'registerForm'])->name('business.registerForm');
     Route::post('business/register', [BusinessAuthenticationController::class, 'businessRegister'])->name('business.register');
 
+    // User register Page:
+    Route::get('user/register', [UserAuthController::class, 'registerForm'])->name('user.registerPage');
+    Route::post('user/register', [UserAuthController::class, 'register'])->name('user.register');
+});
 
-  // User register Page:
-  Route::get('user/register', [UserAuthController::class, 'registerForm'])->name('user.registerPage');
-  Route::post('user/register', [UserAuthController ::class, 'register'])->name('user.register');
-
-Route::middleware('auth')->group(function () 
-  {
-    
+Route::middleware('auth')->group(function () {
     // User Forget Password Page:
     Route::get('user/forget-password', [BusinessAuthenticationController::class, 'forgot_Pass'])->name('user.forgot_Pass');
     Route::post('user/forget-password', [BusinessAuthenticationController::class, 'sendResetLink'])->name('user.forgot_Pass_action');
@@ -61,17 +63,15 @@ Route::middleware('auth')->group(function ()
     Route::get('/user/profile', [UserProfileController::class, 'profile'])->name('user.profile');
     Route::get('/user/password', [UserProfileController::class, 'changepassword'])->name('user.changepassword');
     Route::post('/user/password', [UserProfileController::class, 'changepasswordStore'])->name('user.changepasswordStore');
-    Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');    
-  });
-  
+    Route::post('/user/update', [UserProfileController::class, 'updateOrCreate'])->name('user.updateOrCreate');
+});
 
-  Route::middleware(['auth', 'checkRole:user'])->group(function () {
+Route::middleware(['auth', 'checkRole:user'])->group(function () {
     Route::get('user/dashboard', [UserDashboardController::class, 'userDashboard'])->name('user.dashboard');
     Route::get('author-deatils/{listing_user_id}', [UserDashboardController::class, 'authorDetails'])->name('user.authorDetails');
     Route::get('user/author-listing-details/{id}', [UserDashboardController::class, 'viewDetails'])->name('user_listing_viewDetails');
     Route::post('user/review', [UserReviewController::class, 'review'])->name('user.review');
     Route::get('/category/listings/{id}', [HomeController::class, 'listingByCategory'])->name('category.listings');
-
 });
 
 Route::middleware(['auth', 'checkRole:business_owner'])->group(function () {
@@ -84,26 +84,15 @@ Route::middleware(['auth', 'checkRole:business_owner'])->group(function () {
     Route::get('/business-listing/edit/{id}', [BusinessListingController::class, 'edit'])->name('business_edit');
     Route::put('/business-listing/update/{id}', [BusinessListingController::class, 'update'])->name('business_update');
     Route::get('/business-listing/delete/{id}', [BusinessListingController::class, 'delete'])->name('business_delete');
-    Route::post('/delete-image',  [BusinessListingController::class, 'deleteImage'])->name('delete.image');
+    Route::post('/delete-image', [BusinessListingController::class, 'deleteImage'])->name('delete.image');
 });
-
-
-
-
-
-
-
-
-
 
 // ADMIN BELOW
 Route::get('admin/login', [AuthController::class, 'loginPage'])->name('admin.loginPage');
 Route::post('admin/store', [AuthController::class, 'login'])->name('admin.login');
 Route::post('admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
-
-Route::prefix('admin')->group(function () 
-{
+Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AuthController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/category-listing', [CategotyController::class, 'index'])->name('category_listing');
@@ -122,7 +111,6 @@ Route::prefix('admin')->group(function ()
     Route::get('/business-listing/show', [AdminBusinessListingController::class, 'businessListing'])->name('admin.business_listing_show');
     Route::post('/business-listing/status-change', [AdminBusinessListingController::class, 'statusChange'])->name('admin.statusChange');
 
-
     Route::get('/about', [AboutController::class, 'index'])->name('admin.about');
     Route::get('/about/add', [AboutController::class, 'add'])->name('admin.about_add');
     Route::post('/about/store', [AboutController::class, 'store'])->name('admin.about_store');
@@ -130,12 +118,10 @@ Route::prefix('admin')->group(function ()
     Route::put('/about/update/{id}', [AboutController::class, 'update'])->name('admin.about_update');
     Route::get('/about/delete/{id}', [AboutController::class, 'delete'])->name('admin.about_delete');
 
-
     Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact');
     Route::get('/contact/add', [ContactController::class, 'add'])->name('admin.contact_add');
     Route::post('/contact/store', [ContactController::class, 'store'])->name('admin.contact_store');
     Route::get('/contact/edit/{id}', [ContactController::class, 'edit'])->name('admin.contact_edit');
     Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('admin.contact_update');
     Route::get('/contact/delete/{id}', [ContactController::class, 'delete'])->name('admin.contact_delete');
-
 });

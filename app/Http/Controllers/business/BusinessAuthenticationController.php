@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Password;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
+use App\Models\Review;
+use Illuminate\Support\Str;
 
 
 class BusinessAuthenticationController extends Controller
-{
-
-    
+{    
     // Business Owner register Page:
     public function registerForm()
     {
@@ -26,8 +27,7 @@ class BusinessAuthenticationController extends Controller
 
     // Business Owner register :
     public function businessRegister(Request $request)
-    {
-        
+    {        
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|unique:users',
@@ -39,17 +39,40 @@ class BusinessAuthenticationController extends Controller
         $imageName = 'images/User/' . time() . '_' . $image->getClientOriginalName();
         $image->move('images/User', $imageName);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'image' => $imageName,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password), 
             'role' => "business_owner",
+            'verification_link' => Str::random(60),
             'status' => "active",
         ]);
 
-        return redirect()->route('login')->with('message','Register Successfully!!!');
+        Mail::to($user->email)->send(new VerifyEmail($user->verification_link));
+
+        return redirect()
+            ->back()
+            ->with('message', 'Registration successful! Please check your email for verification.');
+    }
+
+    public function verify($link)
+    {
+        $user = User::where('verification_link', $link)->first();
+
+        if( empty($user) )
+        {
+            return redirect()
+                    ->route('login');
+        }
+
+        $user->verified = 1;
+        $user->save();
+
+        return redirect()
+                    ->route('login')
+                    ->with('message', 'You have been verified successfully');
     }
 
 
@@ -120,7 +143,10 @@ class BusinessAuthenticationController extends Controller
     public function businessDashboard()
     {
         $contact = ContactDetails::get();
-        return view ('front.user-authentication.dashboard', compact('contact'));
+        $user = Auth::user(); 
+        $userWithInfo = User::with('info')->find($user->id);
+        //return $userWithInfo; exit;
+        return view ('front.user-authentication.dashboard', compact('contact', 'userWithInfo'));
     }    
 
     public function userLogout()

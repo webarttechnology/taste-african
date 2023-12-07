@@ -162,12 +162,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            {{-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <iframe id="mapIframe" class="full-width" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                                                     </iframe>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">State</label>
@@ -1118,24 +1118,6 @@
     </script>
 
 
-<script>
-    $(document).ready(function () {
-        // // Function to update the map iframe
-        // function updateMapIframe(latitude, longitude) {
-        //     var mapIframe = $('#mapIframe');
-        //     var embedUrl = 'https://www.google.com/maps/embed/v1/view?key=AIzaSyBEZx_jd9mlykQdWsoaAA0GWS56aVLqlOM&center=' +     + ',' + longitude + '&zoom=15';
-        //     mapIframe.attr('src', embedUrl);
-        // }
 
-        // // Event handler for input changes
-        // $('#latitude, #longitude').on('input', function () {
-        //     var latitude = $('#latitude').val();
-        //     var longitude = $('#longitude').val();
-
-        //     // Update the map iframe with the new coordinates
-        //     updateMapIframe(latitude, longitude);
-        // });
-    });
-</script>
 
 @endsection

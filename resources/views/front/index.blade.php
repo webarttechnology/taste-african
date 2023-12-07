@@ -191,6 +191,7 @@
     <!-- ======================= Home Search End ======================== -->
 
     <!-- ======================= All Types Listing ======================== -->
+    @if(count($listings) > 0)
     <section class="space min">
         <div class="container">
 
@@ -2632,6 +2633,7 @@
 
         </div>
     </section>
+    @endif
     <!-- ======================= All Types Listing ======================== -->
 
     <!-- ======================= Listing Categories ======================== -->

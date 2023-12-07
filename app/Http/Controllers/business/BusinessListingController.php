@@ -21,7 +21,7 @@ class BusinessListingController extends Controller
         $listings = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
             ->where('user_id', Auth::guard('web')->id())
             // ->where('approval', 'show')
-            ->get();
+            ->paginate(10);
         return view('front.business_listing.show', compact('listings'));
     }
 

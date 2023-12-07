@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserReviewController extends Controller
 {
@@ -12,6 +13,7 @@ class UserReviewController extends Controller
     {
         Review::create([
             'list_id' => $request->list_id,
+            'user_id' => Auth::user()->id,
             'star' => $request->star,
             'name' => $request->name,
             'email' => $request->email,
@@ -22,8 +24,7 @@ class UserReviewController extends Controller
     }
 
     public function reviewShow()
-    {
-       
+    {       
         return redirect()->back()->with('message', 'Mes');
     }
 }

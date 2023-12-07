@@ -91,9 +91,7 @@
                                                                         @endfor
                                                                     </div>
                                                                 </div>
-                                                                <div class="Goodup-price-range">
-                                                                    <span class="ft-medium">{{ $totalReviews }} Reviews</span>
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                 
@@ -114,6 +112,13 @@
                                         <p class="zero-listing">You Have Not Listed a single Item. </p>
                                         <a class="btn bg-warning" href="{{route ('business_listing_add')}}"> Add New </a><center>
                                     @endif
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <ul class="pagination">                             
+                                                {{ $listings->links('vendor.pagination.bootstrap-4') }}
+                                            </ul>
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
