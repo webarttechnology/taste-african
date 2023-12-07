@@ -304,13 +304,30 @@
 
                                     <div class="dashboard-list-wraps-body py-3 px-3">
                                         <div id="image-container">
-                                            <div class="row">
+                                            <div class="row mb-2">
                                                 <div class="col-lg-6 col-md-6">
-                                                    <input type="file" class="form-control rounded file"
+                                                    <input type="file" class="form-control rounded file" required
                                                         name="image[]" onchange="showImageOnFile(this)">
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 uploadForm"></div>
                                             </div>
+
+                                            <div class="row mb-2">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <input type="file" class="form-control rounded file" required
+                                                        name="image[]" onchange="showImageOnFile(this)">
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 uploadForm"></div>
+                                            </div>
+
+                                            <div class="row mb-2">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <input type="file" class="form-control rounded file" required
+                                                        name="image[]" onchange="showImageOnFile(this)">
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 uploadForm"></div>
+                                            </div>
+                                            
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
@@ -417,8 +434,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Monday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="monday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="monday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -446,8 +463,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="monday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="monday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -481,8 +498,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Tuesday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="tuesday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="tuesday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -510,8 +527,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="tuesday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="tuesday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -545,8 +562,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Wednesday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="wednesday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="wednesday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -574,8 +591,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="wednesday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="wednesday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -609,8 +626,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Thursday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="thursday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="thursday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -638,8 +655,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="thursday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="thursday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -673,8 +690,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Friday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="friday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="friday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -702,8 +719,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="friday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="friday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -736,8 +753,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Saturday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="saturday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="saturday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -766,8 +783,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="saturday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="saturday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -802,8 +819,8 @@
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Sunday</label>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="sunday_opening_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="sunday_opening_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -832,8 +849,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="sunday_closing_time" class="form-control">
-                                                            <option>Select</option>
+                                                        <select name="sunday_closing_time" class="form-control" required>
+                                                            <option value="">Select</option>
                                                             <option value="1:00 AM">1:00 AM</option>
                                                             <option value="2:00 AM">2:00 AM</option>
                                                             <option value="3:00 AM">3:00 AM</option>
@@ -1003,9 +1020,9 @@
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="form-group">
-                        {{-- <button type="button" class="btn theme-cl rounded theme-bg-light ft-medium">Remove</button> --}}
-                        <button type="button" class="btn btn-danger"
-                            onclick="removeMenuRow(this, event)">Remove</button>
+                        <button type="button" class="btn theme-cl rounded bg-info ft-medium" style="width:100%" onclick="removeMenuRow(this, event)">Remove</button>
+                        {{-- <button type="button" class="btn btn-danger"
+                            onclick="removeMenuRow(this, event)">Remove</button> --}}
                     </div>
                 </div>
             </div>

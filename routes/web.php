@@ -36,8 +36,9 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact'
 Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSend');
 Route::post('/subscribe-store', [HomeController::class, 'subscribeStore'])->name('subscribe_store');
 
-Route::group(['middleware' => 'guest'], function () {
 
+
+Route::group(['middleware' => 'guest'], function () {
 
     //Login Pages
     Route::get('login', [UserAuthController::class, 'loginForm'])->name('login');

@@ -267,7 +267,7 @@
                                                             class="fas fa-map-marker-alt me-1 theme-cl"></i>{{ $listing->city }},
                                                         {{ $listing->state }}</div>
                                                     <div class="Goodup-middle-caption mt-3">
-                                                        <p>{{ Illuminate\Support\Str::limit($listing->description, $limit = 150, $end = '...') }}
+                                                        <p>{{ Illuminate\Support\Str::limit($listing->description, $limit = 50, $end = '...') }}
                                                         </p>
                                                     </div>
                                                 </div>

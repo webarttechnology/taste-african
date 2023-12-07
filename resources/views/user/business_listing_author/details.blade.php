@@ -436,7 +436,7 @@
                                         <div class="list-iobk"><i class="fas fa-envelope"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>Drop a Mail</h5>
-                                            <p>{{ $listing->email }}</p>
+                                            <p><a href="mailto:{{ $listing->email }}">{{ $listing->email }}</a></p>
                                         </div>
                                     </div>
                                 </li>
@@ -446,7 +446,7 @@
                                         <div class="list-iobk"><i class="fas fa-phone"></i></div>
                                         <div class="list-uiyt-capt">
                                             <h5>Call Us</h5>
-                                            <p>{{ $listing->mobile }}</p>
+                                            <p> <a href="tel:{{ $listing->mobile }}">{{ $listing->mobile }}</a></p>
                                         </div>
                                     </div>
                                 </li>
@@ -522,7 +522,7 @@
                                 <div class="Goodup-location"><i
                                         class="fas fa-map-marker-alt me-1 theme-cl"></i>{{$recentViews->list->city}}, {{$recentViews->list->state}}</div>
                                 <div class="Goodup-middle-caption mt-3">
-                                    <p>{{$recentViews->list->description}}</p>
+                                    <p>{{ Illuminate\Support\Str::limit($recentViews->list->description, $limit = 50, $end = '...') }}</p>
                                 </div>
                             </div>                            
                         </div>
