@@ -1,5 +1,6 @@
 @php
     $contact = App\Models\ContactDetails::get();
+    $category = App\Models\Category::get();
 @endphp
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -60,11 +61,12 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page"
                                     href="{{ route('front.about') }}">About</a>
-                            </li>                           
-                            @if (Auth::check() && Auth::user()->role == 'user')
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('user.dashboard') }}"> Listings</a>
                             </li>
+                            @if (Auth::check() && Auth::user()->role == 'user')
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{{ route('user.dashboard') }}">
+                                        Listings</a>
+                                </li>
                             @endif
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{ route('front.faq') }}"> FAQ</a>
@@ -112,7 +114,7 @@
                                 @csrf
                             </form>
                         @else
-                            <ul class="nav-menu nav-menu-social align-to-right">                               
+                            <ul class="nav-menu nav-menu-social align-to-right">
                                 <li class="add-listing">
                                     <a class="auth-link" id="places-tab" href="{{ route('business.registerForm') }}"
                                         aria-selected="true"><i class="fas fa-plus me-2"></i>For Business </a>
@@ -144,103 +146,141 @@
 
         <!-- ============================ Footer Start ================================== -->
 
-        <footer class="light-footer skin-light-footer style-2">
-            <div class="footer-middle">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                            <div class="footer_widget">
-                                <img src="{{ asset($contact[0]->logo)}}" class="img-footer small mb-2"/>
+        
 
-                                <div class="address mt-2">
-                                   {{$contact[0]->address}}
-                                </div>
-                                <div class="address mt-3">
-                                    {{$contact[0]->phone}}<br>{{$contact[0]->email}}
-                                </div>
-                                <div class="address mt-2">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item"><a href="{{$contact[0]->facebook}}" class="theme-cl"><i
-                                                    class="lni lni-facebook-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="{{$contact[0]->twitter}}" class="theme-cl"><i
-                                                    class="lni lni-twitter-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="{{$contact[0]->youtube}}" class="theme-cl"><i
-                                                    class="lni lni-youtube"></i></a></li>
-                                        <li class="list-inline-item"><a href="{{$contact[0]->instragram}}" class="theme-cl"><i
-                                                    class="lni lni-instagram-filled"></i></a></li>
-                                        <li class="list-inline-item"><a href="{{$contact[0]->linkdin}}" class="theme-cl"><i
-                                                    class="lni lni-linkedin-original"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <div class="footer_widget">
-                                <h4 class="widget_title">Main Navigation</h4>
-                                <ul class="footer-menu">
-                                    <li><a href="{{ route('front') }}">Home</a></li>
-                                    <li><a href="{{ route('front.about') }}">About</a></li>
-                                    <li><a href="#">Listings</a></li>
-                                    <li><a href="{{ route('front.contact') }}">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
 
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <div class="footer_widget">
-                                <h4 class="widget_title">Business Owners</h4>
-                                <ul class="footer-menu">
-                                    <li><a href="#">Browse Categories</a></li>
-                                    <li><a href="#">Payment Links</a></li>
-                                    <li><a href="#">Saved Places</a></li>
-                                    <li><a href="#">Dashboard</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <div class="footer_widget">
-                                <h4 class="widget_title">About Company</h4>
-                                <ul class="footer-menu">
-                                    <li><a href="#">Who We'r?</a></li>
-                                    <li><a href="#">Our Mission</a></li>
-                                    <li><a href="#">Our team</a></li>
-                                    <li><a href="#">Packages</a></li>
-                                    <li><a href="#">Dashboard</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                            <div class="footer_widget">
-                                <h4 class="widget_title">Helpful Topics</h4>
-                                <ul class="footer-menu">
-                                    <li><a href="#">Site Map</a></li>
-                                    <li><a href="#">Security</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                    <li><a href="#">FAQ's Page</a></li>
-                                    <li><a href="#">Privacy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
+        <!-- Footer -->
+        <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+            <!-- Section: Social media -->
+            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+                <!-- Left -->
+                <div class="me-5 d-none d-lg-block">
+                    <span>Get connected with us on social networks:</span>
                 </div>
-            </div>
+                <!-- Left -->
 
-            <div class="footer-bottom br-top">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-12 col-md-12 text-center">
-                            <p class="mb-0">© 2023 Taste of Africa. Designd By <a href="https://webart.technology/"
-                                    target="_blank">WebArt Technology</a>.
+                <!-- Right -->
+                <div>
+                    <a href="{{ $contact[0]->facebook }}" class="me-4 text-reset">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="{{ $contact[0]->twitter }}" class="me-4 text-reset">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="{{ $contact[0]->youtube }}" class="me-4 text-reset">
+                        <i class="lni lni-youtube"></i>
+                    </a>
+                    <a href="{{ $contact[0]->instragram }}" class="me-4 text-reset">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="{{ $contact[0]->linkdin }}" class="me-4 text-reset">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                   
+                </div>
+                <!-- Right -->
+            </section>
+            <!-- Section: Social media -->
+
+            <!-- Section: Links  -->
+          
+                <div class="container text-center text-md-start mt-5">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-3 mx-auto mb-4">
+                            <!-- Content -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                 <img src="{{ asset($contact[0]->logo) }}" class="img-footer small mb-2" />
+                            </h6>
+                            <p>
+                                Here you can use rows and columns to organize your footer content. Lorem ipsum
+                                dolor sit amet, consectetur adipisicing elit. Here you can use rows and columns to organize your footer content. Lorem ipsum
+                                dolor sit amet, consectetur adipisicing elit.
                             </p>
                         </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-2 col-lg-5 col-xl-2 mx-auto mb-4 footer-div">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Listings Category
+                            </h6>
+                            @foreach ($category as $listing_cat )
+                            <p class="footer-menu">
+                                <a href="{{url('category/listings/'.$listing_cat->id)}}" class="text-reset"><i class="fas fa-gem me-3"></i>{{$listing_cat->name}}</a>
+                            </p>
+                            @endforeach   
+                            
+                            
+                           
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 footer-div">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                 Useful links
+                            </h6>
+                            <p class="footer-menu">
+                                <a href="{{ route('front') }}" class="text-reset"><i class="fas fa-gem me-3"></i>Home</a>
+                            </p>
+                            <p class="footer-menu">
+                                <a href="{{ route('front.about') }}" class="text-reset"><i class="fas fa-gem me-3"></i>About</a>
+                            </p>
+                            <p class="footer-menu">
+                                <a href="{{ route('front.contact') }}" class="text-reset"><i class="fas fa-gem me-3"></i>Contact</a>
+                            </p>
+
+                            <p class="footer-menu">
+                                <a href="{{route('business.registerForm')}}" class="text-reset"><i class="fas fa-gem me-3"></i>Business Register</a>
+                            </p>
+
+                            <p class="footer-menu">
+                                <a href="{{route('user.registerPage')}}" class="text-reset"><i class="fas fa-gem me-3"></i>User Register</a>
+                            </p>
+
+                            <p class="footer-menu">
+                                <a href="{{route('login')}}" class="text-reset"><i class="fas fa-gem me-3"></i>Login</a>
+                            </p>
+                          
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Contact</h6>
+                            <p><i class="fas fa-home me-3"></i> {{ $contact[0]->address }}</p>
+                            <p>
+                                <i class="fas fa-envelope me-3"></i>
+                                {{ $contact[0]->email }}
+                            </p>
+                            <p><i class="fas fa-phone me-3"></i> {{ $contact[0]->phone }}</p>
+                        </div>
+                        <!-- Grid column -->
                     </div>
+                    <!-- Grid row -->
                 </div>
+           
+            <!-- Section: Links  -->
+
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: #000;">
+                © 2023 Copyright:
+                <a class="text-reset fw-bold" href="https://webart.technology/">WebArt Technology</a>
             </div>
+            <!-- Copyright -->
         </footer>
+        <!-- Footer -->
+
+
+
+
+
         <!-- ============================ Footer End ================================== -->
 
         <a id="tops-button" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>

@@ -14,6 +14,7 @@ use App\Http\Controllers\user\UserReviewController;
 use App\Http\Controllers\business\BusinessAuthenticationController;
 use App\Http\Controllers\admin\AdminAmenityController;
 use App\Http\Controllers\admin\AdminBusinessListingController;
+use App\Http\Controllers\admin\FAQController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,4 +126,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/contact/edit/{id}', [ContactController::class, 'edit'])->name('admin.contact_edit');
     Route::put('/contact/update/{id}', [ContactController::class, 'update'])->name('admin.contact_update');
     Route::get('/contact/delete/{id}', [ContactController::class, 'delete'])->name('admin.contact_delete');
+
+    Route::get('/faq', [FAQController::class, 'index'])->name('admin.faq');
+    Route::get('/faq/add', [FAQController::class, 'add'])->name('admin.faq_add');
+    Route::post('/faq/store', [FAQController::class, 'store'])->name('admin.faq_store');
+    Route::get('/faq/edit/{id}', [FAQController::class, 'edit'])->name('admin.faq_edit');
+    Route::put('/faq/update/{id}', [FAQController::class, 'update'])->name('admin.faq_update');
+    Route::get('/faq/delete/{id}', [FAQController::class, 'delete'])->name('admin.faq_delete');
+
+    
 });
