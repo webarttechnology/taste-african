@@ -7653,10 +7653,9 @@ img.img-footer {
 }
 img.img-footer.small {
     margin: 0;
-    max-width:90px;
+    max-width:115px;
     position: relative;
     top: 2px;
-    margin-bottom: 10px;
 }
 .ft-copyright {
     padding:0px 0 12px 0;
@@ -8266,6 +8265,19 @@ footer.skin-dark-footer ul.footer-bottom-social li a:hover, footer.skin-dark-foo
 }
 .contact-details{
     height: 150px;
+}
+
+.text-reset{
+    color: #000;
+    font-size: 15px;
+}
+
+.footer-menu a{
+    color: #000!important;
+}
+
+.footer-div{
+    padding: 0;
 }
 
 

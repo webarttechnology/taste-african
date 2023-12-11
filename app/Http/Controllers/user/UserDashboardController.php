@@ -8,6 +8,8 @@ use App\Models\BusinessListing;
 use App\Models\ContactDetails;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\RecentViewListing;
+use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
@@ -31,9 +33,17 @@ class UserDashboardController extends Controller
 
     public function viewDetails($id)
     {
+       $views =  RecentViewListing::create([
+            'user_id' => Auth::user()->id,
+            'list_id' => $id,
+        ]);
+
+        $viewers = $views->with('user', 'list.infos', 'list.images')->limit(4)->get();
+       //return      $viewers; exit;
         $listing = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems')->find($id);
         $contact = ContactDetails::get();
         $review = Review::with('user')->where('list_id', $id)->get();
-        return view ('user.business_listing_author.details', compact('listing', 'review', 'contact'));
+       
+        return view ('user.business_listing_author.details', compact('listing', 'review', 'contact', 'viewers'));
     }
 }

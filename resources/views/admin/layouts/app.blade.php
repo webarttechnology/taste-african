@@ -106,6 +106,14 @@
 							</a>
 							<hr>
 						</li>
+
+						<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.faq')}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">FAQ</span>
+							</a>
+							<hr>
+						</li>
 					</ul>
 				</div>
 			</div>

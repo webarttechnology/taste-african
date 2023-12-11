@@ -36,6 +36,11 @@ class BusinessListing extends Model
         return $this->hasMany(BusinessListingImages::class);
     }
 
+    public function viewers()
+    {
+        return $this->hasMany(RecentViewListing::class);
+    }
+
     public function infos()
     {
         return $this->hasOne(BusinessListingInfo::class);

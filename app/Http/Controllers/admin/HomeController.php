@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\About;
 use App\Mail\MyEmail;
+use App\Mail\SubscribeEmail;
 use App\Models\Subscribe;
 use App\Models\ContactDetails;
 use App\Models\Category;
@@ -49,11 +50,14 @@ class HomeController extends Controller
         ]);
 
         $senderName = $request->username;
-        $phoneNumber = $request->subject;
+        $phoneNumber = $request->phone;
         $senderEmail = $request->email;
 
         $email = new MyEmail($senderName, $phoneNumber, $senderEmail);
-        Mail::to('teethi.dhar@webart.technology')->send($email);
+
+        $recipients = [$senderEmail, 'teethi.dhar@webart.technology'];
+
+        Mail::to($recipients)->send($email);
 
         return redirect()->back()->with('message', 'Email sent successfully!');
     }
@@ -101,8 +105,18 @@ class HomeController extends Controller
             'user_id' => Auth::user()->id,
             'email' => $request->email,
         ]);
-        return redirect()->back()->with('message', 'Email sent successfully!');
 
+        $senderName = Auth::user()->name;
+        $phoneNumber = Auth::user()->phone;
+        $senderEmail = $request->email;
+
+        $email = new SubscribeEmail($senderName, $phoneNumber, $senderEmail);
+
+        $recipients = [$senderEmail, 'teethi.dhar@webart.technology'];
+
+        Mail::to($recipients)->send($email);
+
+        return redirect()->back()->with('message', 'Email sent successfully!');
     }
 
     

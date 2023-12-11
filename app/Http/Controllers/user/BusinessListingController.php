@@ -168,6 +168,7 @@ class BusinessListingController extends Controller
 
     public function viewDetails($id)
     {
+
         $listing = BusinessListing::with('amenties', 'images', 'infos', 'keywords', 'menuitems')
             ->where('id', $id)
             ->first();

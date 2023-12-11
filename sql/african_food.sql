@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 12:13 PM
+-- Generation Time: Dec 11, 2023 at 05:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -144,11 +144,8 @@ CREATE TABLE `business_listings` (
 --
 
 INSERT INTO `business_listings` (`id`, `user_id`, `title`, `approval`, `category_id`, `description`, `latitude`, `longitude`, `state`, `city`, `address`, `zip_code`, `mobile`, `email`, `website`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(7, '2', 'Dinner Recipes', 'show', '1', 'Big, beautiful, bossy flavors ahead! Shiitake mushrooms and chicken wontons swim in a brothy flavor-filled sauce and get finished with a swirl of sesame oil and chili crisp on top. Yum!', '12345', '54545', 'west bengal', 'Kolkata', 'Kameko Christian', '42673', '4556963529', 'sayan@gmail.com', 'https://pinchofyum.com/chicken-wontons-in-spicy-chili-sauce', 'approve', NULL, '2023-12-04 22:45:18', '2023-12-05 00:16:42'),
-(8, '2', 'House Favorite Roasted Brussels Sprouts', 'hide', '2', 'Prep your brussels sprouts. Cut off the base of the brussel sprout, remove the outer leaves, and cut it in half vertically. Turn on some music or a good show and go to town.', '45454', '12345', 'Aut culpa consectetu', 'Sapiente dolor quide', 'Kameko Christian', '42673', '0000000000', 'sayan@gmail.com', 'https://pinchofyum.com/house-favorite-brussels-sprouts', 'approve', NULL, '2023-12-04 22:54:43', '2023-12-05 00:16:50'),
-(9, '1', 'Basic Soft Pretzels', 'show', '6', 'Beer cheese soup was made for soft pretzels. I know it, you know it, and these twisty knots of soft fluffy bread with the chunky salt know it.\r\n\r\nAnd that is my job today: to give you the pretzels you need to complete the beer cheese soup set. Soft, excessively fluffy, basic delicious pretzels. You know I take this job very seriously.', '22.688021', '88.376221', 'Aut culpa consectetu', 'Sapiente dolor quide', 'Kameko Christian', '42673', '4556963529', 'teethi@gmail.com', 'https://pinchofyum.com/basic-soft-pretzels', 'approve', NULL, '2023-12-04 23:42:03', '2023-12-05 00:16:54'),
-(10, '1', 'Dolor eu lorem anim', 'hide', '3', 'Beatae aliquam nemo', '777', '777', 'Labore nihil et cons', 'Debitis occaecat vol', 'Voluptate ullam est', '29151', '0000000000', 'nomejiw@mailinator.com', 'https://www.sumiky.ca', 'reject', NULL, '2023-12-04 23:43:27', '2023-12-05 00:17:14'),
-(11, '5', 'Quaerat ipsum omnis', 'show', '7', 'Deserunt vel aut rec', '12345', '636236', 'Rerum labore dolores', 'Eum nobis voluptas e', 'At eum doloribus id', '59451', '1233456789', 'myqoti@mailinator.com', 'https://www.cuwi.info', 'approve', NULL, '2023-12-05 06:39:50', '2023-12-05 06:43:33');
+(1, '2', 'Chicken Wontons', 'show', '1', 'Big, beautiful, bossy flavors ahead! Shiitake mushrooms and chicken wontons swim in a brothy flavor-filled sauce and get finished with a swirl of sesame oil and chili crisp on top. Yum!\r\n\r\nBig, beautiful, bossy flavors ahead! Shiitake mushrooms and chicken wontons swim in a brothy flavor-filled sauce and get finished with a swirl of sesame oil and chili crisp on top. Yum!\r\n\r\nBig, beautiful, bossy flavors ahead! Shiitake mushrooms and chicken wontons swim in a brothy flavor-filled sauce and get finished with a swirl of sesame oil and chili crisp on top. Yum!', '12345', '12345', 'Ipsam perspiciatis', 'Praesentium nesciunt', 'In culpa rerum non e', '43163', '1234567890', 'admin@mailinator.com', 'https://www.sevyqycymadapo.us', 'approve', NULL, '2023-12-07 02:10:57', '2023-12-07 02:13:50'),
+(2, '2', 'Sunt aute adipisici', 'show', '6', 'Illum corporis eos', '12345', '12345', 'Ea deserunt omnis au', 'Labore culpa minus', 'Eaque consequatur F', '67295', '1234567890', 'sykaniwam@mailinator.com', 'https://www.melademin.us', 'approve', NULL, '2023-12-07 02:12:34', '2023-12-07 02:20:27');
 
 -- --------------------------------------------------------
 
@@ -170,63 +167,21 @@ CREATE TABLE `business_listing_amenities` (
 --
 
 INSERT INTO `business_listing_amenities` (`id`, `business_listing_id`, `amenities`, `custom`, `created_at`, `updated_at`) VALUES
-(19, '2', 'Health Score 8.7 / 10', '0', '2023-11-30 23:11:43', '2023-11-30 23:11:43'),
-(20, '2', 'Reservations', '0', '2023-11-30 23:11:43', '2023-11-30 23:11:43'),
-(21, '2', 'Vegetarian Options', '0', '2023-11-30 23:11:43', '2023-11-30 23:11:43'),
-(32, '3', 'Health Score 8.7 / 10', '0', '2023-11-30 23:36:06', '2023-11-30 23:36:06'),
-(33, '3', 'Reservations', '0', '2023-11-30 23:36:06', '2023-11-30 23:36:06'),
-(34, '3', 'Vegetarian Options', '0', '2023-11-30 23:36:06', '2023-11-30 23:36:06'),
-(35, '3', 'Moderate Noise', '0', '2023-11-30 23:36:06', '2023-11-30 23:36:06'),
-(36, '3', 'Good For Kids', '0', '2023-11-30 23:36:06', '2023-11-30 23:36:06'),
-(37, '1', 'Health Score 8.7 / 10', '0', '2023-12-01 01:31:38', '2023-12-01 01:31:38'),
-(38, '1', 'Brunch, Lunch, Dinner', '0', '2023-12-01 01:31:38', '2023-12-01 01:31:38'),
-(39, '1', 'trtrt', '0', '2023-12-01 01:31:38', '2023-12-01 01:31:38'),
-(40, '4', 'Health Score 8.7 / 10', '0', '2023-12-04 00:08:21', '2023-12-04 00:08:21'),
-(41, '4', 'Offers Delivery', '0', '2023-12-04 00:08:21', '2023-12-04 00:08:21'),
-(42, '4', 'Staff wears masks', '0', '2023-12-04 00:08:21', '2023-12-04 00:08:21'),
-(43, '4', 'Accepts Credit Cards', '0', '2023-12-04 00:08:21', '2023-12-04 00:08:21'),
-(44, '4', 'Casual', '0', '2023-12-04 00:08:21', '2023-12-04 00:08:21'),
-(45, '4', 'Brunch, Lunch, Dinner', '0', '2023-12-04 00:08:21', '2023-12-04 00:08:21'),
-(46, '5', 'Offers Delivery', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(47, '5', 'Vegetarian Options', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(48, '5', 'Accepts Credit Cards', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(49, '5', 'Casual', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(50, '5', 'Good for Groups', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(51, '5', 'Good For Kids', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(52, '5', 'Brunch, Lunch, Dinner', '0', '2023-12-04 00:09:15', '2023-12-04 00:09:15'),
-(53, '6', 'Offers Delivery', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(54, '6', 'Offers Takeout', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(55, '6', 'Reservations', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(56, '6', 'Staff wears masks', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(57, '6', 'Accepts Credit Cards', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(58, '6', 'Casual', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(59, '6', 'Good For Kids', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(60, '6', 'Brunch, Lunch, Dinner', '0', '2023-12-04 00:39:02', '2023-12-04 00:39:02'),
-(61, '7', 'Reservations', '0', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(62, '7', 'Staff wears masks', '0', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(63, '7', 'Vegetarian Options', '0', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(64, '7', 'Spicy Chili Sauce', '0', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(74, '8', 'Health Score 8.7 / 10', '0', '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(75, '8', 'Offers Delivery', '0', '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(76, '8', 'Offers Takeout', '0', '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(77, '9', 'Moderate Noise', '0', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(78, '9', 'Good For Kids', '0', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(79, '9', 'Good for Breakfast', '0', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(80, '9', 'Brunch, Lunch, Dinner', '0', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(81, '10', 'Offers Delivery', '0', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(82, '10', 'Offers Takeout', '0', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(83, '10', 'Reservations', '0', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(84, '10', 'Moderate Noise', '0', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(85, '10', 'Good For Kids', '0', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(104, '11', 'Offers Takeout', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(105, '11', 'Staff wears masks', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(106, '11', 'Vegan Options', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(107, '11', 'Vegetarian Options', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(108, '11', 'Casual', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(109, '11', 'Moderate Noise', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(110, '11', 'Offers Catering', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(111, '11', 'Good for Groups', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(112, '11', 'Brunch, Lunch, Dinner', '0', '2023-12-05 06:41:57', '2023-12-05 06:41:57');
+(1, '1', 'Offers Delivery', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(2, '1', 'Reservations', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(3, '1', 'Staff wears masks', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(4, '1', 'Vegan Options', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(5, '1', 'Vegetarian Options', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(6, '1', 'Offers Catering', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(7, '1', 'Good for Groups', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(8, '1', 'Good For Kids', '0', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(23, '2', 'Health Score 8.7 / 10', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(24, '2', 'Offers Delivery', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(25, '2', 'Vegan Options', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(26, '2', 'Vegetarian Options', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(27, '2', 'Accepts Credit Cards', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(28, '2', 'Casual', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(29, '2', 'Good for Breakfast', '0', '2023-12-07 02:20:27', '2023-12-07 02:20:27');
 
 -- --------------------------------------------------------
 
@@ -247,22 +202,14 @@ CREATE TABLE `business_listing_images` (
 --
 
 INSERT INTO `business_listing_images` (`id`, `business_listing_id`, `images`, `created_at`, `updated_at`) VALUES
-(1, '7', 'images/Business_Images/1701749718_l-1.jpg', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(2, '7', 'images/Business_Images/1701749718_l-2.jpg', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(3, '7', 'images/Business_Images/1701749718_l-3.jpg', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(4, '7', 'images/Business_Images/1701749718_l-4.jpg', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(5, '7', 'images/Business_Images/1701749718_l-5.jpg', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(6, '8', 'images/Business_Images/1701750285_l-8.jpg', '2023-12-04 22:54:45', '2023-12-04 22:54:45'),
-(7, '8', 'images/Business_Images/1701750285_l-11.jpg', '2023-12-04 22:54:45', '2023-12-04 22:54:45'),
-(8, '8', 'images/Business_Images/1701750286_l-12.jpg', '2023-12-04 22:54:46', '2023-12-04 22:54:46'),
-(9, '9', 'images/Business_Images/1701753123_food-01.jpg', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(10, '9', 'images/Business_Images/1701753123_food-02.jpg', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(11, '9', 'images/Business_Images/1701753123_food-04.jpg', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(12, '10', 'images/Business_Images/1701753207_food-09.jpg', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(13, '10', 'images/Business_Images/1701753207_food-07.jpg', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(14, '10', 'images/Business_Images/1701753207_food-06.jpg', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(15, '11', 'images/Business_Images/1701778190_banner.jpg', '2023-12-05 06:39:50', '2023-12-05 06:39:50'),
-(16, '11', 'images/Business_Images/1701778190_banner-2.jpg', '2023-12-05 06:39:50', '2023-12-05 06:39:50');
+(1, '1', 'images/Business_Images/1701934857_food-01.jpg', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(2, '1', 'images/Business_Images/1701934857_food-02.jpg', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(3, '1', 'images/Business_Images/1701934857_food-03.jpg', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(4, '1', 'images/Business_Images/1701934857_food-04.jpg', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(5, '1', 'images/Business_Images/1701934857_food-05.jpg', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(6, '2', 'images/Business_Images/1701934954_food-09.jpg', '2023-12-07 02:12:34', '2023-12-07 02:12:34'),
+(7, '2', 'images/Business_Images/1701934954_food-08.jpg', '2023-12-07 02:12:34', '2023-12-07 02:12:34'),
+(8, '2', 'images/Business_Images/1701934954_food-07.jpg', '2023-12-07 02:12:34', '2023-12-07 02:12:34');
 
 -- --------------------------------------------------------
 
@@ -302,11 +249,8 @@ CREATE TABLE `business_listing_infos` (
 --
 
 INSERT INTO `business_listing_infos` (`id`, `business_listing_id`, `monday_opening_time`, `monday_closing_time`, `tuesday_opening_time`, `tuesday_closing_time`, `wednesday_opening_time`, `wednesday_closing_time`, `thursday_opening_time`, `thursday_closing_time`, `friday_opening_time`, `friday_closing_time`, `saturday_opening_time`, `saturday_closing_time`, `sunday_opening_time`, `sunday_closing_time`, `opening_all_time`, `facebook`, `twitter`, `instagram`, `linkedin`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '7', '10:00 AM', '10:00 PM', '10:00 AM', '10:00 PM', '10:00 AM', '10:00 PM', '10:00 AM', '10:00 PM', '10:00 AM', '10:00 PM', '10:00 AM', '2:00 PM', '10:00 AM', '2:00 PM', NULL, 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', NULL, '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(2, '8', '9:00 AM', '7:00 PM', '9:00 AM', '7:00 PM', '9:00 AM', '9:00 PM', '9:00 AM', '9:00 PM', '9:00 AM', '9:00 PM', '9:00 AM', '9:00 PM', '9:00 AM', '9:00 PM', NULL, 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', NULL, '2023-12-04 22:54:43', '2023-12-04 22:54:43'),
-(3, '9', '8:00 AM', '9:00 AM', '8:00 AM', '9:00 AM', '8:00 AM', '9:00 AM', '8:00 AM', '9:00 AM', '8:00 AM', '9:00 AM', '8:00 AM', '9:00 AM', '8:00 AM', '9:00 AM', NULL, 'https://pinchofyum.com/basic-soft-pretzels', 'https://pinchofyum.com/basic-soft-pretzels', 'https://pinchofyum.com/basic-soft-pretzels', 'https://pinchofyum.com/basic-soft-pretzels', NULL, '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(4, '10', '12:00 PM', '8:00 AM', '12:00 AM', '12:00 PM', '3:00 PM', '11:00 AM', '8:00 PM', '12:00 AM', '5:00 AM', '3:00 PM', '9:00 PM', 'Select', '5:00 PM', '5:00 PM', 'on', 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', NULL, '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(5, '11', '6:00 PM', '9:00 PM', '12:00 PM', '4:00 AM', '1:00 AM', '9:00 AM', '10:00 AM', '3:00 PM', '12:00 PM', '6:00 AM', '12:00 AM', '9:00 PM', '10:00 AM', '7:00 PM', NULL, 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', 'https://www.fic.www', NULL, '2023-12-05 06:39:50', '2023-12-05 06:39:50');
+(1, '1', '3:00 AM', '11:00 AM', '4:00 PM', '9:00 PM', '6:00 PM', '6:00 AM', '1:00 AM', 'Select', '6:00 PM', '3:00 AM', '3:00 PM', '5:00 PM', '2:00 PM', '2:00 AM', NULL, 'https://www.sevyqycymadapo.us', 'https://www.sevyqycymadapo.us', 'https://www.sevyqycymadapo.us', 'https://www.sevyqycymadapo.us', NULL, '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(2, '2', '5:00 AM', '7:00 AM', '11:00 AM', '1:00 PM', '5:00 PM', '1:00 AM', '9:00 PM', '2:00 AM', '3:00 AM', '12:00 AM', '5:00 PM', '2:00 PM', '1:00 PM', '8:00 PM', NULL, 'http://127.0.0.1:8000/business-listing', 'http://127.0.0.1:8000/business-listing', 'http://127.0.0.1:8000/business-listing', 'http://127.0.0.1:8000/business-listing', NULL, '2023-12-07 02:12:34', '2023-12-07 02:19:44');
 
 -- --------------------------------------------------------
 
@@ -327,16 +271,10 @@ CREATE TABLE `business_listing_keywords` (
 --
 
 INSERT INTO `business_listing_keywords` (`id`, `business_listing_id`, `keywords`, `created_at`, `updated_at`) VALUES
-(1, '7', 'Chicken Wontons', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(2, '7', 'Spicy Chili Sauce', '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(9, '8', 'Brussels Sprouts', '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(10, '8', 'Prefer', '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(11, '8', 'Taste Good', '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(12, '9', 'Beer cheese soup', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(13, '9', 'pretzels', '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(14, '10', 'Magna in do est non', '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(19, '11', 'Enim qui tempore vo', '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(20, '11', '94984', '2023-12-05 06:41:57', '2023-12-05 06:41:57');
+(1, '1', 'food', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(2, '1', 'chess', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(3, '1', 'chife', '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(6, '2', 'Illum ut autem laud', '2023-12-07 02:20:27', '2023-12-07 02:20:27');
 
 -- --------------------------------------------------------
 
@@ -362,16 +300,10 @@ CREATE TABLE `business_listing_menuitems` (
 --
 
 INSERT INTO `business_listing_menuitems` (`id`, `business_listing_id`, `item_name`, `category`, `price`, `about_item`, `image`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '7', 'Chicken Wontons in Spicy Chili Sauce', 'Fast', '497', 'Big, beautiful, bossy flavors ahead! Shiitake mushrooms and chicken wontons swim in a brothy flavor-filled sauce and get finished with a swirl of sesame oil and chili crisp on top. Yum!', 'images/MenuItems/17017497180.png', NULL, '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(2, '7', 'Chicken Wontons in Spicy Chili Sauce', 'Fast', '497', 'Big, beautiful, bossy flavors ahead! Shiitake mushrooms and chicken wontons swim in a brothy flavor-filled sauce and get finished with a swirl of sesame oil and chili crisp on top. Yum!', 'images/MenuItems/17017497181.png', NULL, '2023-12-04 22:45:18', '2023-12-04 22:45:18'),
-(7, '8', 'brussels sprouts', 'Fast', '4970', 'This is an SOS series recipe – as in, an excellent back pocket choice for when you just need to get something on the table quickly – so here’s our super short and sweet ingredient list:', 'images/MenuItems/17017502840.png', NULL, '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(8, '8', 'brussels sprouts', 'fast', '497', 'This is an SOS series recipe – as in, an excellent back pocket choice for when you just need to get something on the table quickly – so here’s our super short and sweet ingredient list:', 'images/MenuItems/17017517691.jpg', NULL, '2023-12-04 23:19:29', '2023-12-04 23:19:29'),
-(9, '9', 'Simple and straightforward', 'Fast', '497', 'And that is my job today: to give you the pretzels you need to complete the beer cheese soup set. Soft, excessively fluffy, basic delicious pretzels. You know I take this job very seriously.', 'images/MenuItems/17017531230.jpg', NULL, '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(10, '9', 'Simple and straightforward', 'Fast', '497', 'And that is my job today: to give you the pretzels you need to complete the beer cheese soup set. Soft, excessively fluffy, basic delicious pretzels. You know I take this job very seriously.', 'images/MenuItems/17017531231.jpg', NULL, '2023-12-04 23:42:03', '2023-12-04 23:42:03'),
-(11, '10', 'Jane Edwards', 'Illum saepe amet q', '642', 'Minima optio enim q', 'images/MenuItems/17017532070.jpg', NULL, '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(12, '10', 'Jane Edwards', 'Illum saepe amet q', '642', 'Minima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim qMinima optio enim q', 'images/MenuItems/17017532071.jpg', NULL, '2023-12-04 23:43:27', '2023-12-04 23:43:27'),
-(17, '11', 'Kelly Zamora', 'Odio dolor porro aut', '221', 'Et inventore in labo', 'images/MenuItems/17017781900.jpg', NULL, '2023-12-05 06:41:57', '2023-12-05 06:41:57'),
-(18, '11', 'Chaney Strong', 'Ducimus suscipit es', '86', 'Consequat Culpa vol', 'images/MenuItems/17017781901.jpg', NULL, '2023-12-05 06:41:57', '2023-12-05 06:41:57');
+(1, '1', 'Kelsie Hill', 'Voluptatum sunt veli', '221', 'Iure et enim cupidat', 'images/MenuItems/17019348570.jpg', NULL, '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(2, '1', 'Pizza', 'food', '500', 'https://www.sevyqycymadapo.us', 'images/MenuItems/17019348571.jpg', NULL, '2023-12-07 02:10:57', '2023-12-07 02:10:57'),
+(7, '2', 'Kay Rosario', 'Delectus sunt vel i', '202', 'Id tempor mollit ni', 'images/MenuItems/17019349540.jpg', NULL, '2023-12-07 02:20:27', '2023-12-07 02:20:27'),
+(8, '2', 'Pizza', 'food', '500', 'http://127.0.0.1:8000/business-listing', 'images/MenuItems/17019349541.jpg', NULL, '2023-12-07 02:20:27', '2023-12-07 02:20:27');
 
 -- --------------------------------------------------------
 
@@ -450,6 +382,20 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `f_a_q_s`
+--
+
+CREATE TABLE `f_a_q_s` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `ans` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -483,7 +429,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2023_12_01_095730_create_reviews_table', 3),
 (18, '2023_12_04_041313_create_abouts_table', 4),
 (19, '2023_12_05_072615_create_contact_details_table', 5),
-(20, '2023_12_06_044320_create_subscribes_table', 6);
+(20, '2023_12_06_044320_create_subscribes_table', 6),
+(23, '2023_12_07_052215_alter_user_table', 7),
+(24, '2023_12_07_064043_create_recent_view_listings_table', 8),
+(25, '2023_12_11_035039_create_f_a_q_s_table', 9);
 
 -- --------------------------------------------------------
 
@@ -519,6 +468,39 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `recent_view_listings`
+--
+
+CREATE TABLE `recent_view_listings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `list_id` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `recent_view_listings`
+--
+
+INSERT INTO `recent_view_listings` (`id`, `user_id`, `list_id`, `created_at`, `updated_at`) VALUES
+(1, '1', '1', '2023-12-07 02:14:04', '2023-12-07 02:14:04'),
+(2, '1', '2', '2023-12-07 02:14:26', '2023-12-07 02:14:26'),
+(3, '1', '2', '2023-12-07 02:15:18', '2023-12-07 02:15:18'),
+(4, '1', '1', '2023-12-07 02:16:05', '2023-12-07 02:16:05'),
+(5, '1', '1', '2023-12-07 02:16:24', '2023-12-07 02:16:24'),
+(6, '1', '1', '2023-12-07 02:16:47', '2023-12-07 02:16:47'),
+(7, '1', '2', '2023-12-07 02:17:10', '2023-12-07 02:17:10'),
+(8, '1', '2', '2023-12-07 02:17:34', '2023-12-07 02:17:34'),
+(9, '1', '1', '2023-12-07 06:00:31', '2023-12-07 06:00:31'),
+(10, '1', '1', '2023-12-07 06:05:25', '2023-12-07 06:05:25'),
+(11, '1', '1', '2023-12-07 06:06:07', '2023-12-07 06:06:07'),
+(12, '1', '1', '2023-12-07 06:11:28', '2023-12-07 06:11:28'),
+(13, '1', '1', '2023-12-07 06:16:23', '2023-12-07 06:16:23');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reviews`
 --
 
@@ -540,12 +522,8 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `list_id`, `user_id`, `star`, `name`, `image`, `email`, `review`, `created_at`, `updated_at`) VALUES
-(1, '9', '1', '3', 'Teethi Dhar', NULL, 'teethi@gmail.com', 'Its good. i have better Expectations from here. Otherwise it is good to goo.', '2023-12-05 00:32:20', '2023-12-05 00:32:20'),
-(2, '9', '5', '1', 'Sayan', NULL, 'sayan@gmail.com', 'Its good. i have better Expectations from here. Otherwise it is good to goo.', '2023-12-05 00:32:41', '2023-12-05 00:32:41'),
-(3, '11', '4', '2', 'Personal', NULL, 'testter@yopmail.com', 'I dont know what this is', '2023-12-05 06:44:13', '2023-12-05 06:44:13'),
-(4, '11', '4', '5', 'My name', NULL, 'myname@yopmail.com', 'Review of gods', '2023-12-05 06:47:34', '2023-12-05 06:47:34'),
-(5, '7', '3', '1', 'Sayan', NULL, 'sayan@yopmail.com', 'Very bad place', '2023-12-05 23:43:29', '2023-12-05 23:43:29'),
-(6, '7', '2', '5', 'Teethi', NULL, 'teethi@gmail.com', 'No you are wrong this is very good', '2023-12-05 23:45:17', '2023-12-05 23:45:17');
+(1, '1', '1', '1', 'Sayan', NULL, 'sayan@gmail.com', 'very good', '2023-12-07 02:16:23', '2023-12-07 02:16:23'),
+(2, '2', '1', '3', 'Sayan', NULL, 'sayan@gmail.com', 'not good', '2023-12-07 02:17:34', '2023-12-07 02:17:34');
 
 -- --------------------------------------------------------
 
@@ -566,7 +544,8 @@ CREATE TABLE `subscribes` (
 --
 
 INSERT INTO `subscribes` (`id`, `user_id`, `email`, `created_at`, `updated_at`) VALUES
-(1, '3', 'admin@gmail.com', '2023-12-05 23:33:37', '2023-12-05 23:33:37');
+(1, '1', 'teethi.dhar@webart.technology', '2023-12-07 05:35:10', '2023-12-07 05:35:10'),
+(2, '1', 'teethi.webart@gmail.com', '2023-12-07 05:40:21', '2023-12-07 05:40:21');
 
 -- --------------------------------------------------------
 
@@ -584,6 +563,8 @@ CREATE TABLE `users` (
   `role` varchar(255) DEFAULT NULL,
   `phone` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
+  `verification_link` varchar(255) DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT 0,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -594,12 +575,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `image`, `email`, `email_verified_at`, `password`, `role`, `phone`, `status`, `deleted_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Teethi Dhar', 'images/User/1701748878_girl.png', 'teethi@gmail.com', NULL, '$2y$12$t6JhmFacHAO9k4u0JkWhbeP5purmRl3kDe7E0C9zDye1E2D6FbXke', 'business_owner', '+1 (358) 639-1328', 'active', NULL, NULL, '2023-12-04 22:31:18', '2023-12-04 22:31:18'),
-(2, 'Sayan', 'images/User/1701748908_man.png', 'sayan@gmail.com', NULL, '$2y$12$kIVjKxewXgoqDA6I6Am5MeTlaXSgfbNpF/COgF4.FvDAeeL7/7vx6', 'business_owner', '+1 (358) 639-1328', 'active', NULL, NULL, '2023-12-04 22:31:48', '2023-12-04 22:31:48'),
-(3, 'Adem', 'images/User/1701753497_user.png', 'user@gmail.com', NULL, '$2y$12$qzONIMKS.DxfRu5ifVJHzu0NzG1jPZFqDb2.JGyLlXAvHhh7k7P3u', 'user', '+1 (189) 496-9287', 'active', NULL, NULL, '2023-12-04 23:48:18', '2023-12-04 23:48:18'),
-(4, 'Sayandip', 'images/User/1701777618_404.png', 'sayandipsaha096@gmail.com', NULL, '$2y$12$7ZdSw88wV7qsuR5de5CQT.Yp4iF7npcgeYAvMD2fKv6WTzde5zXhm', 'user', '+1 (358) 639-1328', 'active', NULL, NULL, '2023-12-05 06:30:18', '2023-12-05 06:30:18'),
-(5, 'Business Account', 'images/User/1701777652_burger-king.png', 'business@mailinator.com', NULL, '$2y$12$84.wWePBl9Un2WIL5QPH5uLmp6UBSRF28gkOC7DSlP77IpQKnL8Ju', 'business_owner', '+1 (561) 633-7392', 'active', NULL, NULL, '2023-12-05 06:30:53', '2023-12-05 06:35:32');
+INSERT INTO `users` (`id`, `name`, `image`, `email`, `email_verified_at`, `password`, `role`, `phone`, `status`, `verification_link`, `verified`, `deleted_at`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Sayandip', 'images/User/1701930462_user.png', 'teethi.dhar@webart.technology', NULL, '$2y$12$Jj4H9RmvlZVZg1kqIPE/TepY0GRjaIoX4kUrUVBec.nGkFrmMyqxe', 'user', '+1 (388) 814-1792', 'active', '0A7K4iP0copxmi1nJWfinIzbg6UEFRLyynO3lA3AZyvYH0Hqn4MYxhomb0QZ', 1, NULL, NULL, '2023-12-07 00:57:43', '2023-12-07 02:04:24'),
+(7, 'Teethi Dhar', 'images/User/1702266369_5.jpg', 'teethi.webart@gmail.com', NULL, '$2y$12$GuKooW/YDDrmN8NajJwTW.McY5G4VEPyGYiCwwnOdKpkzvtcVe1Wa', 'business_owner', '+1 (388) 814-1792', 'active', 'WzfRwyC0PGZWj4JHJRHGeDOhMvycyLQWrc9H7DSLn0eaqrdc81xSDhvM5PKF', 1, NULL, NULL, '2023-12-10 22:16:09', '2023-12-10 22:16:39');
 
 -- --------------------------------------------------------
 
@@ -623,10 +601,8 @@ CREATE TABLE `user_infos` (
 --
 
 INSERT INTO `user_infos` (`id`, `user_id`, `state`, `city`, `address`, `zip_code`, `created_at`, `updated_at`) VALUES
-(1, '2', 'Mumbai', 'Agra', 'Newtown', '42673', '2023-12-04 22:36:53', '2023-12-04 22:36:53'),
-(2, '1', 'Goa', 'Agra', 'Kameko Christian', '42673', '2023-12-04 23:34:32', '2023-12-04 23:34:32'),
-(3, '5', 'Gujrat', 'Ghaziabad', '78855', '700109', '2023-12-05 06:34:11', '2023-12-05 06:34:11'),
-(4, '3', 'Uttrakhand', 'Agra', 'Brenna Whitehead', '59215', '2023-12-05 22:40:33', '2023-12-05 22:40:33');
+(1, '1', 'Uttrakhand', 'Allahabad', 'Brenna Whitehead', '59215', '2023-12-07 02:02:54', '2023-12-07 02:02:54'),
+(2, '2', 'Uttar Pradesh', 'Allahabad', 'Newtown', '700035', '2023-12-07 02:06:59', '2023-12-07 02:06:59');
 
 --
 -- Indexes for dumped tables
@@ -707,6 +683,12 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `f_a_q_s`
+--
+ALTER TABLE `f_a_q_s`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -725,6 +707,12 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `recent_view_listings`
+--
+ALTER TABLE `recent_view_listings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `reviews`
@@ -777,37 +765,37 @@ ALTER TABLE `amenities`
 -- AUTO_INCREMENT for table `business_listings`
 --
 ALTER TABLE `business_listings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `business_listing_amenities`
 --
 ALTER TABLE `business_listing_amenities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `business_listing_images`
 --
 ALTER TABLE `business_listing_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `business_listing_infos`
 --
 ALTER TABLE `business_listing_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `business_listing_keywords`
 --
 ALTER TABLE `business_listing_keywords`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `business_listing_menuitems`
 --
 ALTER TABLE `business_listing_menuitems`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -828,10 +816,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `f_a_q_s`
+--
+ALTER TABLE `f_a_q_s`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -840,28 +834,34 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `recent_view_listings`
+--
+ALTER TABLE `recent_view_listings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subscribes`
 --
 ALTER TABLE `subscribes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_infos`
 --
 ALTER TABLE `user_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
