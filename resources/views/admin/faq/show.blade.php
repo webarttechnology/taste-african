@@ -6,8 +6,11 @@
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Information Detail</h1>
+                    <h1>FAQ's</h1>
                 </div>  
+                <div>
+                    <a href="{{ route ('admin.faq_add')}}" class="btn btn-primary"> Add </a>
+                </div>    
                          
             </div>
             <div class="row">
@@ -19,14 +22,16 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Question</th>
-                                            <th scope="col">Ans</th>
+                                            <th scope="col">Answer</th>
 											<th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $faq)
                                             <tr>
+                                                <td>{{ $faq->selected_category->name }}</td>
                                                 <td>{{ $faq->question }}</td>
                                                 <td>{{ $faq->ans }}</td>                                               
                                                 <td>
@@ -57,6 +62,3 @@
 
 
 @stop
-
-
-

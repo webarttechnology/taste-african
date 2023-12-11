@@ -12,6 +12,8 @@ use App\Models\Category;
 use App\Models\BusinessListing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
+use App\Models\FaqCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -76,7 +78,8 @@ class HomeController extends Controller
 
     public function faq()
     {
-        return view('front.faq');
+        $categories = FaqCategory::with('faqs')->get();
+        return view('front.faq', compact('categories'));
     }
 
     public function pricing()

@@ -20,24 +20,25 @@
 							<div class="row ec-vendor-uploads">						
 								<div class="col-lg-12">
 									<div class="ec-vendor-upload-detail">
-										<form class="row g-3" method="POST" action="{{route ('admin.about_store')}}" enctype="multipart/form-data">
+										<form class="row g-3" method="POST" action="{{route ('admin.faq_store')}}" enctype="multipart/form-data">
 											@csrf
-											<div class="col-md-4">
-												<label for="inputEmail4" class="form-label">About Short Title</label>
-												<input type="text" class="form-control slug-title" id="name" name="about_short_title" value="{{old('about_short_title')}}">
+											<div class="col-md-12">
+												<label for="category" class="form-label">Category</label>
+												<select name="category" id="category" required>
+													<option value="">Select a category</option>
+													@foreach ( $categories as $category )
+														<option value="{{ $category->id }}">{{ $category->name }}</option>
+													@endforeach
+												</select>
 											</div>
-											<div class="col-md-6">
-												<label for="inputEmail4" class="form-label">About Description</label>
-												<textarea class="form-control slug-title"  name="description" rows="4" cols="150"></textarea>
+											<div class="col-md-12">
+												<label for="question" class="form-label">Question</label>
+												<input type="text" class="form-control slug-title" required id="question" name="question" value="{{old('question')}}">
 											</div>
-											<div class="col-md-2">
-												<label for="inputEmail4" class="form-label"></label>
-												<button type="submit" class="btn btn-primary">Add New</button>
+											<div class="col-md-12">
+												<label for="answer" class="form-label">Answer</label>
+												<textarea class="form-control slug-title" id="answer" required  name="answer" rows="4" cols="150"></textarea>
 											</div>
-										
-											
-																					
-
 
 											<div class="col-md-12">
 												<button type="submit" class="btn btn-primary">Submit</button>
