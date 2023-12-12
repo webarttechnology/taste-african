@@ -35,6 +35,7 @@
                 <div class="col-xl-10 col-lg-11 col-md-12 col-sm-12">
 
                     @foreach ($categories as $category)
+                        @php if( count($category->faqs) == 0 ) continue; @endphp
                         <div class="d-block position-relative mb-4">
                             <h4 class="ft-medium">{{ $category->name }}:</h4>
 

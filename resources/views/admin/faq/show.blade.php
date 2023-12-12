@@ -44,7 +44,8 @@
                                                             <span class="sr-only">Info</span>
                                                         </button>                                                       
                                                         <div class="dropdown-menu dropdown-custom-button">
-                                                            <a class="dropdown-item" href="{{ url ('admin/about/edit/'.$faq->id)}}">Edit</a>                                                           
+                                                            <a class="dropdown-item" href="{{ url ('admin/faq/edit/'.$faq->id)}}">Edit</a>                                                           
+                                                            <a class="dropdown-item delete-faq" data-id="{{ $faq->id }}" href="{{ url ('admin/faq/delete/'.$faq->id)}}">Delete</a>                                                           
                                                         </div>                                                       
                                                     </div>
                                                 </td>
@@ -60,5 +61,19 @@
         </div> <!-- End Content -->
     </div> <!-- End Content Wrapper -->
 
+@endsection
 
-@stop
+@section('custom_js')
+    <script>
+        $(".delete-faq").on('click', function(e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+
+            if( confirm('Are you sure you want to delete this faq?') ) {
+                return window.location.href = '{{ url('admin/faq/delete') }}' + '/' + id;
+            }
+        })
+    </script>
+
+@endsection

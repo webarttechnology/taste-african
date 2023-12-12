@@ -267,5 +267,7 @@
   </script>
 {{-- Editor jS --}}
 
+  @yield('custom_js')
+
 </body>
 </html>

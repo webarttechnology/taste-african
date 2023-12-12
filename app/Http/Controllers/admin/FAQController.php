@@ -39,14 +39,30 @@ class FaqController extends Controller
         return redirect()->route('admin.faq')->with('message', 'Faq has been added');
     }
 
-    public function edit()
+    public function update( Request $request, $id )
     {
-        
+        $faq = ModelsFaq::find($id);
+        $faq->category = $request->category;
+        $faq->question = $request->question;
+        $faq->ans = $request->answer;
+        $faq->save();
+
+        return redirect()->route('admin.faq')->with('message', 'Faq has been updated');
+    }  
+
+    public function edit($id)
+    {
+        $faq = ModelsFaq::find($id);
+        $categories = FaqCategory::get();
+        return view('admin.faq.edit', compact('categories', 'faq'));
     }
 
 
-    public function delete()
+    public function delete($id)
     {
-        
+        $faq = ModelsFaq::find($id);
+        $faq->delete();
+
+        return redirect()->route('admin.faq')->with('message', 'Faq has been deleted');
     }
 }
