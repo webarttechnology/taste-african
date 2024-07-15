@@ -6,11 +6,11 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="placesseach" role="tabpanel"
                     aria-labelledby="placesseach-tab">
-                    <form class="main-search-wrap fl-wrap" action="{{route('front.allListing')}}" method="GET" onsubmit="return validateForm()">
+                    <form class="main-search-wrap fl-wrap" action="{{route('front.search')}}" method="POST">
                         @csrf
                         <div class="main-search-item">
                             <span class="search-tag"><i class="lni lni-briefcase"></i></span>
-                            <select class="form-control" name="search_item" id="search_item">
+                            <select class="form-control" name="search_item" id="search_item" required>
                                 <option value="">Select Category</option>
                                 @foreach ($business_category as $category)
                                  <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -19,14 +19,18 @@
                         </div>
                         <div class="main-search-item">
                             <span class="search-tag"><i class="lni lni-keyboard"></i></span>
-                            <select class="form-control radius" name="state" id="states">
-                                <option value="" disabled selected>Select State</option>
+                            <select class="form-control radius" name="state" id="city" required>
+                                <option value="">Select State</option>
                                 @foreach ($states as $state_name)
-                                    <option value="{{ $state_name->id }}">{{ $state_name->name }}</option>
-                                @endforeach
+                                <option value="{{ $state_name->state }}">{{ $state_name->state }}</option>
+                               @endforeach
                             </select>
-                            <select class="form-control" name="city" id="cities">
-                                <option value="" disabled selected>Select City</option>
+                            <select class="form-control" name="city" id="cities" required>
+                                <option value="">Select City</option>
+                                @foreach ($cities as $listing_cities)
+                                    <option value="{{ $listing_cities->city }}">{{ $listing_cities->city }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>                                    
                        

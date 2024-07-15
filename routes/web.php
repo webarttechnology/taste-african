@@ -43,6 +43,7 @@ Route::post('/email-send', [HomeController::class, 'emailSend'])->name('emailSen
 Route::post('/subscribe-store', [HomeController::class, 'subscribeStore'])->name('subscribe_store');
 Route::post('/search', [HomeController::class, 'search'])->name('front.search');
 Route::get('/get-cities/{category}',[HomeController::class, 'searchCity'])->name('front.search.city');
+Route::get('/get-all-cities/{id}',[HomeController::class, 'allCities'])->name('front.all.city');
 Route::get('/all-listings', [HomeController::class, 'allListings'])->name('front.allListing');
 Route::get('/business-listing/details/{id}', [BusinessListingController::class, 'viewDetails'])->name('business_viewDetails');
 Route::get('/privacy-policy',[HomeController::class, 'privacyPolicy'])->name('front.privacypolicy');

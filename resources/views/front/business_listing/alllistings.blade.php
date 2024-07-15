@@ -64,18 +64,14 @@
                             <div class="main-search-item">
                                 <span class="search-tag"><i class="lni lni-briefcase"></i></span>
                                 <select class="form-control" name="title" id="states" required>
-                                    <option value="">Select State</option>
+                                    <option value="" disabled selected>Select State</option>
                                     @foreach ($states as $listing_states)
-                                        <option value="{{ $listing_states->state }}">{{ $listing_states->state }}
+                                        <option value="{{ $listing_states->id }}">{{ $listing_states->name }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <select class="form-control" name="title" id="cities" required>
-                                    <option value="">Select City</option>
-                                    @foreach ($cities as $listing_cities)
-                                        <option value="{{ $listing_cities->city }}">{{ $listing_cities->city }}
-                                        </option>
-                                    @endforeach
+                                    <option value="" disabled selected>Select City</option>
                                 </select>
                             </div>
                             {{-- <div class="main-search-button">
@@ -284,11 +280,16 @@
             // AJAX call for combined category, state, and city search
             $('#category, #states, #cities').change(function() {
                 $('#listings-container').empty();
+                filterBusinessListings();
+            });
+
+            function filterBusinessListings()
+            {                
                 var categoryId = $('#category').val();
                 var state = $('#states').val();
                 var city = $('#cities').val();
     
-                $.ajax({
+                return $.ajax({
                     url: '{{ route('listings.search') }}', // Replace with your actual route
                     type: 'POST',
                     data: {
@@ -313,8 +314,45 @@
                         console.error(xhr.responseText);
                     }
                 });
+            }
+
+            // Initialize Select2 for state dropdown
+            $('#states').select2({
+                placeholder: "Select a State",
+                allowClear: true // Option to clear selected state
+            });
+
+            // Initialize Select2 for city dropdown
+            $('#cities').select2({
+                placeholder: "Select a City",
+                allowClear: true // Option to clear selected city
+            });
+
+            $('#states').change(function() {
+                var stateId = $(this).val();
+                if (stateId) {
+                    $.ajax({
+                        url: '/get-all-cities/' + stateId, // Replace with your Laravel route for fetching cities
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#cities').empty();
+                            $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                            $.each(data, function(key, value) {
+                                $('#cities').append('<option value="' + value.id + '">' + value.name + '</option>');
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error fetching cities: ' + error);
+                        }
+                    });                    
+                    filterBusinessListings();
+                } else {
+                    $('#cities').empty();
+                    $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                }
             });
     
-    });
+        });
     
     </script>

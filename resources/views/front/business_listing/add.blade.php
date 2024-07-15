@@ -86,7 +86,7 @@
                                                         class="asterisk_required_field"></span>
                                                     <select class="form-control"name="category"
                                                         value="{{ old('category') }}" required>
-                                                        <option>---- Select ----</option>
+                                                        <option value="">---- Select ----</option>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">{{ $category->name }}
                                                             </option>
@@ -104,7 +104,7 @@
                                                     <label class="mb-1">Country of Origin</label>
                                                     <select class="form-control" name="country" id="countrySelect"
                                                         required>
-                                                        <option>---- Select ----</option>
+                                                        <option value="">---- Select ----</option>
                                                         @foreach ($country as $countries)
                                                             <option value="{{ $countries->country_name }}">
                                                                 {{ $countries->country_name }}</option>
@@ -122,7 +122,7 @@
                                                     <label class="mb-1">Listing Status</label> <span
                                                         class="asterisk_required_field"></span>
                                                     <select class="form-control"name="approval" required>
-                                                        <option>---- Select ----</option>
+                                                        <option value="">---- Select ----</option>
                                                         <option value="hide">hide</option>
                                                         <option value="show">show</option>
                                                     </select>
@@ -185,12 +185,18 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">City</label><span
+                                                    <label class="mb-1">State</label><span
                                                         class="asterisk_required_field"></span>
-                                                    <input type="text" class="form-control rounded" name="city"
-                                                        value="{{ old('city') }}" required />
+                                                    <select id="state" name="state" class="form-control rounded" required>
+                                                        <option value="" selected disabled>Select a State</option>
+                                                        @foreach ($states as $state)
+                                                            <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    {{-- <input type="text" class="form-control rounded" name="state"
+                                                        value="{{ old('state') }}" required /> --}}
                                                     <div class="validation-error">
-                                                        @error('city')
+                                                        @error('state')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
@@ -198,12 +204,15 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">State</label><span
+                                                    <label class="mb-1">City</label><span
                                                         class="asterisk_required_field"></span>
-                                                    <input type="text" class="form-control rounded" name="state"
-                                                        value="{{ old('state') }}" required />
+                                                    <select id="city" name="city" class="form-control rounded" required>
+                                                        <option value="" selected disabled>Select a City</option>
+                                                    </select>
+                                                    {{-- <input type="text" class="form-control rounded" name="city"
+                                                        value="{{ old('city') }}" required /> --}}
                                                     <div class="validation-error">
-                                                        @error('state')
+                                                        @error('city')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
@@ -1189,6 +1198,41 @@
                     });
                 }
             });
+        });
+        // Initialize Select2 for state dropdown
+        $('#state').select2({
+            placeholder: "Select a State",
+            allowClear: true // Option to clear selected state
+        });
+
+        // Initialize Select2 for city dropdown
+        $('#city').select2({
+            placeholder: "Select a City",
+            allowClear: true // Option to clear selected city
+        });
+
+        $('#state').change(function() {
+            var stateId = $(this).val();
+            if (stateId) {
+                $.ajax({
+                    url: '/get-all-cities/' + stateId, // Replace with your Laravel route for fetching cities
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#city').empty();
+                        $('#city').append('<option value="" selected disabled>Select a City</option>');
+                        $.each(data, function(key, value) {
+                            $('#city').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching cities: ' + error);
+                    }
+                });
+            } else {
+                $('#city').empty();
+                $('#city').append('<option value="" selected disabled>Select a City</option>');
+            }
         });
     </script>
 

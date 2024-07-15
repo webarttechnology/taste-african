@@ -12,7 +12,9 @@ use App\Models\BusinessListingMenuitems;
 use App\Models\BusinessListingImages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Country;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 
 class BusinessListingController extends Controller
@@ -40,7 +42,9 @@ class BusinessListingController extends Controller
         $amenities = Amenity::get();
         $categories = Category::get();
         $country = Country::get();
-        return view('front.business_listing.add', compact('categories', 'amenities', 'country'));
+        $states = State::get();
+        $cities = City::get();
+        return view('front.business_listing.add', compact('categories', 'amenities', 'country', 'states', 'cities'));
     }
 
     public function store(Request $request)

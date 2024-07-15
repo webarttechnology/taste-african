@@ -66,6 +66,16 @@ class BusinessListing extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class, 'list_id', 'id');

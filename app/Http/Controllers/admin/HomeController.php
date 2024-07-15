@@ -14,46 +14,42 @@ use App\Http\Controllers\Controller;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsCondition;
 use App\Models\Blog;
+use App\Models\City;
 use App\Models\FaqCategory;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
-{  
+{
 
     public function front()
     {
         $business_category = Category::withCount('listings')->get();
         $abouts = About::get();
-        $listings = BusinessListing::with('amenties', 'reviews' ,'images', 'infos' , 'keywords' , 'menuitems', 'user', 'category')
-        ->where('status', 'approve')
-        ->where('approval', 'show')
-        ->get();
+        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos', 'keywords', 'menuitems', 'user', 'category')
+            ->where('status', 'approve')
+            ->where('approval', 'show')
+            ->get();
 
         // $states = BusinessListing::select('state')
         // ->distinct()->get();
-          $states = BusinessListing::where('status', 'approve')
-         ->where('approval', 'show')
-         ->select('state')
-         ->distinct()
-         ->get();
-         $blog = Blog::limit(4)->get();
-         $cities = BusinessListing::where('status', 'approve')
-         ->where('approval', 'show')
-         ->select('city')
-         ->distinct()
-         ->get();
+        $states = State::where('status', 1)
+            ->get();
+        $blog = Blog::limit(4)->get();
+        $cities = City::where('status', 1)
+            ->get();
         return view('front.index', compact('business_category',  'abouts', 'listings', 'states', 'blog', 'cities'));
     }
 
     public function listingByCategory($id)
     {
-        $listings = BusinessListing::with('amenties', 'reviews' ,'images', 'infos' , 'keywords' , 'menuitems', 'user', 'category')
-        ->where('status', 'approve')
-        ->where('approval', 'show')
-        ->where('category_id', $id)
-        ->get();
+        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos', 'keywords', 'menuitems', 'user', 'category')
+            ->where('status', 'approve')
+            ->where('approval', 'show')
+            ->where('category_id', $id)
+            ->get();
         $business_category = Category::withCount('listings')->get();
         $category_id = $id;
         // $listings = BusinessListing::with('amenties', 'images', 'infos' , 'keywords' , 'menuitems', 'user')
@@ -61,97 +57,128 @@ class HomeController extends Controller
         // ->where('approval', 'show')
         // ->paginate(5);
         $title = BusinessListing::select('title')
-        ->distinct()->get();
+            ->distinct()->get();
         $contact = ContactDetails::get();
         $states = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('state')
-        ->distinct()
-        ->get();
+            ->where('approval', 'show')
+            ->select('state')
+            ->distinct()
+            ->get();
         $cities = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('city')
-        ->distinct()
-        ->get();
-        return view('user.business_listing_author.categoryListing', compact('category_id', 'listings','contact', 'business_category', 'title', 'states', 'cities'));
+            ->where('approval', 'show')
+            ->select('city')
+            ->distinct()
+            ->get();
+        return view('user.business_listing_author.categoryListing', compact('category_id', 'listings', 'contact', 'business_category', 'title', 'states', 'cities'));
     }
-    
-    public function allListings()
+
+    public function allListings(Request $request)
     {
-        $listings = BusinessListing::with('amenties', 'reviews' ,'images', 'infos' , 'keywords' , 'menuitems', 'user', 'category')
-        ->where('status', 'approve')
-        ->where('approval', 'show')
-        ->get();     
+        $selected_category = '';
+        $selected_state = '';
+        $selected_city = '';
+        if (!empty($request->search_item)) {
+            $selected_category = $request->search_item;
+        }
+        if (!empty($request->state)) {
+            $selected_state = $request->state;
+        }
+        if (!empty($request->city)) {
+            $selected_city = $request->city;
+        }
+        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos', 'keywords', 'menuitems', 'user', 'category')
+            ->where('status', 'approve')
+            ->where('approval', 'show')
+            ->get();
         $business_category = Category::withCount('listings')->get();
         $title = BusinessListing::select('title')
-        ->distinct()->get();
+            ->distinct()->get();
         $contact = ContactDetails::get();
-        $states = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('state')
-        ->distinct()
+        // $states = State::where('status', 1)
+        //     ->where('approval', 'show')
+        //     ->select('state')
+        //     ->distinct()
+        //     ->get();
+        // $cities = BusinessListing::where('status', 'approve')
+        //     ->where('approval', 'show')
+        //     ->select('city')
+        //     ->distinct()
+        //     ->get();
+        $states = State::where('status', 1)
         ->get();
-        $cities = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('city')
-        ->distinct()
-        ->get();
-        return view('front.business_listing.alllistings', compact( 'listings', 'contact', 'business_category', 'title', 'states', 'cities'));
+        $cities = BusinessListing::where('status', 1)
+            ->get();
+        return view('front.business_listing.alllistings', compact('listings', 'contact', 'business_category', 'title', 'states', 'cities', 'search_item', 'selected_state', 'selected_city'));
     }
 
     public function searchListings()
     {
         $business_category = Category::withCount('listings')->get();
         $states = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('state')
-        ->distinct()
-        ->get();
+            ->where('approval', 'show')
+            ->select('state')
+            ->distinct()
+            ->get();
         $cities = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('city')
-        ->distinct()
-        ->get();
-        return view('front.search-listings.search', compact( 'listings', 'contact', 'business_category', 'title', 'states', 'cities'));
+            ->where('approval', 'show')
+            ->select('city')
+            ->distinct()
+            ->get();
+        return view('front.search-listings.search', compact('listings', 'contact', 'business_category', 'title', 'states', 'cities'));
     }
 
     public function search(Request $request)
-    {     
-        $category = $request->search_item;  
+    {
+        $category = $request->search_item;
         $state = $request->state;
         $city = $request->city;
         $item_category = $request->search_item;
-        $listings = BusinessListing::with('amenties', 'reviews' ,'images', 'infos' , 'keywords' , 'menuitems', 'user', 'category')
-        ->where('status', 'approve')
-        ->where('approval', 'show')
-        ->where('state', 'like', '%' . $state . '%')
-        ->where('city', 'like', '%' . $city . '%')
-        ->where('category_id', $item_category)
-        ->get();   
+        $listings = BusinessListing::with('amenties', 'reviews', 'images', 'infos', 'keywords', 'menuitems', 'user', 'category')
+            ->where('status', 'approve')
+            ->where('approval', 'show')
+            ->where('state', 'like', '%' . $state . '%')
+            ->where('city', 'like', '%' . $city . '%')
+            ->where('category_id', $item_category)
+            ->get();
         $states = BusinessListing::where('status', 'approve')
-        ->where('approval', 'show')
-        ->select('state')
-        ->distinct()
-        ->get();
+            ->where('approval', 'show')
+            ->select('state')
+            ->distinct()
+            ->get();
         $business_category = Category::get();
         $cities = BusinessListing::select('city')
-        ->distinct()->get();
-        return view('search-listings.searchresult', compact( 'category','listings', 'item_category', 'business_category', 'cities', 'states', 'city',
-        'state'));
+            ->distinct()->get();
+        return view('search-listings.searchresult', compact(
+            'category',
+            'listings',
+            'item_category',
+            'business_category',
+            'cities',
+            'states',
+            'city',
+            'state'
+        ));
     }
-    
+
     public function searchCity($category)
-    {       
+    {
         $cities = BusinessListing::where('category_id', $category)
-        ->pluck('city')
-        ->unique()
-        ->values();
+            ->pluck('city')
+            ->unique()
+            ->values();
 
-       return response()->json($cities);
+        return response()->json($cities);
     }
 
-    
-    
+    public function allCities($stateID)
+    {
+        $cities = City::where('state_id', $stateID)->get();
+
+        return response()->json($cities);
+    }
+
+
+
     public function smartSearch(Request $request)
     {
         if ($request->ajax()) {
@@ -184,37 +211,37 @@ class HomeController extends Controller
 
     public function emailSend(Request $request)
     {
-      $request->validate([
-        'username' => 'required',
-        'email' => 'required|email',
-        'phone' => 'required',
-        'subject' => 'required',
-        'message' => 'required',
-         'g-recaptcha-response' => 'required'
-    ]);
-    
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+            'g-recaptcha-response' => 'required'
+        ]);
+
         $senderName = $request->username;
         $phoneNumber = $request->phone;
         $senderEmail = $request->email;
-    
+
         try {
             $email = new MyEmail($senderName, $phoneNumber, $senderEmail);
-    
+
             $recipients = [$senderEmail, 'info@africanfoodusa.com'];
             Mail::to($recipients)->send($email);
-            
+
             return redirect()->back()->with('message', 'Email sent successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    
+
 
     public function about()
     {
         $business_category = Category::withCount('listings')->get();
         $abouts = About::get();
-        return view('front.about-us', compact('business_category','abouts'));
+        return view('front.about-us', compact('business_category', 'abouts'));
     }
 
     public function blog()
@@ -266,7 +293,7 @@ class HomeController extends Controller
 
     public function subscribeStore(Request $request)
     {
-        
+
         // if (!Auth::check()) {
         //     return redirect()->route('login')->with('error', 'Please log in first.');
         // }
@@ -291,6 +318,4 @@ class HomeController extends Controller
 
         return redirect()->back()->with('message', 'Thank you for subscribing with us!');
     }
-
-    
 }

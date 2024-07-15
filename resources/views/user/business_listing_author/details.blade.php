@@ -410,7 +410,7 @@
                                                     @endif
 
                                                     <div class="clearfix"></div>
-                                                    <p>" {{ $reviews->review }} "</p>                                                    
+                                                    <p>{{ $reviews->review }}</p>                                                    
                                                 </div>
                                             </div>
                                         @endforeach                                      

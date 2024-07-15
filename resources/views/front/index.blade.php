@@ -249,7 +249,7 @@
             </div>
         </div>
     </section>
-  <!-- ======================= About Start ============================ -->
+    <!-- ======================= About Start ============================ -->
     <section class="space">
         <div class="container">
 
@@ -373,6 +373,71 @@
                     $('#search-results').html(data);
                 }
             });
+        });    
+
+        // Initialize Select2 for state dropdown
+        $('#states').select2({
+            placeholder: "Select a State",
+            allowClear: true // Option to clear selected state
         });
+
+        // Initialize Select2 for city dropdown
+        $('#cities').select2({
+            placeholder: "Select a City",
+            allowClear: true // Option to clear selected city
+        });
+
+        $('#states').change(function() {
+            var stateId = $(this).val();
+            if (stateId) {
+                $.ajax({
+                    url: '/get-all-cities/' + stateId, // Replace with your Laravel route for fetching cities
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#cities').empty();
+                        $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                        $.each(data, function(key, value) {
+                            $('#cities').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching cities: ' + error);
+                    }
+                });
+            } else {
+                $('#cities').empty();
+                $('#cities').append('<option value="" selected disabled>Select a City</option>');
+            }
+        });
+
+        // Configure Toastr options to show notifications in the center
+        toastr.options = {
+            "positionClass": "toast-top-center",
+            "timeOut": "3000",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
     });
+
+    function validateForm() {
+        let isValid = false;
+        $('select').each(function() {
+            if ($(this).val()) {
+                isValid = true;
+                return false; // Break out of the loop
+            }
+        });
+
+        if (!isValid) {
+            toastr.error('Please select at least one option from Category, State, or City.');
+        }
+
+        return isValid;
+    }
 </script>
