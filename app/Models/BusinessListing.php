@@ -15,7 +15,7 @@ class BusinessListing extends Model
         'category_id',
         'description',
         'latitude',
-        'longitude',
+        'country',
         'state',
         'city',
         'address',

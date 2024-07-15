@@ -11,6 +11,7 @@ class ContactDetails extends Model
 
     protected $fillable = [
         'logo',
+         'site_name',
         'address',
         'phone',
         'email',

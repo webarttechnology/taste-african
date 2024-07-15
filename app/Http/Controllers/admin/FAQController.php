@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\FAQ;
 use App\Models\Faq as ModelsFaq;
 use App\Models\FaqCategory;
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $data = Faq::with('selected_category')->get();
+        $data = ModelsFaq::with('selected_category')->get();
         return view ('admin.faq.show', compact('data')) ;
     }
 

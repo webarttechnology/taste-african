@@ -227,15 +227,15 @@ $(function() {
 	});
 	
 	// Script For Fix Header on Scroll
-	$(window).on('scroll', function() {    
-		var scroll = $(window).scrollTop();
+// 	$(window).on('scroll', function() {    
+// 		var scroll = $(window).scrollTop();
 
-		if (scroll >= 50) {
-			$(".header").addClass("header-fixed");
-		} else {
-			$(".header").removeClass("header-fixed");
-		}
-	});
+// 		if (scroll >= 50) {
+// 			$(".header").addClass("header-fixed");
+// 		} else {
+// 			$(".header").removeClass("header-fixed");
+// 		}
+// 	});
 	
 	// Review Slide
 	$('.reviews-slide').slick({

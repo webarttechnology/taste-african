@@ -18,7 +18,7 @@
 										<div class="row">
 											<div class="col-6">
 												<div class="form-group">
-													<label class="mb-1">Name</label>
+													<label class="mb-1">Name </label>
 													<input type="text" class="form-control rounded" name="username">
 												</div>
 											</div>

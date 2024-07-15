@@ -14,11 +14,11 @@
                     <li class="{{ Route::is('user.dashboard') ? 'active' : ''}}">
                         @if (Auth::user()->role == 'business_owner')
                         <li class="{{ Route::is('business_listing') ? 'active' : ''}}">
-                        <a href="{{route ('business_listing')}}"><i class="lni lni-files me-2"></i>My Listings </a>
+                        <a href="{{route ('business_listing')}}"><i class="lni lni-files me-2"></i> Listings </a>
                         </li>           
                         @else
                         <li class="{{ Route::is('user.dashboard') ? 'active' : ''}}">
-                        <a href="{{route ('user.dashboard')}}"><i class="lni lni-files me-2"></i>My Listings </a>
+                        <a href="{{route ('user.dashboard')}}"><i class="lni lni-files me-2"></i> Listings </a>
                         @endif 
                     </li>                 
                    

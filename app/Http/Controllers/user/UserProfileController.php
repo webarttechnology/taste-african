@@ -9,11 +9,14 @@ use App\Rules\PhoneNumber;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserProfileController extends Controller
 {
     public function profile()
     {
+        //  dd(Auth::user()->role);
+         
         $user = Auth::user();
         $userWithInfo = User::with('info')->find($user->id);
         return view ('front.profile.user-profile',  compact('userWithInfo'));
@@ -79,5 +82,31 @@ class UserProfileController extends Controller
        Auth::logout();
    
        return redirect()->route('login')->with('message', 'Password changed successfully. Login Again With New Password!!');   
+    }
+
+    public function deleteProfile()
+    {
+        $user_id = Auth::user()->id;
+
+        // Find the user by ID
+        $user = User::find($user_id);
+    
+        if ($user) {
+            // Update the user's status to "deactive"
+            $user->status = 'deactive';
+            
+            // Save the changes
+            $user->save();
+    
+            // Optionally, log the user out after deactivating their profile
+            Auth::logout();
+    
+            // Redirect to a page with a success message
+            return redirect()->route('login')->with('error', 'Your profile has been deactivated.');    
+        } else {
+            // Handle the case where the user is not found (optional)
+            return redirect()->route('profile')->withErrors(['error' => 'User not found.']);
+        }
+        
     }
 }

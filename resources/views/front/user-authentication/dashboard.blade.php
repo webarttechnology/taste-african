@@ -83,8 +83,8 @@ table {
 		border: 0px solid transparent;
 	}
 </style>
-@extends('front.layout.app')
-@section('content')
+	@extends('front.layout.app')
+	@section('content')
 			
 			<!-- =============================== Dashboard Header ========================== -->
 			<section class="bg-cover position-relative" style="background:url({{asset('front/img/cover.jpg')}}) no-repeat #C90000;">
@@ -118,36 +118,39 @@ table {
 
 				@include('front.layout.sidebar')
 				
-				<div class="goodup-dashboard-content">			
-					
+				<div class="goodup-dashboard-content detailed">	
 					<div class="dashboard-widg-bar d-block">
 						<div class="row">	
-						<table>
-							<tr>
-								<td colspan="3">
-									<div class="name" >{{ $userWithInfo->name }}</div>
-									<span><img src="{{asset($userWithInfo->image)}}" width="50px"></span>
-								</td>
-								
-							</tr>
-							<tr>
-								<td class="details-td">
-									<div class="label">Phone</div> : <div class="phone">{{ $userWithInfo->phone }}</div>
-									<br><div class="label">Mobile</div> : <div class="mobile">{{ $userWithInfo->name }}</div>
-									<br><div class="label">City</div> : <div class="email">{{ $userWithInfo->city }}</div>
-								</td>
-								<td class="description-td">
-									<img src="{{asset('front\img\edit.png')}}" class="edit" width="55px;">
-									<div class="description" spellcheck="false">This is a Short Description of the Client</div>
-									
-									<input type="button" value="Update" class="update">
-								</td>
-							</tr>
-						</table>
-					</div>
-				
-							
-							
-					</div>
-					
+							<div class="d-flex justify-content-around">
+								<div class="name" >{{ $userWithInfo->name }}</div>
+								<span>
+									@if($userWithInfo->image === null)
+									<img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" width="100px"/>
+									@else
+									<img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" width="100px"/>
+									@endif
+								</span>
+							</div>
+							<table>
+								<tr>
+									<td class="details-td">
+										<div class="label">Phone</div> : <div class="phone">{{ $userWithInfo->phone }}</div>
+										<br><div class="label">Name</div> : <div class="mobile">{{ $userWithInfo->name }}</div>
+										<br>
+										@if ( $userWithInfo->city )
+										<div class="label">City</div> : <div class="email">{{ $userWithInfo->city }}</div>
+										@endif
+										
+									</td>
+									<td class="description-td">
+										<div class="description" spellcheck="false">This is a Short Description of the Client</div>									
+										<input type="button" value="Update" class="update">
+									</td>
+								</tr>
+							</table>
+					    </div>							
+				    </div>
+
+			    </div>
+			</div>
 @stop

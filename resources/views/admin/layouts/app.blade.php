@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Ekka - Admin Dashboard eCommerce HTML Template.">
+	<meta name="description" content="African Food - Admin Dashboard">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 	<title>African Food - Admin Dashboard</title>
@@ -13,21 +13,20 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet"> 
-	<link href="../../../../../cdn.jsdelivr.net/npm/%40mdi/font%404.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
+	{{-- <link href="../../../../../cdn.jsdelivr.net/npm/%40mdi/font%404.4.95/css/materialdesignicons.min.css" rel="stylesheet" /> --}}
 
 	<!-- Ekka CSS -->
 	<link id="ekka-css" href="{{asset('admin/css/ekka.css')}}" rel="stylesheet"/>
 
 	<!-- FAVICON -->
 	 <link href="{{asset('admin/img/favicon.png')}}" rel="shortcut icon" />
-
+	 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
 	{{-- Toaster:: --}}
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
      <!-- Include TinyMCE library -->
-	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	{{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> --}}
 	<!-- Include TinyMCE library -->
 </head>
 
@@ -41,7 +40,10 @@
 			<div id="sidebar" class="sidebar ec-sidebar-footer">
 
 				<div class="ec-brand">
-					<h1 style="color: #183d8c">African Food</h1>
+					{{-- <h1 style="color: #183d8c">African Food</h1> --}}
+				</div>
+				<div class="ec-brand">
+					{{-- <h1 style="color: #183d8c">African Food</h1> --}}
 				</div>
 
 				<div class="ec-navigation" data-simplebar>
@@ -77,6 +79,15 @@
 							</div>
 							<hr>
 						</li>
+
+						<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.userProfile')}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">Profiles</span>
+							</a>
+							<hr>
+						</li>
+
 						<li class="active">
 							<a class="sidenav-item-link" href="{{ route ('category_listing')}}">
 								<i class="mdi mdi-view-dashboard-outline"></i>
@@ -106,6 +117,14 @@
 							</a>
 							<hr>
 						</li>
+						
+							<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.blog')}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">Blog</span>
+							</a>
+							<hr>
+						</li>
 
 						<li class="active">
 							<a class="sidenav-item-link" href="{{ route ('admin.faq')}}">
@@ -114,6 +133,25 @@
 							</a>
 							<hr>
 						</li>
+
+						<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.privacy_policy_edit', ['id' => 1])}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">Privacy Policy</span>
+							</a>
+							<hr>
+						</li>
+
+
+						<li class="active">
+							<a class="sidenav-item-link" href="{{ route ('admin.terms_and_conditions_edit', ['id' => 2])}}">
+								<i class="mdi mdi-view-dashboard-outline"></i>
+								<span class="nav-text">Terms And Conditions</span>
+							</a>
+							<hr>
+						</li>
+
+
 					</ul>
 				</div>
 			</div>
@@ -123,48 +161,21 @@
 		<div class="ec-page-wrapper">
 
 			<!-- Header -->
-			<header class="ec-main-header" id="header">
-				<nav class="navbar navbar-static-top navbar-expand-lg">
-					<button id="sidebar-toggler" class="sidebar-toggle"></button>
-					<!-- search form -->
-					<div class="search-form d-lg-inline-block">
-						{{-- <div class="input-group">
-							<input type="text" name="query" id="search-input" class="form-control"
-								placeholder="search.." autofocus autocomplete="off" />
-							<button type="button" name="search" id="search-btn" class="btn btn-flat">
-								<i class="mdi mdi-magnify"></i>
-							</button>
-						</div> --}}
-						<div id="search-results-container">
-							<ul id="search-results"></ul>
-						</div>
-					</div>
+		<header class="ec-main-header" id="header">
+    <nav class="navbar navbar-static-top navbar-expand-lg">					
+        <!-- navbar right -->
+        <div class="navbar-right ml-auto">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.logout') }}" style="font-weight: bold; font-size:15px">
+                        <i class="mdi mdi-settings-outline mdi-spin"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-					<!-- navbar right -->
-					<div class="navbar-right">
-						<ul class="nav navbar-nav">
-							<!-- User Account -->
-							<li class="dropdown user-menu">
-								@if(Auth::check())
-									<button class="dropdown-toggle nav-link ec-drop" data-bs-toggle="dropdown" aria-expanded="false">
-										<a>{{ Auth::user()->name }}</a>
-									</button>
-								@else
-									<!-- Put alternative content or nothing here if the user is not authenticated -->
-								@endif
-								<form action="{{ route('admin.logout') }}" method="post">
-									@csrf
-									<button type="submit" class="btn btn-link">Log Out</button>
-								</form>	
-							</li>
-						
-							<li class="right-sidebar-in right-sidebar-2-menu">
-								<i class="mdi mdi-settings-outline mdi-spin"></i>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</header>
 
 
 
@@ -179,10 +190,11 @@
 	<!-- Footer -->
     <footer class="footer mt-auto">
         <div class="copyright bg-white">
-            <p>
-                Copyright &copy; <span id="ec-year"></span><a class="text-primary"
-                href="https://webart.technology/" target="_blank"> WebArt Technology</a>. All Rights Reserved.
-              </p>
+			<p>
+				Copyright &copy; <span id="ec-year"><?php echo date('Y'); ?></span><a class="text-primary"
+				href="https://webart.technology/" target="_blank"> WebArt Technology</a>. All Rights Reserved.
+			</p>
+			
         </div>
     </footer>
 
@@ -203,8 +215,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+{{-- ckeditor:: --}}
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
 <script>
-		toastr.options = {
+
+	CKEDITOR.replace('description_1');
+	CKEDITOR.replace('description_2');
+
+	toastr.options = {
 		"closeButton": true,
 		"progressBar": true
 	}
@@ -232,42 +254,7 @@
 	@endif
 </script>
 
-{{-- Editor jS --}}
-<script>
-    tinymce.init({
-      selector: 'textarea#file-picker',
-      plugins: 'image code',
-      toolbar: 'undo redo | link image | code',
-      image_title: true,
-      automatic_uploads: true,
-      file_picker_types: 'image',
-      file_picker_callback: function (cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-
-        input.onchange = function () {
-          var file = this.files[0];
-
-          var reader = new FileReader();
-          reader.onload = function () {
-            var id = 'blobid' + (new Date()).getTime();
-            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-            var base64 = reader.result.split(',')[1];
-            var blobInfo = blobCache.create(id, file, base64);
-            blobCache.add(blobInfo);
-            cb(blobInfo.blobUri(), { title: file.name });
-          };
-          reader.readAsDataURL(file);
-        };
-        input.click();
-      },
-      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-    });
-  </script>
-{{-- Editor jS --}}
-
-  @yield('custom_js')
+@yield('custom_js')
 
 </body>
 </html>

@@ -41,7 +41,13 @@
                                             <div class="col-md-12">
                                                 <label class="form-label">Logo</label>
                                                 <input class="form-control" type="file" id="image" name="image">
-                                            </div>                                           
+                                            </div>   
+
+                                            <div class="col-md-6">
+                                                <label for="inputEmail4" class="form-label">Site Name</label>
+                                                <input type="text" class="form-control slug-title"
+                                                    name="site_name" value="{{ old('site_name') }}">
+                                            </div>  
 
                                             <div class="col-md-12">
                                                 <label for="footer_text" class="form-label">Footer Text</label>

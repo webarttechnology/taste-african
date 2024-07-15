@@ -23,15 +23,15 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'address' => 'required',
-            'phone' => 'required|numeric',
-            'email' => 'email',
-            'image' => 'required',
-            'facebook' => 'url',
-            'instragram' => 'url',
-            'linkdin' => 'url',
-            'youtube' => 'url',
-            'twitter' => 'url',
+            // 'address' => 'required',
+            // 'phone' => 'required|numeric',
+            // 'email' => 'email',
+            // 'image' => 'required',
+            // 'facebook' => 'url',
+            // 'instragram' => 'url',
+            // 'linkdin' => 'url',
+            // 'youtube' => 'url',
+            // 'twitter' => 'url',
         ]);
 
         $image = $request->image;
@@ -65,14 +65,14 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'address' => 'required',
-            'phone' => 'required|numeric',
-            'email' => 'email',
-            'facebook' => 'url',
-            'instragram' => 'url',
-            'linkdin' => 'url',
-            'youtube' => 'url',
-            'twitter' => 'url',
+            // 'address' => 'required',
+            // 'phone' => 'required|numeric',
+            // 'email' => 'email',
+            // 'facebook' => 'url',
+            // 'instragram' => 'url',
+            // 'linkdin' => 'url',
+            // 'youtube' => 'url',
+            // 'twitter' => 'url',
         ]);
 
         $contactdetails = ContactDetails::findOrFail($id);
@@ -92,6 +92,7 @@ class ContactController extends Controller
             $contactdetails->update([
                 'address' => $request->address,
                 'phone' => $request->phone,
+                'site_name' => $request->site_name,
                 'email' => $request->email,
                 'logo' => $imageName,
                 'footer_text' => $request->footer_text,
@@ -106,6 +107,7 @@ class ContactController extends Controller
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
+                'site_name' => $request->site_name,
                 'footer_text' => $request->footer_text,
                 'facebook' => $request->facebook,
                 'instragram' => $request->instragram,
@@ -116,7 +118,7 @@ class ContactController extends Controller
         }
 
         return redirect()
-            ->route('admin.contact')
+            ->back()
             ->with('message', 'Data Updated Successfully!!!');
     }
 

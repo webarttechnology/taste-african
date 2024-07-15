@@ -10,7 +10,7 @@ class CategotyController extends Controller
 {
     public function index()
     {
-        $category = Category::get();
+        $category = Category::paginate(5);
         return view('admin.category.show',  compact('category'));
     }
 

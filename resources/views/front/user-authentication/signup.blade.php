@@ -18,39 +18,45 @@
 										<div class="row">
 											<div class="col-6">
 												<div class="form-group">
-													<label class="mb-1">Name</label>
-													<input type="text" class="form-control rounded" name="name">
+													<label class="mb-1">Name</label><span class="optional-label" style="color: red">*</span>
+													<input type="text" class="form-control rounded" name="name" value="{{old('name')}}">
 												</div>
 											</div>
 											<div class="col-6">
 												<div class="form-group">
-												<label class="mb-1">Email ID</label>
-												<input type="text" class="form-control rounded" name="email">
+												<label class="mb-1">Email ID</label><span class="optional-label" style="color: red">*</span>
+												<input type="text" class="form-control rounded" name="email" value="{{old('email')}}">
 											</div>
 											</div>
 										</div>										
 										<div class="row">
 											<div class="col-4">
 												<div class="form-group">
-													<label class="mb-1">Phone Number</label>
-													<input type="text" class="form-control rounded" name="phone">
+													<label class="mb-1">Phone Number</label><span class="optional-label" style="color: red">*</span>
+													<input type="text" class="form-control rounded" name="phone" value="{{old('phone')}}">
 												</div>
 											</div>
 											<div class="col-4">
 												<div class="form-group">
-													<label class="mb-1">Password</label>
+													<label class="mb-1">Password</label><span class="optional-label" style="color: red">*</span>
 													<input type="password" class="form-control rounded" name="password">
+													<small class="form-text text-muted">
+														Password must be at least 8 characters long.
+													</small>
 												</div>
 											</div>											
 											<div class="col-4">
 												<div class="form-group">
-													<label class="mb-1">Confirem Password</label>
+													<label class="mb-1">Confirm Password</label><span class="optional-label" style="color: red">*</span>
 													<input type="password" class="form-control rounded" name="password_confirmation">
+													<small class="form-text text-muted">
+														Confirm Password must be same with password field.
+													</small>
 												</div>
 											</div>
 											<div class="col-12">
 												<div class="form-group">
-													<label class="mb-1">Image</label>
+													<label class="mb-1">Image</label><span class="optional-label">(Optional)</span>
 													<input type="file" class="form-control rounded" name="image">
 												</div>
 											</div>

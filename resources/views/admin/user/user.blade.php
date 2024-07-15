@@ -12,7 +12,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card-default">
-
                         <div class="card-body product-detail">
                             <div class="row">
                                 <table class="table">
@@ -22,41 +21,25 @@
                                             <th scope="col">Email</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Role</th>
 											<th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($user as $users)
+                                        @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $users->name }}</td>
-                                                <td>{{ $users->email }}</td>
-                                                <td>{{ $users->role }}</td>
-                                                <td style="text-transform: capitalize" class="status-column" data-users-id="{{ $users->id }}"
-												data-approvel-status="{{ $users->status }}"> {{ $users->status }} </td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->role }}</td>
+                                                <td style="text-transform: capitalize" class="status-column" data-users-id="{{ $user->id }}"
+												data-approvel-status="{{ $user->status }}"> {{ $user->status }} </td>
                                                 <td>
-                                                    <div class="btn-group mb-1">
-                                                        <button type="button" class="btn btn-outline-success">Info</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false" data-display="static">
-                                                            <span class="sr-only">Info</span>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-															@if ($users->status == 'active')
-																<a class="dropdown-item update-status" href="#" data-id="{{ $users->id }}"
-																	data-action="inactive">Inactive</a>
-															@else
-																<a class="dropdown-item update-status" href="#" data-id="{{ $users->id }}"
-																	data-action="active">Active</a>																
-															@endif
-                                                        </div>
-                                                    </div>
-                                                </td>
-												<td>
-													<a href="{{ url ('admin/user/delete/'.$users->id)}}" onclick="return confirm('Are you sure you want to delete this record?')"><i class="far fa-trash-alt mr-2" ></i>Delete</a>
-												</td>
+                                                    @if ($user->status == 'active')
+                                                       <a class="btn btn-primary status-change" href="{{ route('statusChange', ['id' => $user->id, 'status' => 'deactive'] )}}" onclick="return confirm('Are you sure you want to deactive this item?');">Deactive</a>
+                                                    @else ($user->status == 'deactive')
+                                                       <a class="btn btn-info status-change" href="{{ route('statusChange', ['id' => $user->id, 'status' => 'active'])}}" onclick="return confirm('Are you sure you want to active this item?');">Active</a>
+                                                    @endif
+                                                  <a class="btn btn-danger status-change" href="{{ route('statusChange', ['id' => $user->id, 'status' => 'delete'])}}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                                                </td>												
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -93,26 +76,7 @@
                     'X-CSRF-TOKEN': csrfToken
                 }
             });
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('statusChange') }}',
-                data: {
-                    status: action,
-                    user_id: installerId,
-                },
-                success: function(response) {
-                    if (response.success) {
-                        statusColumn.text(response.status);
-                    } else {
-                        console.error('Failed to update status.');
-                    }
-                },
-                error: function() {
-                    console.error('Error while making the AJAX request.');
-                },
-            });
         });
-        // Click on approve and reject button
+
     });
 </script>

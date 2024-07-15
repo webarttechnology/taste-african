@@ -21,7 +21,7 @@
 		<link id="ekka-css" href="{{asset('admin/css/ekka.css')}}" rel="stylesheet"/>
 
 		<!-- FAVICON -->
-		 <link href="{{asset('admin/img/favicon.png')}}" rel="shortcut icon" />
+		 <link href="{{asset('admin/img/images.png')}}" rel="shortcut icon" />
 		
 		{{-- Toaster:: --}}
 		 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -35,7 +35,7 @@
 						<div class="card-header bg-primary">
 							<div class="ec-brand">
 								<a href="{{route ('front')}}" title="Ekka">
-									<img class="ec-brand-icon" src="{{asset('front/img/logos/logo4.png')}}" alt="" />
+									<img class="ec-brand-icon" src="{{asset('front/img/logos.png')}}" alt="" />
 								</a>
 							</div>
 						</div>
@@ -46,7 +46,7 @@
 								@csrf
 								<div class="row">
 									<div class="form-group col-md-12 mb-4">
-										<input type="email" class="form-control" id="email" name="email">		
+										<input type="email" class="form-control" id="email" name="email" required>		
                                         <br>
 										<button type="submit" class="btn btn-primary btn-block mb-4">Sign In</button>	
 									</div>

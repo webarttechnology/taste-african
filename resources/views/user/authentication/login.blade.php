@@ -18,7 +18,7 @@
 										@csrf			
 										<div class="form-group">
 											<label class="mb-1">Name</label>
-											<input type="email" class="form-control rounded" name="email">
+											<input type="email" class="form-control rounded" name="email" required value="{{ old('email')}}">
 										</div>
 										
 										<div class="form-group">
@@ -42,7 +42,7 @@
 											<button type="submit" class="btn btn-md full-width theme-bg text-light rounded ft-medium">Sign In</button>
 										</div>
 										<div class="form-group text-center mt-4 mb-0">
-											<p class="mb-0">You Don't have any account? <a href="{{route('user.registerPage')}}" class="ft-medium text-success" style="font-weight: bold">Register</a></p>
+											<p class="mb-0">You Don't have any account? <a href="{{route('user.registerPage')}}" target="_blank" class="ft-medium text-success" style="font-weight: bold">Register</a></p>
 										</div>
 										
 									</form>

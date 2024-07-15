@@ -51,11 +51,11 @@
 												<label class="form-label">About Image 1</label>
 												<input class="form-control" type="file" id="image" name="image_1">
 											</div>											
-											<div class="col-md-12">
-												<label for="inputEmail4" class="form-label">About Description 1</label>												
-												<textarea class="form-control slug-title" id="file-picker" name="description_1" rows="15" cols="150"></textarea>
-											</div>
-
+										
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Description</label>
+                                                    <textarea class="form-control ckeditor" name="description_1" id="description_1" rows="2"></textarea>
+                                                </div>
 
 											<div class="col-md-4">
 												<label for="inputEmail4" class="form-label">Banner Sub Heading</label>
@@ -86,3 +86,6 @@
 	</div> <!-- End Content Wrapper -->
 
 @stop
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script> CKEDITOR.replaceAll('ck-editor');  </script>

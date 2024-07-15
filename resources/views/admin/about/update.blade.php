@@ -36,10 +36,12 @@
 												<input class="form-control" type="file" id="image" name="image">
 												<img src="{{ asset($about->image) }}" alt="Your Image" width="100px">
 											</div>											
-											<div class="col-md-12">
-												<label for="inputEmail4" class="form-label">About Description</label>
-												<textarea class="form-control slug-title"  name="description" rows="15" cols="150">{{$about->description}}</textarea>
-											</div>
+										
+											
+											  <div class="col-md-12">
+                                                    <label class="form-label">About Description</label>
+                                                    <textarea class="form-control ckeditor" name="description" id="description" rows="2">{{$about->description}}</textarea>
+                                                </div>
 
 											<div class="col-md-4">
 												<label for="inputEmail4" class="form-label">About Short Title 1</label>
@@ -54,10 +56,10 @@
 												<input class="form-control" type="file" id="image" name="image_1">
 												<img src="{{ asset($about->image_1) }}" alt="Your Image" width="100px">
 											</div>											
-											<div class="col-md-12">
-												<label for="inputEmail4" class="form-label">About Description 1</label>												
-												<textarea class="form-control slug-title" id="file-picker" name="description_1" rows="15" cols="150">{!! $about->description_1 !!}</textarea>
-											</div>
+											<!--<div class="col-md-12">-->
+											<!--	<label for="inputEmail4" class="form-label">About Description 1</label>												-->
+											<!--	<textarea class="form-control slug-title" id="file-picker" name="description_1" rows="15" cols="150">{!! $about->description_1 !!}</textarea>-->
+											<!--</div>-->
 
 
 											<div class="col-md-4">
@@ -90,3 +92,5 @@
 	</div> <!-- End Content Wrapper -->
 
 @stop
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script> CKEDITOR.replaceAll('ck-editor');  </script>

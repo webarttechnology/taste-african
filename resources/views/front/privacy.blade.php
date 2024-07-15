@@ -1,75 +1,49 @@
-<?php include("header.php") ?>
-			
-			<!-- ======================= Top Breadcrubms ======================== -->
-			<div class="gray py-3">
-				<div class="container">
-					<div class="row">
-						<div class="colxl-12 col-lg-12 col-md-12">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.php">Home</a></li>
-									<li class="breadcrumb-item"><a href="#">Pages</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Privacy</li>
-								</ol>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ======================= Top Breadcrubms ======================== -->
-			
-			<!-- ======================= About Us Detail ======================== -->
-			<section class="middle">
-				<div class="container">
-					<div class="row align-items-center justify-content-between">
-					
-						<div class="col-xl-11 col-lg-12 col-md-6 col-sm-12">
-							<div class="abt_caption">
-								<h2 class="ft-medium mb-4">Privacy & Policy</h2>
-								<p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-								<p class="mb-4">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</p>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</section>
-			<!-- ======================= About Us End ======================== -->
-			
-			<!-- ======================= Newsletter Start ============================ -->
-			<section class="space bg-cover" style="background:#03343b url(assets/img/landing-bg.png) no-repeat;">
-				<div class="container py-5">
-					
-					<div class="row justify-content-center">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-							<div class="sec_title position-relative text-center mb-5">
-								<h6 class="text-light mb-0">Subscribr Now</h6>
-								<h2 class="ft-bold text-light">Get All Updates & Advance Offers</h2>
-							</div>
-						</div>
-					</div>
-					
-					<div class="row align-items-center justify-content-center">
-						<div class="col-xl-7 col-lg-10 col-md-12 col-sm-12 col-12">
-							<form class="bg-white rounded p-1">
-								<div class="row no-gutters">
-									<div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-8">
-										<div class="form-group mb-0 position-relative">
-											<input type="text" class="form-control b-0" placeholder="Enter Your Email Address">
-										</div>
-									</div>
-									<div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
-										<div class="form-group mb-0 position-relative">
-											<button class="btn full-width btn-height theme-bg text-light fs-md" type="button">Subscribe</button>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-			<!-- ======================= Newsletter Start ============================ -->
-			
-		<?php include("foter.php") ?>
+@extends('front.layout.app')
+@section('content')
+
+    <!-- ======================= Top Breadcrubms ======================== -->
+    <section class="about-bg bg-cover" style="background:url('{{ asset('front/img/banner.jpg') }}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-11 col-sm-12">
+                    <div class="abt-caption">
+                        <div class="abt-caption-head">
+                            <h1> Privacy Policy </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======================= Top Breadcrubms ======================== -->
+
+    <!-- ======================= About Start ============================ -->
+    <section class="space">
+        <div class="container">
+
+            <div class="row align-items-center justify-content-between">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="m-spaced">
+                        <div class="position-relative about-section">
+                            <div class="mb-2"><span
+                                    class="bg-light-sky text-sky px-2 py-1 rounded">{{ $privacy->heading }}</span>
+                            </div>
+                            <p> {!! $privacy->description !!} </p>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+
+        </div>
+    </section>
+    <!-- ======================= About Start ============================ -->
+
+   
+
+
+
+
+
+@stop

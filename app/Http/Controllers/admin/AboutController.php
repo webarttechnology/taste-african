@@ -28,7 +28,7 @@ class AboutController extends Controller
             'image' => 'required',
             'about_short_title_1' => 'required',
             'about_long_title_1' => 'required',
-            'description_1' => 'required',
+          
             'image_1' => 'required',
             'banner_image' => 'required',
             'banner_sub_heading' => 'required',
@@ -85,7 +85,6 @@ class AboutController extends Controller
             'description' => 'required',
             'about_short_title_1' => 'required',
             'about_long_title_1' => 'required',
-            'description_1' => 'required',
             'banner_sub_heading' => 'required',
             'banner_main_heading' => 'required',
         ]);

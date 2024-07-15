@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmail;
 use App\Models\Review;
+use Carbon\Carbon; 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+
 
 
 class BusinessAuthenticationController extends Controller
@@ -32,12 +36,18 @@ class BusinessAuthenticationController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|unique:users',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', new PhoneNumber],
+            'phone' => 'required',
         ]);
 
-        $image = $request->image;
-        $imageName = 'images/User/' . time() . '_' . $image->getClientOriginalName();
-        $image->move('images/User', $imageName);
+        $imageName = null; 
+
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $imageName = 'images/User/' . time() . '_' . $image->getClientOriginalName();
+            $image->move('images/User', $imageName);
+        }
+
+        try {
 
         $user = User::create([
             'name' => $request->name,
@@ -55,6 +65,13 @@ class BusinessAuthenticationController extends Controller
         return redirect()
             ->back()
             ->with('message', 'Registration successful! Please check your email for verification.');
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()
+                ->back()
+                ->with('error', 'Oops! Connection could not be established with host mail.africanfoodusa.com!!');
+        }    
     }
 
     public function verify($link)
@@ -92,53 +109,105 @@ class BusinessAuthenticationController extends Controller
         }
     }
 
+
     public function forgot_Pass()
-    {    
+    {
         return view('front.user-authentication.forgot_password');
     }
 
-    public function sendResetLink(Request $request)
+    // public function sendResetLink(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|email|exists:users',
+    //     ]);
+
+    //     $token = Str::random(64);
+
+    //     DB::table('password_reset_tokens')->insert([
+    //         'email' => $request->email, 
+    //         'token' => $token, 
+    //         'created_at' => Carbon::now()
+    //       ]);
+
+    //     Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
+    //         $message->to($request->email);
+    //         $message->subject('Reset Password');
+    //     });
+
+    //     return back()->with('message', 'We have e-mailed your password reset link!');
+    // }
+    
+    
+     public function sendResetLink(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users',
         ]);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $token = Str::random(64);
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with('message', __($status))
-            : back()->withErrors(['error' => __($status)]);
-        
+        $existingToken = DB::table('password_reset_tokens')->where('email', $request->email)->first();
+
+         if ($existingToken) {
+            DB::table('password_reset_tokens')
+                ->where('email', $request->email)
+                ->update([
+                    'token' => $token,
+                    'created_at' => Carbon::now()
+                ]);
+        } else {
+            DB::table('password_reset_tokens')->insert([
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => Carbon::now()
+            ]);
+        }
+
+        Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Reset Password');
+        });
+
+        return back()->with('message', 'We have e-mailed your password reset link!');
     }
+    
 
-
-    public function showResetForm( Request $request )
+    public function showResetForm($token)
     {
-        $token = $request->get('token');
+        $token = $token;
         return view('auth.reset-password', ['token' => $token]);
     }
 
+
     public function resetPassword(Request $request)
     {
-        // $request->validate([
-        //     'token' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required|confirmed|min:8',
-        // ]);
+
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_reset_tokens')
+                              ->where([
+                                'email' => $request->email, 
+                                'token' => $request->token
+                              ])
+                              ->first();
+
+        if(!$updatePassword){
+                                return back()->withInput()->with('error', 'Invalid token!');
+                            }
+
+        User::where('email', $request->email)
+                            ->update(['password' => Hash::make($request->password)]);
+       
+        DB::table('password_reset_tokens')->where(['email'=> $request->email])->delete();
+
+        return redirect()->back()->with('message', 'Your password has been reset. Please login with your new password.');
+    }
 
 
-        if ($request->password == $request->password_confirmation) {
-            User::where('email_verified_at', $request->verifyCode)->update([
-                'password' => Hash::make($request->password),
-            ]);
-
-            return redirect()->route('business.loginPage')->with('success', 'Password Changed Login Now!!');
-        } else {
-            return redirect()->with('error', 'Password & Confirm Password Must Be Same');
-        }
-    }    
 
     public function businessDashboard()
     {

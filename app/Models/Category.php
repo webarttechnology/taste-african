@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(BusinessListing::class);
     }
+    
+    public function approvedListings()
+    {
+        return $this->hasMany(BusinessListing::class)->where('status', 'approve');
+    }
 }

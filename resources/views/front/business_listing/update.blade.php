@@ -2,28 +2,24 @@
 @section('content')
     <!-- =============================== Dashboard Header ========================== -->
     <section class="bg-cover position-relative" style="background:url({{ asset('front/img/cover.jpg') }}) no-repeat #C90000;">
-        <div class="abs-list-sec"><a href="{{ route('business_listing') }}" class="add-list-btn"><i
-                    class="fas fa-plus me-2"></i>Update Listing</a></div>
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
                     <div class="dashboard-head-author-clicl">
                         <div class="dashboard-head-author-thumb">
-                            @if(Auth::user()->image === null)
-                            <img src="{{asset('front/img/user.png')}}" class="img-fluid" alt="" />
+                            @if (Auth::user()->image === null)
+                                <img src="{{ asset('front/img/user.png') }}" class="img-fluid" alt="" />
                             @else
-                            <img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
+                                <img src="{{ asset(Auth::user()->image) }}" class="img-fluid" alt="" />
                             @endif
                         </div>
                         <div class="dashboard-head-author-caption">
                             <div class="dashploio">
                                 <h4>{{ Auth::user()->name }}</h4>
                             </div>
-                           
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -31,13 +27,13 @@
     <!-- =============================== Dashboard Header ========================== -->
 
     <!-- ======================= Dashboard Detail ======================== -->
-    <div class="goodup-dashboard-wrap gray px-4 py-5">
+    <div class="goodup-dashboard-wrap gray px-4 py-5 bus_cnt">
         <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false"
             aria-controls="MobNav">
             <i class="fas fa-bars me-2"></i>Dashboard Navigation</a>
         @include('front.layout.sidebar')
 
-        <div class="goodup-dashboard-content">
+        <div class="goodup-dashboard-content detailed">
             <div class="dashboard-tlbar d-block mb-5">
                 <div class="row">
                     <div class="colxl-12 col-lg-12 col-md-12">
@@ -60,7 +56,8 @@
                                     <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                         <div class="dashboard-list-wraps-flx">
                                             <h4 class="mb-0 ft-medium fs-md">
-                                                <i class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option
+                                                <i class="fa fa-camera me-2 theme-cl fs-sm"></i>Image & Gallery Option <span
+                                                class="asterisk_required_field"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -75,11 +72,11 @@
                                                 <div class="col-lg-6 col-md-6 uploadForm image-div"></div>
 
                                                 @foreach ($listing->images as $listing_image)
-                                                    <div class="col-lg-6 col-md-6 image-div">
+                                                    <div class="col-lg-10 col-md-10 image-div">
                                                         <img src="{{ asset($listing_image->images) }}"
                                                             class="img-fluid mx-auto" width="150px" />
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 image-div">
+                                                    <div class="col-lg-2 col-md-2 image-div">
                                                         <a href="#"
                                                             class="btn theme-cl rounded theme-bg-light ft-medium delete-image"
                                                             data-image-id="{{ $listing_image->id }}">Delete</a>
@@ -109,9 +106,10 @@
 
                                     <div class="dashboard-list-wraps-body py-3 px-3">
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">Listing Title</label>
+                                                    <label class="mb-1">Listing Title</label> <span
+                                                    class="asterisk_required_field"></span>
                                                     <input type="text" class="form-control rounded" placeholder=""
                                                         name="title" value="{{ old('title', $listing->title) }}" />
                                                     <div class="validation-error">
@@ -121,19 +119,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">Listing Status</label>
-                                                    <select class="form-control"name="approval">
-                                                        <option>---- Select ----</option>                                                      
-                                                            <option value="hide"{{$listing->approval == 'hide' ? 'selected' : ''}}>hide</option>
-                                                            <option value="show"{{$listing->approval == 'show' ? 'selected' : ''}}>show</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Categories</label>
+                                                    <label class="mb-1">Categories</label> <span
+                                                    class="asterisk_required_field"></span>
                                                     <select class="form-control"name="category"
                                                         value="{{ old('category') }}">
                                                         <option>---- Select ----</option>
@@ -151,7 +140,41 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Country of Origin</label>
+                                                    <select class="form-control" name="country" id="countrySelect"
+                                                        required>
+                                                        <option>---- Select ----</option>
+                                                        @foreach ($country as $countries)
+                                                            <option value="{{ $countries->country_name }}">
+                                                                {{ $countries->country_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <div class="validation-error">
+                                                        @error('country')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Listing Status</label> <span
+                                                    class="asterisk_required_field"></span>
+                                                    <select class="form-control"name="approval">
+                                                        <option>---- Select ----</option>
+                                                        <option
+                                                            value="hide"{{ $listing->approval == 'hide' ? 'selected' : '' }}>
+                                                            hide</option>
+                                                        <option
+                                                            value="show"{{ $listing->approval == 'show' ? 'selected' : '' }}>
+                                                            show</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            {{-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Keywords</label>
                                                     <input type="text" class="form-control rounded" id="keywords"
@@ -162,10 +185,11 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            </div> --}}
+                                            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">About Listing</label>
+                                                    <label class="mb-1">About Listing</label> <span
+                                                    class="asterisk_required_field"></span>
                                                     <textarea class="form-control rounded ht-150" name="description" value="">{{ $listing->description }}</textarea>
                                                     <div class="validation-error">
                                                         @error('description')
@@ -187,69 +211,10 @@
                                             </h4>
                                         </div>
                                     </div>
-
+                                     
                                     <div class="dashboard-list-wraps-body py-3 px-3">
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Latitude</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="latitude"
-                                                        value="{{ old('latitude', $listing->latitude) }}" />
-                                                    <div class="validation-error">
-                                                        @error('latitude')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">Longitude</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="longitude"
-                                                        value="{{ old('longitude', $listing->longitude) }}" />
-                                                    <div class="validation-error">
-                                                        @error('longitude')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <iframe
-                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27437.803590312993!2d76.75937213955079!3d30.726117899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390feda9761bdc2f%3A0x5e764f7f18edc390!2sMidpoint%20Cafe!5e0!3m2!1sen!2sin!4v1649569611177!5m2!1sen!2sin"
-                                                        class="full-width" height="300" style="border:0;"
-                                                        allowfullscreen="" loading="lazy"
-                                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">State</label>
-                                                    <input type="text" class="form-control rounded" name="state"
-                                                        value="{{ old('state', $listing->state) }}" />
-                                                    <div class="validation-error">
-                                                        @error('state')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1">City</label>
-                                                    <input type="text" class="form-control rounded" name="city"
-                                                        value="{{ old('city', $listing->city) }}" />
-                                                    <div class="validation-error">
-                                                        @error('city')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Address</label>
                                                     <input type="text" class="form-control rounded" placeholder=""
@@ -261,9 +226,37 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">Zip Code</label>
+                                                    <label class="mb-1">City</label><span
+                                                    class="asterisk_required_field"></span>
+                                                    <input type="text" class="form-control rounded" name="city"
+                                                        value="{{ old('city', $listing->city) }}" />
+                                                    <div class="validation-error">
+                                                        @error('city')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">State</label><span
+                                                    class="asterisk_required_field"></span>
+                                                    <input type="text" class="form-control rounded" name="state"
+                                                        value="{{ old('state', $listing->state) }}" />
+                                                    <div class="validation-error">
+                                                        @error('state')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="mb-1">Zip Code</label><span
+                                                    class="asterisk_required_field"></span>
                                                     <input type="text" class="form-control rounded" placeholder=""
                                                         name="zip_code"
                                                         value="{{ old('zip_code', $listing->zip_code) }}" />
@@ -274,7 +267,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            
+
+                                            <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">-->
+                                            <!--    <div class="form-group">-->
+                                            <!--        <button type="button"-->
+                                            <!--            class="btn theme-cl rounded bg-warning ft-medium mt-4"-->
+                                            <!--            id="addNewCountryButton">-->
+                                            <!--            Add New Country-->
+                                            <!--        </button>-->
+                                            <!--    </div>-->
+                                            <!--</div>-->
+                                            
+                                           
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Mobile</label>
                                                     <input type="text" class="form-control rounded" placeholder=""
@@ -286,7 +292,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="mb-1">Email</label>
                                                     <input type="text" class="form-control rounded" placeholder=""
@@ -331,7 +337,10 @@
                                                     <ul id="amenities-list">
                                                         @foreach ($amenities as $amenity)
                                                             @php
-                                                                $amenitiesArray = array_column(json_decode(json_encode($listing->amenties), true), 'amenities');
+                                                                $amenitiesArray = array_column(
+                                                                    json_decode(json_encode($listing->amenties), true),
+                                                                    'amenities',
+                                                                );
                                                             @endphp
                                                             <li>
                                                                 <input class="checkbox-custom"
@@ -357,10 +366,8 @@
                                     </div>
                                 </div>
 
-
-
                                 <!-- Menu Items -->
-                                <div class="container mt-5">
+                                {{-- <div class="container mt-5">
                                     <div class="dashboard-list-wraps bg-white rounded mb-4">
                                         <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
                                             <div class="dashboard-list-wraps-flx">
@@ -456,7 +463,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Working hours -->
                                 <div class="dashboard-list-wraps bg-white rounded mb-4">
@@ -469,1238 +476,427 @@
 
                                     <div class="dashboard-list-wraps-body py-3 px-3">
                                         <div class="row">
+
                                             <div class="form-group">
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Monday</label>
                                                     <div class="col-lg-5 col-md-5">
                                                         <select name="monday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
+                                                            <option value="Closed">Closed</option>
+                                                            @php
+                                                                $openingTimes = [
+                                                                    '1:00 AM',
+                                                                    '2:00 AM',
+                                                                    '3:00 AM',
+                                                                    '4:00 AM',
+                                                                    '5:00 AM',
+                                                                    '6:00 AM',
+                                                                    '7:00 AM',
+                                                                    '8:00 AM',
+                                                                    '9:00 AM',
+                                                                    '10:00 AM',
+                                                                    '11:00 AM',
+                                                                    '12:00 PM',
+                                                                    '1:00 PM',
+                                                                    '2:00 PM',
+                                                                    '3:00 PM',
+                                                                    '4:00 PM',
+                                                                    '5:00 PM',
+                                                                    '6:00 PM',
+                                                                    '7:00 PM',
+                                                                    '8:00 PM',
+                                                                    '9:00 PM',
+                                                                    '10:00 PM',
+                                                                    '11:00 PM',
+                                                                    '12:00 AM',
+                                                                ];
+                                                            @endphp
+
+                                                            @foreach ($openingTimes as $time)
+                                                                <option
+                                                                    {{ optional($listing->infos)->monday_opening_time == $time ? 'selected' : '' }}
+                                                                    value="{{ $time }}">
+                                                                    {{ $time }}
+                                                                </option>
+                                                            @endforeach
+
                                                         </select>
-
-
-
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
-                                                        <select name="monday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->monday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
+                                                        @php
+                                                            $closingTimes = [
+                                                                'Closed',
+                                                                '1:00 AM',
+                                                                '2:00 AM',
+                                                                '3:00 AM',
+                                                                '4:00 AM',
+                                                                '5:00 AM',
+                                                                '6:00 AM',
+                                                                '7:00 AM',
+                                                                '8:00 AM',
+                                                                '9:00 AM',
+                                                                '10:00 AM',
+                                                                '11:00 AM',
+                                                                '12:00 PM',
+                                                                '1:00 PM',
+                                                                '2:00 PM',
+                                                                '3:00 PM',
+                                                                '4:00 PM',
+                                                                '5:00 PM',
+                                                                '6:00 PM',
+                                                                '7:00 PM',
+                                                                '8:00 PM',
+                                                                '9:00 PM',
+                                                                '10:00 PM',
+                                                                '11:00 PM',
+                                                                '12:00 AM',
+                                                            ];
+                                                        @endphp
 
+                                                        <select name="monday_closing_time" class="form-control">
+                                                            @foreach ($closingTimes as $time)
+                                                                <option
+                                                                    {{ optional($listing->infos)->monday_closing_time == $time ? 'selected' : '' }}
+                                                                    value="{{ $time }}">
+                                                                    {{ $time }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            @php
+                                                $times = [
+                                                    'Closed',
+                                                    '1:00 AM',
+                                                    '2:00 AM',
+                                                    '3:00 AM',
+                                                    '4:00 AM',
+                                                    '5:00 AM',
+                                                    '6:00 AM',
+                                                    '7:00 AM',
+                                                    '8:00 AM',
+                                                    '9:00 AM',
+                                                    '10:00 AM',
+                                                    '11:00 AM',
+                                                    '12:00 PM',
+                                                    '1:00 PM',
+                                                    '2:00 PM',
+                                                    '3:00 PM',
+                                                    '4:00 PM',
+                                                    '5:00 PM',
+                                                    '6:00 PM',
+                                                    '7:00 PM',
+                                                    '8:00 PM',
+                                                    '9:00 PM',
+                                                    '10:00 PM',
+                                                    '11:00 PM',
+                                                    '12:00 AM',
+                                                ];
+                                            @endphp
 
                                             <div class="form-group">
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Tuesday</label>
                                                     <div class="col-lg-5 col-md-5">
-
                                                         <select name="tuesday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
+                                                            @foreach ($times as $time)
+                                                                <option
+                                                                    {{ optional($listing->infos)->tuesday_opening_time == $time ? 'selected' : '' }}
+                                                                    value="{{ $time }}">
+                                                                    {{ $time }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
                                                         <select name="tuesday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->tuesday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
+                                                            @foreach ($times as $time)
+                                                                <option
+                                                                    {{ optional($listing->infos)->tuesday_closing_time == $time ? 'selected' : '' }}
+                                                                    value="{{ $time }}">
+                                                                    {{ $time }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
 
+
+
+                                            @php
+                                                $times = [
+                                                    'Closed',
+                                                    '1:00 AM',
+                                                    '2:00 AM',
+                                                    '3:00 AM',
+                                                    '4:00 AM',
+                                                    '5:00 AM',
+                                                    '6:00 AM',
+                                                    '7:00 AM',
+                                                    '8:00 AM',
+                                                    '9:00 AM',
+                                                    '10:00 AM',
+                                                    '11:00 AM',
+                                                    '12:00 PM',
+                                                    '1:00 PM',
+                                                    '2:00 PM',
+                                                    '3:00 PM',
+                                                    '4:00 PM',
+                                                    '5:00 PM',
+                                                    '6:00 PM',
+                                                    '7:00 PM',
+                                                    '8:00 PM',
+                                                    '9:00 PM',
+                                                    '10:00 PM',
+                                                    '11:00 PM',
+                                                    '12:00 AM',
+                                                ];
+                                            @endphp
 
                                             <div class="form-group">
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Wednesday</label>
                                                     <div class="col-lg-5 col-md-5">
-
                                                         <select name="wednesday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
+                                                            @foreach ($times as $time)
+                                                                <option
+                                                                    {{ optional($listing->infos)->wednesday_opening_time == $time ? 'selected' : '' }}
+                                                                    value="{{ $time }}">
+                                                                    {{ $time }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-5 col-md-5">
                                                         <select name="wednesday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->wednesday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
+                                                            @foreach ($times as $time)
+                                                                <option
+                                                                    {{ optional($listing->infos)->wednesday_closing_time == $time ? 'selected' : '' }}
+                                                                    value="{{ $time }}">
+                                                                    {{ $time }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            @php
+                                                $days = [
+                                                    'Monday',
+                                                    'Tuesday',
+                                                    'Wednesday',
+                                                    'Thursday',
+                                                    'Friday',
+                                                    'Saturday',
+                                                    'Sunday',
+                                                ];
+                                                $times = [
+                                                    'Closed',
+                                                    '1:00 AM',
+                                                    '2:00 AM',
+                                                    '3:00 AM',
+                                                    '4:00 AM',
+                                                    '5:00 AM',
+                                                    '6:00 AM',
+                                                    '7:00 AM',
+                                                    '8:00 AM',
+                                                    '9:00 AM',
+                                                    '10:00 AM',
+                                                    '11:00 AM',
+                                                    '12:00 PM',
+                                                    '1:00 PM',
+                                                    '2:00 PM',
+                                                    '3:00 PM',
+                                                    '4:00 PM',
+                                                    '5:00 PM',
+                                                    '6:00 PM',
+                                                    '7:00 PM',
+                                                    '8:00 PM',
+                                                    '9:00 PM',
+                                                    '10:00 PM',
+                                                    '11:00 PM',
+                                                    '12:00 AM',
+                                                ];
+                                            @endphp
 
                                             <div class="form-group">
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Thursday</label>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="thursday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="thursday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->thursday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-                                                    </div>
+                                                    @foreach (['opening_time', 'closing_time'] as $timeType)
+                                                        <div class="col-lg-5 col-md-5">
+                                                            <select name="thursday_{{ $timeType }}"
+                                                                class="form-control">
+                                                                <option value="Closed">Closed</option>
+                                                                @foreach ($times as $time)
+                                                                    <option
+                                                                        {{ optional(optional($listing->infos)->thursday)[$timeType] == $time ? 'selected' : '' }}
+                                                                        value="{{ $time }}">
+                                                                        {{ $time }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
 
 
 
+                                            @php
+                                                $times = [
+                                                    'Closed',
+                                                    '1:00 AM',
+                                                    '2:00 AM',
+                                                    '3:00 AM',
+                                                    '4:00 AM',
+                                                    '5:00 AM',
+                                                    '6:00 AM',
+                                                    '7:00 AM',
+                                                    '8:00 AM',
+                                                    '9:00 AM',
+                                                    '10:00 AM',
+                                                    '11:00 AM',
+                                                    '12:00 PM',
+                                                    '1:00 PM',
+                                                    '2:00 PM',
+                                                    '3:00 PM',
+                                                    '4:00 PM',
+                                                    '5:00 PM',
+                                                    '6:00 PM',
+                                                    '7:00 PM',
+                                                    '8:00 PM',
+                                                    '9:00 PM',
+                                                    '10:00 PM',
+                                                    '11:00 PM',
+                                                    '12:00 AM',
+                                                ];
+                                            @endphp
 
                                             <div class="form-group">
                                                 <div class="row align-items-center">
                                                     <label class="control-label col-lg-2 col-md-2">Friday</label>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="friday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="friday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->friday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-                                                    </div>
+                                                    @foreach (['opening_time', 'closing_time'] as $timeType)
+                                                        <div class="col-lg-5 col-md-5">
+                                                            <select name="friday_{{ $timeType }}"
+                                                                class="form-control">
+                                                                <option value="Closed">Closed</option>
+                                                                @foreach ($times as $time)
+                                                                    @php
+                                                                        $selected =
+                                                                            optional($listing->infos)
+                                                                                ->{"friday_{$timeType}"} == $time
+                                                                                ? 'selected'
+                                                                                : '';
+                                                                    @endphp
+                                                                    <option {{ $selected }}
+                                                                        value="{{ $time }}">
+                                                                        {{ $time }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
 
-
-
-                                            <div class="form-group">
-                                                <div class="row align-items-center">
-                                                    <label class="control-label col-lg-2 col-md-2">Saturday</label>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="saturday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="saturday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->saturday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <div class="row align-items-center">
-                                                    <label class="control-label col-lg-2 col-md-2">Sunday</label>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="sunday_opening_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_timesunday_opening_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_opening_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="col-lg-5 col-md-5">
-                                                        <select name="sunday_closing_time" class="form-control">
-                                                            <option>Select</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '1:00 AM' ? 'selected' : '' }}
-                                                                value="1:00 AM">1:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '2:00 AM' ? 'selected' : '' }}
-                                                                value="2:00 AM">2:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '3:00 AM' ? 'selected' : '' }}
-                                                                value="3:00 AM">3:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '4:00 AM' ? 'selected' : '' }}
-                                                                value="4:00 AM">4:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '5:00 AM' ? 'selected' : '' }}
-                                                                value="5:00 AM">5:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '6:00 AM' ? 'selected' : '' }}
-                                                                value="6:00 AM">6:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '7:00 AM' ? 'selected' : '' }}
-                                                                value="7:00 AM">7:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '8:00 AM' ? 'selected' : '' }}
-                                                                value="8:00 AM">8:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '9:00 AM' ? 'selected' : '' }}
-                                                                value="9:00 AM">9:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '10:00 AM' ? 'selected' : '' }}
-                                                                value="10:00 AM">10:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '11:00 AM' ? 'selected' : '' }}
-                                                                value="11:00 AM">11:00 AM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '12:00 PM' ? 'selected' : '' }}
-                                                                value="12:00 PM">12:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '1:00 PM' ? 'selected' : '' }}
-                                                                value="1:00 PM">1:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '2:00 PM' ? 'selected' : '' }}
-                                                                value="2:00 PM">2:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '3:00 PM' ? 'selected' : '' }}
-                                                                value="3:00 PM">3:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '4:00 PM' ? 'selected' : '' }}
-                                                                value="4:00 PM">4:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '5:00 PM' ? 'selected' : '' }}
-                                                                value="5:00 PM">5:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '6:00 PM' ? 'selected' : '' }}
-                                                                value="6:00 PM">6:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '7:00 PM' ? 'selected' : '' }}
-                                                                value="7:00 PM">7:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '8:00 PM' ? 'selected' : '' }}
-                                                                value="8:00 PM">8:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '9:00 PM' ? 'selected' : '' }}
-                                                                value="9:00 PM">9:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '10:00 PM' ? 'selected' : '' }}
-                                                                value="10:00 PM">10:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '11:00 PM' ? 'selected' : '' }}
-                                                                value="11:00 PM">11:00 PM</option>
-                                                            <option
-                                                                {{ $listing->infos->sunday_closing_time == '12:00 AM' ? 'selected' : '' }}
-                                                                value="12:00 AM">12:00 AM</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group mt-4">
-                                                <input id="t24" class="checkbox-custom" name="opening_all_time"
-                                                    type="checkbox">
-                                                <label for="This Business open 7x24" class="checkbox-custom-label">This
-                                                    Business open 7x24</label>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
 
 
-                                <!-- Social Links -->
-                                <div class="dashboard-list-wraps bg-white rounded mb-4">
-                                    <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
-                                        <div class="dashboard-list-wraps-flx">
-                                            <h4 class="mb-0 ft-medium fs-md"><i
-                                                    class="fa fa-user-friends me-2 theme-cl fs-sm"></i>Social Links</h4>
-                                        </div>
-                                    </div>
+                                        <!-- Social Links -->
+                                        <div class="dashboard-list-wraps bg-white rounded mb-4">
+                                            <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                                                <div class="dashboard-list-wraps-flx">
+                                                    <h4 class="mb-0 ft-medium fs-md"><i
+                                                            class="fa fa-user-friends me-2 theme-cl fs-sm"></i>Social Links
+                                                    </h4>
+                                                </div>
+                                            </div>
 
-                                    <div class="dashboard-list-wraps-body py-3 px-3">
-                                        <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1"><i
-                                                            class="ti-facebook theme-cl me-1"></i>Facebook</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="facebook"
-                                                        value="{{ old('facebook', $listing->infos->facebook) }}" />
-                                                    <div class="validation-error">
-                                                        @error('facebook')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
+                                            <div class="dashboard-list-wraps-body py-3 px-3">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="mb-1"><i
+                                                                    class="ti-facebook theme-cl me-1"></i>Facebook</label>
+                                                            <input type="text" class="form-control rounded"
+                                                                placeholder="" name="facebook"
+                                                                value="{{ old('facebook', isset($listing->infos->facebook) ? $listing->infos->facebook : '') }}" />
+
+                                                            <div class="validation-error">
+                                                                @error('facebook')
+                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1"><i
-                                                            class="ti-twitter theme-cl me-1"></i>Twitter</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="twitter"
-                                                        value="{{ old('twitter', $listing->infos->twitter) }}" />
-                                                    <div class="validation-error">
-                                                        @error('twitter')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="mb-1"><i
+                                                                    class="ti-twitter theme-cl me-1"></i>Twitter</label>
+                                                            <input type="text" class="form-control rounded"
+                                                                placeholder="" name="twitter"
+                                                                value="{{ old('twitter', isset($listing->infos->twitter) ? $listing->infos->twitter : '') }}" />
+                                                            <div class="validation-error">
+                                                                @error('twitter')
+                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1"><i
-                                                            class="ti-instagram theme-cl me-1"></i>Instagram</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="instagram"
-                                                        value="{{ old('instagram', $listing->infos->instagram) }}" />
-                                                    <div class="validation-error">
-                                                        @error('instagram')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="mb-1"><i
+                                                                    class="ti-instagram theme-cl me-1"></i>Instagram</label>
+                                                            <input type="text" class="form-control rounded"
+                                                                placeholder="" name="instagram"
+                                                                value="{{ old('instagram', isset($listing->infos->instagram) ? $listing->infos->instagram : '') }}" />
+                                                            <div class="validation-error">
+                                                                @error('instagram')
+                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="mb-1"><i
-                                                            class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
-                                                    <input type="text" class="form-control rounded" placeholder=""
-                                                        name="linkedin"
-                                                        value="{{ old('linkedin', $listing->infos->linkedin) }}" />
-                                                    <div class="validation-error">
-                                                        @error('linkedin')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="mb-1"><i
+                                                                    class="ti-linkedin theme-cl me-1"></i>Linkedin</label>
+                                                            <input type="text" class="form-control rounded"
+                                                                placeholder="" name="linkedin"
+                                                                value="{{ old('linkedin', isset($listing->infos->linkedin) ? $listing->infos->linkedin : '') }}" />
+                                                            <div class="validation-error">
+                                                                @error('linkedin')
+                                                                    <p class="text-danger">{{ $message }}</p>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <button class="btn theme-bg rounded text-light" type="submit"> Submit
-                                                    </button>
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <button class="btn theme-bg rounded text-light"
+                                                                type="submit"> Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>        
                         </form>
                     </div>
                 </div>
             </div>
 
             {{-- Div for Menu --}}
-            <div class="row menu-row d-none mb-2" style="border:2px solid black">
+            {{-- <div class="row menu-row d-none mb-2" style="border:2px solid black">
                 <h2> Add Another Menu Items</h2>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                     <div class="form-group">
@@ -1743,7 +939,7 @@
                             onclick="removespecificMenuRow(this, event)">Remove</button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- Div for Menu --}}
 
             {{-- Div for Image --}}
@@ -1762,6 +958,8 @@
                 </div>
             </div>
             {{-- Div for Image --}}
+        </div>
+    </div>
         @stop
 
 
@@ -1892,7 +1090,32 @@
                             }
                         });
                     });
+
+                    $('#addNewCountryButton').on('click', function() {
+            var newCountryName = prompt("Enter the name of the new country:");
+
+            if (newCountryName) {
+                $.ajax({
+                    url: '{{ route('addCountry') }}', // Laravel route for adding a country
+                    method: 'POST',
+                    data: {
+                        country: newCountryName,
+                        _token: '{{ csrf_token() }}' // CSRF token
+                    },
+                    success: function(response) {
+                        $('#countrySelect').append(`<option value="${response.country.id}">${response.country.country_name}</option>`);
+                        $('#countrySelect').val(response.country.id); // Optionally select the newly added option
+                        alert("Country added successfully.");
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Failed to add country.");
+                    }
+                });
+            }
+        });
                 });
             </script>
+
+
 
         @endsection

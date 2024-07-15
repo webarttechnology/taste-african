@@ -32,7 +32,7 @@
     <!-- ======================= dashboard Detail ======================== -->
     @include('front.layout.sidebar')
 
-        <div class="goodup-dashboard-content">
+        <div class="goodup-dashboard-content detailed">
             <div class="dashboard-tlbar d-block mb-5">
                 <div class="row">
                     <div class="colxl-12 col-lg-12 col-md-12">
@@ -52,7 +52,7 @@
                                         <!-- Single Listing Item -->
                                         <div class="dsd-single-listing-wraps">
                                             <div class="dsd-single-lst-thumb">
-                                                @foreach ($listing->images as $listing_image)
+                                                @foreach ($listing->images->take(1) as $listing_image)
                                                     <a href="{{ $listing_image->images }}" class="mfp-gallery">
                                                         <img src="{{ $listing_image->images }}" class="img-fluid mx-auto" alt="{{ $listing->title }}"/>
                                                     </a>
@@ -100,8 +100,8 @@
                                                             class="fas fa-edit me-1"></i>Edit</a>
                                                     <a href="{{ url ('business-listing/details/'.$listing->id) }}" class="btn btn-view mr-1"><i
                                                             class="fas fa-eye me-1"></i>View</a>
-                                                    <a href="{{ url ('business-listing/delete/'.$listing->id) }}" class="btn btn-delete"><i
-                                                            class="fas fa-trash me-1"></i>Delete</a>
+                                                    <!--<a href="{{ url ('business-listing/delete/'.$listing->id) }}" class="btn btn-delete"><i-->
+                                                    <!--        class="fas fa-trash me-1"></i>Delete</a>-->
                                                             
                                                 </div>
                                             </div>
@@ -125,5 +125,6 @@
                     </div>
                 </div>
             </div>
-
+</div>
+            </div>
         @stop

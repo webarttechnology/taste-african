@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
+		<meta name="description" content="African Food - Admin Dashboard">
 
 		<title>African Food - Admin Dashboard</title>
 		
@@ -34,30 +34,42 @@
 					<div class="card">
 						<div class="card-header bg-primary">
 							<div class="ec-brand">
-								<a href="index.html" title="Ekka">
+								<a href="" title="Ekka">
 									<img class="ec-brand-icon" src="{{asset('front/img/logos.png')}}" alt="" />
 								</a>
 							</div>
 						</div>
 						<div class="card-body p-5">
-							<h4 class="text-dark mb-5">Sign In</h4>
+							<h4 class="text-dark mb-5">Admin Sign In</h4>
 							
 							<form action="{{ route ('admin.login')}}" method="POST">
 								@csrf
 								<div class="row">
 									<div class="form-group col-md-12 mb-4">
-										<label class="mb-1">Email</label>
+										<label class="mb-1">Email</label><span class="optional-label" style="color: red">*</span>
 										<input type="email" class="form-control" id="email" name="email">
 									</div>
 									
 									<div class="form-group col-md-12 ">
-										<label class="mb-1">Password</label>
-										<input type="password" class="form-control" id="password" name="password">
+										<label class="mb-1">Password</label><span class="optional-label" style="color: red">*</span>
+										<input type="password" class="form-control" id="password" name="password" ><span class="optional-label">(Required, at least 8 characters)</span>
+										<span class="tooltip">i
+										  <span class="tooltiptext">Password should be at least 8 characters long and contain a mix of letters and numbers.</span>
+									  </span>
 									</div>
 									
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary btn-block mb-4">Sign In</button>
 									</div>
+								<div class="row">
+                                    <div class="col-md-6 d-flex justify-content-end">
+                                        <a href="{{ route('admin.forgot_Pass') }}" class=" mb-4">Forget Password</a>
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-start">
+                                        <a href="{{ route('admin.registerPage') }}" class=" ml-4">New Member?</a>
+                                    </div>
+                                </div>
+
 								</div>
 							</form>
 						</div>

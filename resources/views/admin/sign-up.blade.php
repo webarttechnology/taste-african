@@ -7,9 +7,9 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ekka - Admin Dashboard HTML Template.">
+  <meta name="description" content="African Food - Admin Dashboard">
 
-  <title>Tita - Admin Dashboard</title>
+  <title>Africa Food USA - Admin Dashboard</title>
 
 <!-- GOOGLE FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -37,56 +37,44 @@
         <div class="card">
           <div class="card-header bg-primary">
             <div class="ec-brand">
-              <a href="index.html" title="Ekka">African Food
-              </a>
+              <center><img class="ec-brand-icon" src="{{ asset('front/img/logos.png') }}" width="100px"/></center>
             </div>
           </div>
           <div class="card-body p-5">
-            <h4 class="text-dark mb-5">Sign Up</h4>
+            <h4 class="text-dark mb-5">Admin Sign Up</h4>
 
-            <form action="{{ route ('business.register')}}" method="POST">
+            <form action="{{ route ('admin.register')}}" method="POST">
               @csrf
               <div class="row">
                 <div class="form-group col-md-12 mb-4">
-                  <label class="mb-1">Name</label>
-                  <input type="text" class="form-control rounded" name="name">
+                  <label class="mb-1">Name</label><span class="optional-label" style="color: red">*</span>
+                  <input type="text" class="form-control rounded" name="name" required value="{{ old ('name')}}">
                 </div>
 
-                <div class="form-group col-md-12 mb-4">
-                  <label class="mb-1">Email</label>
-                  <input type="text" class="form-control rounded" name="email">
+                <div class="form-group col-md-12">
+                  <label class="mb-1">Email</label><span class="optional-label" style="color: red">*</span>
+                  <input type="text" class="form-control rounded" name="email" required value="{{ old ('email')}}">
                 </div>
 
-                <div class="form-group col-md-12 mb-4">
-                  <input type="hidden" class="form-control rounded" name="status">
+                
+
+                <div class="form-group col-md-12 ">
+                  <label class="mb-1">Password</label><span class="optional-label" style="color: red">*</span>
+                  <input type="password" class="form-control rounded" name="password" required ><span class="optional-label">(Required, at least 8 characters)</span>
+                  <span class="tooltip">i
+                    <span class="tooltiptext">Password should be at least 8 characters long and contain a mix of letters and numbers.</span>
+                </span>
                 </div>
 
                 <div class="form-group col-md-12 ">
-                  <div class="form-group">
-                    <label class="mb-1">Role</label>
-                    <select class="form-select" aria-label="Default select example" name="role">
-                      <option selected>Open this select menu</option>
-                      <option value="Business Owner">Business Owner</option>
-                      <option value="User"> User</option>
-                      <option value="Admin">Admin</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group col-md-12 ">
-                  <label class="mb-1">Password</label>
-                  <input type="password" class="form-control rounded" name="password">
-                </div>
-
-                <div class="form-group col-md-12 ">
-                  <label class="mb-1">Confirm Password</label>
-                  <input type="password" class="form-control rounded" id="cpassword" name="password_confirmation" placeholder="Confirm Password">
+                  <label class="mb-1">Confirm Password</label><span class="optional-label" style="color: red">*</span>
+                  <input type="password" class="form-control rounded" id="cpassword" name="password_confirmation"  required>
                 </div>
 
                 <div class="col-md-12">  
                   <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>
                   <p class="sign-upp">Already have an account?
-                    <a class="text-blue" href="{{route ('business.loginPage')}}">Sign in</a>
+                    <a class="text-blue" href="{{ route ('admin.loginPage')}}">Sign in</a>
                   </p>
                 </div>
               </div>

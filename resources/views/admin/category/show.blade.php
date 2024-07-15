@@ -18,7 +18,7 @@
 
                         <div class="card-body product-detail">
                             <div class="row">
-                                <table class="table">
+                                <table class="table" id="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
@@ -53,6 +53,11 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <ul class="pagination">                             
+                                        {{ $category->links('vendor.pagination.bootstrap-4') }}
+                                    </ul>
+                                </div>
                             </div>   
                         </div>
                     </div>
@@ -64,5 +69,12 @@
 
 @stop
 
+
+<script>
+    $(document).ready(function() {
+        // Initialize DataTables
+        $('#table').DataTable();
+    });
+</script>
 
 

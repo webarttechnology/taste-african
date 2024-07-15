@@ -40,13 +40,15 @@
                                                     name="email" value="{{ old('email',$contactdetails->email) }}">
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="form-label">Logo</label>
+                                                <label class="form-label">Logo & Favicon</label>
                                                 <input class="form-control" type="file" id="image" name="image">
 												<img src="{{asset ($contactdetails->logo)}}" width="50px">
                                             </div>  
 											
 											<div class="col-md-6">
-												
+                                                <label for="inputEmail4" class="form-label">Site Name</label>
+                                                <input type="text" class="form-control slug-title"
+                                                    name="site_name" value="{{ old('site_name',$contactdetails->site_name) }}">
                                             </div>  
 
                                             <div class="col-md-12">
