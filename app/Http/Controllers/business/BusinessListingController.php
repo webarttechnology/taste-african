@@ -212,7 +212,23 @@ class BusinessListingController extends Controller
         {
             $keywords .= ", " . $keyword->keywords;
         }
-        return view('front.business_listing.update', compact('listing', 'keywords', 'categories', 'amenities', 'country'));
+        $states = State::where('status', 1)
+        ->get();
+        $selected_state = '';
+        $selected_city = '';
+        if (!empty($listing->state)) {
+            $selected_state = $listing->state;
+        }
+        if (!empty($listing->city)) {
+            $selected_city = $listing->city;
+        }
+        $cities = '';
+        if ($selected_state != '') {
+            $cities = City::where('state_id', $selected_state)
+                ->where('status', 1)
+                ->get();
+        }
+        return view('front.business_listing.update', compact('listing', 'keywords', 'categories', 'amenities', 'country', 'states', 'cities', 'selected_state', 'selected_city'));
     }
 
     public function deleteImage(Request $request)

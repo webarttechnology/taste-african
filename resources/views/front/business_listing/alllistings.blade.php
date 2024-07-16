@@ -54,7 +54,7 @@
                                     <option value="">Select Category</option>
                                     @foreach ($business_category as $category)
                                         <option value="{{ $category->id }}"
-                                            {{ old('category') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->id == $selected_category ? 'selected' : '' }}>
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
@@ -66,12 +66,20 @@
                                 <select class="form-control" name="title" id="states" required>
                                     <option value="" disabled selected>Select State</option>
                                     @foreach ($states as $listing_states)
-                                        <option value="{{ $listing_states->id }}">{{ $listing_states->name }}
+                                        <option value="{{ $listing_states->id }}"
+                                            {{ $listing_states->id == $selected_state ? 'selected' : '' }}>{{ $listing_states->name }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <select class="form-control" name="title" id="cities" required>
                                     <option value="" disabled selected>Select City</option>
+                                    @if (!empty($cities))
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}"
+                                                {{ $city->id == $selected_city ? 'selected' : '' }}>{{ $city->name }}
+                                            </option>
+                                        @endforeach                                        
+                                    @endif
                                 </select>
                             </div>
                             {{-- <div class="main-search-button">
@@ -106,12 +114,12 @@
         <!--                        <span class="search-tag"><i class="lni lni-briefcase"></i></span>-->
         <!--                        <select class="form-control" name="category" id="category" required>-->
         <!--                            <option value="">Select Category</option>-->
-        <!--                            @foreach ($business_category as $category)-->
+        {{-- <!--                            @foreach ($business_category as $category)-->
         <!--                                <option value="{{ $category->id }}"-->
         <!--                                    {{ old('category') == $category->id ? 'selected' : '' }}>-->
         <!--                                    {{ $category->name }}-->
         <!--                                </option>-->
-        <!--                            @endforeach-->
+        <!--                            @endforeach--> --}}
         <!--                        </select>-->
 
         <!--                    </div>-->
@@ -119,17 +127,17 @@
         <!--                        <span class="search-tag"><i class="lni lni-briefcase"></i></span>-->
         <!--                        <select class="form-control" name="title" id="states" required>-->
         <!--                            <option value="">Select State</option>-->
-        <!--                            @foreach ($states as $listing_states)-->
+        {{-- <!--                            @foreach ($states as $listing_states)-->
         <!--                                <option value="{{ $listing_states->state }}">{{ $listing_states->state }}-->
         <!--                                </option>-->
-        <!--                            @endforeach-->
+        <!--                            @endforeach--> --}}
         <!--                        </select>-->
         <!--                        <select class="form-control" name="title" id="cities" required>-->
         <!--                            <option value="">Select City</option>-->
-        <!--                            @foreach ($cities as $listing_cities)-->
+        {{-- <!--                            @foreach ($cities as $listing_cities)-->
         <!--                                <option value="{{ $listing_cities->city }}">{{ $listing_cities->city }}-->
         <!--                                </option>-->
-        <!--                            @endforeach-->
+        <!--                            @endforeach--> --}}
         <!--                        </select>-->
         <!--                    </div>-->
         <!--                    {{-- <div class="main-search-button">-->
@@ -274,9 +282,10 @@
 
 @stop
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@section('custom_js')
     <script>
         $(document).ready(function() {
+            filterBusinessListings();
             // AJAX call for combined category, state, and city search
             $('#category, #states, #cities').change(function() {
                 $('#listings-container').empty();
@@ -288,7 +297,7 @@
                 var categoryId = $('#category').val();
                 var state = $('#states').val();
                 var city = $('#cities').val();
-    
+
                 return $.ajax({
                     url: '{{ route('listings.search') }}', // Replace with your actual route
                     type: 'POST',
@@ -352,7 +361,8 @@
                     $('#cities').append('<option value="" selected disabled>Select a City</option>');
                 }
             });
-    
+
         });
-    
+
     </script>
+@endsection

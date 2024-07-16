@@ -228,12 +228,20 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">City</label><span
+                                                    <label class="mb-1">State</label><span
                                                     class="asterisk_required_field"></span>
-                                                    <input type="text" class="form-control rounded" name="city"
-                                                        value="{{ old('city', $listing->city) }}" />
+                                                    {{-- <input type="text" class="form-control rounded" name="state"
+                                                        value="{{ old('state', $listing->state) }}" /> --}}
+                                                    <select class="form-control" name="state" id="states" required>
+                                                        <option value="" disabled selected>Select State</option>
+                                                        @foreach ($states as $listing_states)
+                                                            <option value="{{ $listing_states->id }}"
+                                                                {{ $listing_states->id == $selected_state ? 'selected' : '' }}>{{ $listing_states->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                     <div class="validation-error">
-                                                        @error('city')
+                                                        @error('state')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
@@ -241,12 +249,22 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="mb-1">State</label><span
+                                                    <label class="mb-1">City</label><span
                                                     class="asterisk_required_field"></span>
-                                                    <input type="text" class="form-control rounded" name="state"
-                                                        value="{{ old('state', $listing->state) }}" />
+                                                    {{-- <input type="text" class="form-control rounded" name="city"
+                                                        value="{{ old('city', $listing->city) }}" /> --}}
+                                                    <select class="form-control" name="city" id="cities" required>
+                                                        <option value="" disabled selected>Select City</option>
+                                                        @if (!empty($cities))
+                                                            @foreach ($cities as $city)
+                                                                <option value="{{ $city->id }}"
+                                                                    {{ $city->id == $selected_city ? 'selected' : '' }}>{{ $city->name }}
+                                                                </option>
+                                                            @endforeach                                        
+                                                        @endif
+                                                    </select>
                                                     <div class="validation-error">
-                                                        @error('state')
+                                                        @error('city')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
@@ -1113,6 +1131,47 @@
                 });
             }
         });
+                });
+            </script>
+            <script>
+                $(document).ready(function() {
+        
+                    // Initialize Select2 for state dropdown
+                    $('#states').select2({
+                        placeholder: "Select a State",
+                        allowClear: true // Option to clear selected state
+                    });
+        
+                    // Initialize Select2 for city dropdown
+                    $('#cities').select2({
+                        placeholder: "Select a City",
+                        allowClear: true // Option to clear selected city
+                    });
+        
+                    $('#states').change(function() {
+                        var stateId = $(this).val();
+                        if (stateId) {
+                            $.ajax({
+                                url: '/get-all-cities/' + stateId, // Replace with your Laravel route for fetching cities
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('#cities').empty();
+                                    $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                                    $.each(data, function(key, value) {
+                                        $('#cities').append('<option value="' + value.id + '">' + value.name + '</option>');
+                                    });
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error fetching cities: ' + error);
+                                }
+                            });
+                        } else {
+                            $('#cities').empty();
+                            $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                        }
+                    });
+            
                 });
             </script>
 

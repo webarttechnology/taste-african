@@ -58,15 +58,33 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">State</label>
-                                                <input type="text" class="form-control rounded" name="state"
-                                                    value="{{ $userWithInfo->info == null ? '' : $userWithInfo->info->state }}" />
+                                                {{-- <input type="text" class="form-control rounded" name="state"
+                                                    value="{{ $userWithInfo->info == null ? '' : $userWithInfo->info->state }}" /> --}}
+                                                <select class="form-control" name="state" id="states" required>
+                                                    <option value="" disabled selected>Select State</option>
+                                                    @foreach ($states as $listing_states)
+                                                        <option value="{{ $listing_states->id }}"
+                                                            {{ $listing_states->id == $selected_state ? 'selected' : '' }}>{{ $listing_states->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="mb-1">City</label>
-                                                <input type="text" class="form-control rounded" name="city"
-                                                    value="{{ $userWithInfo->info == null ? '' : $userWithInfo->info->city }}" />
+                                                {{-- <input type="text" class="form-control rounded" name="city"
+                                                    value="{{ $userWithInfo->info == null ? '' : $userWithInfo->info->city }}" /> --}}
+                                                <select class="form-control" name="city" id="cities" required>
+                                                    <option value="" disabled selected>Select City</option>
+                                                    @if (!empty($cities))
+                                                        @foreach ($cities as $city)
+                                                            <option value="{{ $city->id }}"
+                                                                {{ $city->id == $selected_city ? 'selected' : '' }}>{{ $city->name }}
+                                                            </option>
+                                                        @endforeach                                        
+                                                    @endif
+                                                </select>
 
                                             </div>
                                         </div>
@@ -102,3 +120,46 @@
         </div>
     </div>
         @stop
+        @section('custom_js')
+            <script>
+                $(document).ready(function() {
+        
+                    // Initialize Select2 for state dropdown
+                    $('#states').select2({
+                        placeholder: "Select a State",
+                        allowClear: true // Option to clear selected state
+                    });
+        
+                    // Initialize Select2 for city dropdown
+                    $('#cities').select2({
+                        placeholder: "Select a City",
+                        allowClear: true // Option to clear selected city
+                    });
+        
+                    $('#states').change(function() {
+                        var stateId = $(this).val();
+                        if (stateId) {
+                            $.ajax({
+                                url: '/get-all-cities/' + stateId, // Replace with your Laravel route for fetching cities
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(data) {
+                                    $('#cities').empty();
+                                    $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                                    $.each(data, function(key, value) {
+                                        $('#cities').append('<option value="' + value.id + '">' + value.name + '</option>');
+                                    });
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error fetching cities: ' + error);
+                                }
+                            });
+                        } else {
+                            $('#cities').empty();
+                            $('#cities').append('<option value="" selected disabled>Select a City</option>');
+                        }
+                    });
+            
+                });
+            </script>
+        @endsection

@@ -77,6 +77,7 @@ class HomeController extends Controller
         $selected_category = '';
         $selected_state = '';
         $selected_city = '';
+        $cities = '';
         if (!empty($request->search_item)) {
             $selected_category = $request->search_item;
         }
@@ -106,9 +107,12 @@ class HomeController extends Controller
         //     ->get();
         $states = State::where('status', 1)
         ->get();
-        $cities = BusinessListing::where('status', 1)
-            ->get();
-        return view('front.business_listing.alllistings', compact('listings', 'contact', 'business_category', 'title', 'states', 'cities', 'search_item', 'selected_state', 'selected_city'));
+        if ($selected_state != '') {
+            $cities = City::where('state_id', $selected_state)
+                ->where('status', 1)
+                ->get();
+        }
+        return view('front.business_listing.alllistings', compact('listings', 'contact', 'business_category', 'title', 'states', 'cities', 'selected_category', 'selected_state', 'selected_city'));
     }
 
     public function searchListings()

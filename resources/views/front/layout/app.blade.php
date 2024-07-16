@@ -370,6 +370,7 @@
     {{-- Sweet Alert:: --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @yield('custom_js')
 
     <script>
         var btn = document.querySelector('.toggle');

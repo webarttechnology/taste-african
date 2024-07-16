@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\UserInfo;
 use App\Rules\PhoneNumber;
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +21,23 @@ class UserProfileController extends Controller
          
         $user = Auth::user();
         $userWithInfo = User::with('info')->find($user->id);
-        return view ('front.profile.user-profile',  compact('userWithInfo'));
+        $states = State::where('status', 1)
+        ->get();
+        $selected_state = '';
+        $selected_city = '';
+        if (!empty($userWithInfo->info->state)) {
+            $selected_state = $userWithInfo->info->state;
+        }
+        if (!empty($userWithInfo->info->city)) {
+            $selected_city = $userWithInfo->info->city;
+        }
+        $cities = '';
+        if ($selected_state != '') {
+            $cities = City::where('state_id', $selected_state)
+                ->where('status', 1)
+                ->get();
+        }
+        return view ('front.profile.user-profile',  compact('userWithInfo', 'states', 'cities', 'selected_state', 'selected_city'));
     }
 
     public function updateOrCreate(Request $request )
