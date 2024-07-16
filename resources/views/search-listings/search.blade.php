@@ -7,7 +7,7 @@
                 <div class="tab-pane fade show active" id="placesseach" role="tabpanel"
                     aria-labelledby="placesseach-tab">
                     <form class="main-search-wrap fl-wrap" action="{{route('front.allListing')}}" method="GET" onsubmit="return validateForm()">
-                        @csrf
+                        {{-- @csrf --}}
                         <div class="main-search-item">
                             <span class="search-tag"><i class="lni lni-briefcase"></i></span>
                             <select class="form-control" name="search_item" id="search_item">

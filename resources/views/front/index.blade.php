@@ -37,7 +37,8 @@
                     <div class="Goodup-top-cates">
                         <ul>
                             @foreach ($business_category->take(7) as $category)
-                                <li><a href="{{url('category/listings/'.$category->id)}}" class="Goodup-top-cat-box">
+                                {{-- <li><a href="{{url('category/listings/'.$category->id)}}" class="Goodup-top-cat-box"> --}}
+                                <li><a href="{{url('all-listings?search_item='.$category->id)}}" class="Goodup-top-cat-box">
                                         <div class="Goodup-tp-ico">
                                             <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
                                                 width="40px">
